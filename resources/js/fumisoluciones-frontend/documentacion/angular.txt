@@ -27,3 +27,8 @@ ng g component shared/header/web-header
 ng g component shared/header/admin-header
 
 ng generate service core/services/servicios
+
+ng g c modules/web/components/slider-principal
+ng g c modules/web/components/ofrecemos
+ng g c modules/web/components/servicios
+ng g c modules/web/components/slider-clientes
