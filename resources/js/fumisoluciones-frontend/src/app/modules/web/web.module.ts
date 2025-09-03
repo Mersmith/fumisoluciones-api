@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SliderPrincipalComponent } from './components/slider-principal/slider-principal.component';
 import { OfrecemosComponent } from './components/ofrecemos/ofrecemos.component';
 import { ServiciosComponent } from './components/servicios/servicios.component';
-import { SliderClientesComponent } from './components/slider-clientes/slider-clientes.component'; // ✅ agregar esto
+import { SliderClientesComponent } from './components/slider-clientes/slider-clientes.component';
 
 @NgModule({
   declarations: [
