@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WebLayoutComponent } from './web-layout/web-layout.component';
 import { WebHeaderComponent } from './web-header/web-header.component';
-import { SharedModule } from '../../shared/shared.module';
-import { RouterModule } from '@angular/router'; // <-- IMPORTAR
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -12,8 +11,7 @@ import { RouterModule } from '@angular/router'; // <-- IMPORTAR
   ],
   imports: [
     CommonModule,
-    SharedModule,
-    RouterModule // <-- AÑADIR
+    RouterModule
   ],
   exports: [
     WebLayoutComponent,

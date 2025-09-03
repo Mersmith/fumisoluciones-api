@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Producto } from '../../../shared/models/producto.model';
-import { ProductosService } from '../../../core/services/productos.service';
+import { Producto } from '../../../models/producto.model';
+import { ProductosService } from '../../../services/productos.service';
 
 @Component({
   selector: 'app-web-productos',

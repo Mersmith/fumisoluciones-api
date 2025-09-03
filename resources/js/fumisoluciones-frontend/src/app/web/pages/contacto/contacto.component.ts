@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactosService } from '../../../core/services/contactos.service';
-import { ServiciosService } from '../../../core/services/servicios.service';
-import { Contacto } from '../../../shared/models/contacto.model';
-import { Servicio } from '../../../shared/models/servicio.model';
+import { ContactosService } from '../../../services/contactos.service';
+import { ServiciosService } from '../../../services/servicios.service';
+import { Contacto } from '../../../models/contacto.model';
+import { Servicio } from '../../../models/servicio.model';
 
 @Component({
   selector: 'app-web-contacto',
