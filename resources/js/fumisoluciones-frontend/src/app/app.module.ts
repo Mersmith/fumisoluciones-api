@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WebLayoutModule } from './web/layout/web-layout.module';
-import { AdminLayoutModule } from './admin/layout/admin-layout.module';
+import { WebLayoutModule } from './modules/web/layout/web-layout.module';
+import { AdminLayoutModule } from './modules/admin/layout/admin-layout.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
