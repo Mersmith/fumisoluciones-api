@@ -32,3 +32,5 @@ ng g c modules/web/components/slider-principal
 ng g c modules/web/components/ofrecemos
 ng g c modules/web/components/servicios
 ng g c modules/web/components/slider-clientes
+
+ng g component modules/web/layout/web-footer

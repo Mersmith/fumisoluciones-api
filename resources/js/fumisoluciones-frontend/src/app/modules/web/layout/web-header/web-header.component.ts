@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./web-header.component.css']
 })
 export class WebHeaderComponent {
+  menuOpen = false;
 
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
 }

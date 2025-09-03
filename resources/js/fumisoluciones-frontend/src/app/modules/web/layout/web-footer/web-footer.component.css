@@ -1,0 +1,55 @@
+/* ===== FOOTER GENERAL ===== */
+.footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+/* Info principal */
+.footer-info h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.footer-info p {
+    font-size: 14px;
+    color: #ccc;
+    margin: 0;
+}
+
+/* Derechos */
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.footer-bottom a {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 15px;
+    }
+
+    .footer-info h2 {
+        font-size: 18px;
+    }
+
+    .footer-info p {
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        font-size: 12px;
+    }
+}

@@ -1,26 +1,18 @@
-<nav class="bg-white shadow-md p-4 flex justify-between items-center">
-    <!-- Logo o título -->
-    <div class="text-xl font-bold">
-      Fumisoluciones
-    </div>
-  
-    <!-- Menú -->
-    <ul class="flex space-x-6">
-      <li>
-        <a routerLink="/" routerLinkActive="text-blue-600 font-semibold" [routerLinkActiveOptions]="{ exact: true }">
-          Inicio
-        </a>
-      </li>
-      <li>
-        <a routerLink="/productos" routerLinkActive="text-blue-600 font-semibold">
-          Productos
-        </a>
-      </li>
-      <li>
-        <a routerLink="/contacto" routerLinkActive="text-blue-600 font-semibold">
-          Contacto
-        </a>
-      </li>
-    </ul>
-  </nav>
-  
+<nav class="navbar">
+  <!-- Logo -->
+  <div class="logo">
+    <img src="https://www.fumisolucionesac.com/assets/img/logo.png" alt="Logo">
+  </div>
+
+  <!-- Hamburguesa -->
+  <div class="hamburger" (click)="toggleMenu()">
+    ☰
+  </div>
+
+  <!-- Menú -->
+  <ul class="nav-links" [class.open]="menuOpen">
+    <li><a routerLink="/" (click)="closeMenu()">Inicio</a></li>
+    <li><a routerLink="/productos" (click)="closeMenu()">Productos</a></li>
+    <li><a routerLink="/contacto" (click)="closeMenu()">Contacto</a></li>
+  </ul>
+</nav>
