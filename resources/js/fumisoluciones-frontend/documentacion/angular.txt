@@ -1,0 +1,27 @@
+cd C:\xampp2\htdocs\fumisoluciones-api\resources\js
+ng new fumisoluciones-frontend
+
+cd C:\xampp2\htdocs\fumisoluciones-api\resources\js\fumisoluciones-frontend
+ng build --output-path=../../../public/frontend --base-href=/frontend/
+
+ng version
+
+ng g module web --routing
+ng g module admin --routing
+
+ng g component web/layout/web-layout
+ng g component web/pages/inicio
+ng g component web/pages/productos
+ng g component web/pages/contacto
+
+ng g component admin/layout/admin-layout
+ng g component admin/pages/productos
+ng g component admin/pages/contacto
+
+ng g module shared/shared --flat
+
+ng generate module web/layout --flat=false
+ng generate module admin/layout --flat=false
+
+ng g component shared/header/web-header
+ng g component shared/header/admin-header

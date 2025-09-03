@@ -1,0 +1,30 @@
+<div>
+  <h2>Productos</h2>
+
+  <input type="text" [formControl]="buscarControl" placeholder="Buscar producto" />
+
+  <select [(ngModel)]="orden" (change)="cargarProductos()">
+    <option value="asc">Ascendente</option>
+    <option value="desc">Descendente</option>
+  </select>
+
+  <ul>
+    <li *ngFor="let producto of productos">
+      <h3>{{ producto.nombre }}</h3>
+      <p>{{ producto.descripcion }}</p>
+      <img *ngIf="producto.imagen" [src]="producto.imagen"
+        alt="{{ producto.nombre }}" width="100" />
+    </li>
+  </ul>
+
+  <div class="paginacion">
+    <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">
+      Anterior
+    </button>
+    <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+    <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas">
+      Siguiente
+    </button>
+  </div>
+
+</div>

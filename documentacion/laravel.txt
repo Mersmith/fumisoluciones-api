@@ -1,0 +1,9 @@
+composer create-project laravel/laravel fumisoluciones-api "10.*"
+
+php artisan make:model Servicio -mfsc
+php artisan make:model Categoria -mfsc
+php artisan make:model Producto -mfsc
+php artisan make:model Cotizacion -mfsc
+php artisan make:model Contacto -mfsc
+
+php artisan migrate:fresh --seed
