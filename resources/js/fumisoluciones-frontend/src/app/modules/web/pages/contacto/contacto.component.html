@@ -1,18 +1,15 @@
 <div class="g_container">
-    <div class="ofrecemos">
-        <!-- Introducción -->
+    <div class="g_contenedor_columna">
         <div class="g_encabezado">
             <h2>Contácte y <span>trabajemos</span> juntos!</h2>
         </div>
 
         <div class="contacto-grid">
-            <!-- 📍 Datos de contacto -->
             <div class="contacto-info">
                 <p><i class="fa-solid fa-phone"></i> <strong>Celular:</strong><br> +51 924218321</p>
                 <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong><br> informes@fumisolucionesac.com <br>
                     fumisoluciones16@gmail.com</p>
                 <p><i class="fa-solid fa-location-dot"></i> <strong>Dirección:</strong><br> San Juan de Lurigancho</p>
-                <!-- 🌍 Mapa -->
                 <div class="contacto-mapa">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9716.288138101843!2d-77.0062851973512!3d-11.977228351345385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c56a978fd8bf%3A0x3d67f37d51e1d7c0!2sSan%20Juan%20de%20Lurigancho!5e1!3m2!1ses!2spe!4v1757009478938!5m2!1ses!2spe"
@@ -21,7 +18,6 @@
                 </div>
             </div>
 
-            <!-- 📝 Formulario -->
             <div class="contacto-formulario">
                 <form (ngSubmit)="guardarContacto()">
                     <div class="form-group">
@@ -30,8 +26,8 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" [(ngModel)]="nuevoContacto.apellido" name="apellido"
-                            placeholder="Apellido" required />
+                        <input type="text" [(ngModel)]="nuevoContacto.apellido" name="apellido" placeholder="Apellido"
+                            required />
                     </div>
 
                     <div class="form-group">

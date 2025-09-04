@@ -48,6 +48,12 @@ export class ContactoComponent implements OnInit {
     this.contactosService.createContacto(this.nuevoContacto).subscribe({
       next: (res) => {
         console.log('Contacto creado:', res);
+
+        const mensaje = `Hola, soy ${this.nuevoContacto.nombre} ${this.nuevoContacto.apellido}, quiero ${this.nuevoContacto.detalle}`;
+
+        const numero = "51960335525";
+
+        window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, '_blank');
       },
       error: (err) => {
         console.error('Error al crear contacto:', err);
