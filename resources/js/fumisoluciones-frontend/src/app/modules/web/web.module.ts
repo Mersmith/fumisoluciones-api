@@ -12,6 +12,9 @@ import { SliderPrincipalComponent } from './components/slider-principal/slider-p
 import { OfrecemosComponent } from './components/ofrecemos/ofrecemos.component';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 import { SliderClientesComponent } from './components/slider-clientes/slider-clientes.component';
+import { NosotrosComponent } from './pages/nosotros/nosotros.component';
+import { ExperienciaComponent } from './pages/experiencia/experiencia.component';
+import { ProductoComponent } from './pages/producto/producto.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { SliderClientesComponent } from './components/slider-clientes/slider-cli
     OfrecemosComponent,
     ServiciosComponent,
     SliderClientesComponent,
+    NosotrosComponent,
+    ExperienciaComponent,
+    ProductoComponent,
   ],
   imports: [
     CommonModule,

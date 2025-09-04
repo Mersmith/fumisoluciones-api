@@ -7,9 +7,20 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class SliderPrincipalComponent implements OnInit, OnDestroy {
   slides = [
-    { image: 'https://www.fumisolucionesac.com/assets/img/slide/slide-1.jpg', title: 'Soluciones Integrales' },
-    { image: 'https://www.fumisolucionesac.com/assets/img/slide/slide-2.jpg', title: 'Calidad y Confianza' },
-    { image: 'https://www.fumisolucionesac.com/assets/img/slide/slide-3.jpg', title: 'Innovación y Servicio' },
+    {
+      image: 'https://www.centromedicoosi.com/wp-content/uploads/2024/08/Banner-OSI-Home--2048x640.jpg',
+      title: 'Muévete sin dolor y vive mejor',
+      descripcion: 'Nuestros tratamientos combinan diversas especialidades para una mejor y más rápida recuperación.',
+      nombre_link: 'Reserva',
+      link: '#',
+    },
+    {
+      image: 'https://www.centromedicoosi.com/wp-content/uploads/2024/08/Banner-OSI-Home--2048x640.jpg',
+      title: 'Sana colita de rana.',
+      descripcion: 'Nuestros tratamientos combinan diversas especialidades para una mejor y más rápida recuperación.',
+      nombre_link: 'Más informes',
+      link: '#',
+    },
   ];
 
   currentSlide = 0;

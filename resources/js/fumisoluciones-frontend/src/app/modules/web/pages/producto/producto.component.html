@@ -1,0 +1,8 @@
+<div *ngIf="producto">
+    <h2>{{ producto.nombre }}</h2>
+    <img *ngIf="producto.imagen" [src]="producto.imagen" alt="{{ producto.nombre }}" width="200">
+    <p>{{ producto.descripcion }}</p>
+  </div>
+  
+  <a routerLink="/productos">← Volver a productos</a>
+  

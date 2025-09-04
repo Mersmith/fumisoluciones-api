@@ -18,4 +18,8 @@ export class ProductosService {
     }
     return this.http.get<any>(url);
   }
+
+  getProducto(id: number) {
+    return this.http.get<Producto>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -5,13 +5,15 @@ import { WebHeaderComponent } from './web-header/web-header.component';
 import { RouterModule } from '@angular/router';
 import { WebFooterComponent } from './web-footer/web-footer.component';
 import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
+import { WhatsappButtonComponent } from '../components/whatsapp-button/whatsapp-button.component';
 
 @NgModule({
   declarations: [
     WebLayoutComponent,
     WebHeaderComponent,
     WebFooterComponent,
-    BackToTopComponent
+    BackToTopComponent,
+    WhatsappButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { BackToTopComponent } from '../components/back-to-top/back-to-top.compon
     WebLayoutComponent,
     WebHeaderComponent,
     WebFooterComponent,
-    BackToTopComponent
+    BackToTopComponent,
+    WhatsappButtonComponent,
   ]
 })
 export class WebLayoutModule { }

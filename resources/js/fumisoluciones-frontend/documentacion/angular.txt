@@ -13,6 +13,10 @@ ng g component web/layout/web-layout
 ng g component web/pages/inicio
 ng g component web/pages/productos
 ng g component web/pages/contacto
+ng g component modules/web/pages/nosotros
+ng g component modules/web/pages/servicios
+ng g component modules/web/pages/experiencia
+ng g component modules/web/pages/producto
 
 ng g component admin/layout/admin-layout
 ng g component admin/pages/productos
@@ -34,5 +38,6 @@ ng g c modules/web/components/servicios
 ng g c modules/web/components/slider-clientes
 
 ng g c modules/web/components/back-to-top
+ng g c modules/web/components/whatsapp-button
 
 ng g component modules/web/layout/web-footer

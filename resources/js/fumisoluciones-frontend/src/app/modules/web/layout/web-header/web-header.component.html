@@ -1,18 +1,47 @@
-<nav class="navbar">
-  <!-- Logo -->
-  <div class="logo">
-    <img src="https://www.fumisolucionesac.com/assets/img/logo.png" alt="Logo">
-  </div>
+<header class="header">
+  <nav class="navbar">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://www.fumisolucionesac.com/assets/img/logo.png" alt="Logo">
+    </div>
 
-  <!-- Hamburguesa -->
-  <div class="hamburger" (click)="toggleMenu()">
-    ☰
-  </div>
+    <!-- Hamburguesa -->
+    <div class="hamburger" (click)="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
 
-  <!-- Menú -->
-  <ul class="nav-links" [class.open]="menuOpen">
-    <li><a routerLink="/" (click)="closeMenu()">Inicio</a></li>
-    <li><a routerLink="/productos" (click)="closeMenu()">Productos</a></li>
-    <li><a routerLink="/contacto" (click)="closeMenu()">Contacto</a></li>
-  </ul>
-</nav>
+    <!-- Menú -->
+    <ul class="nav-links" [class.open]="menuOpen">
+      <li>
+        <a routerLink="/" (click)="closeMenu()">
+          <i class="fa-solid fa-house"></i> Inicio
+        </a>
+      </li>
+      <li>
+        <a routerLink="/nosotros" (click)="closeMenu()">
+          <i class="fa-solid fa-user-group"></i> Nosotros
+        </a>
+      </li>
+      <li>
+        <a routerLink="/experiencia" (click)="closeMenu()">
+          <i class="fa-solid fa-briefcase"></i> Experiencia
+        </a>
+      </li>
+      <li>
+        <a routerLink="/servicios" (click)="closeMenu()">
+          <i class="fa-solid fa-gears"></i> Servicios
+        </a>
+      </li>
+      <li>
+        <a routerLink="/productos" (click)="closeMenu()">
+          <i class="fa-solid fa-box-open"></i> Productos
+        </a>
+      </li>
+      <li>
+        <a routerLink="/contacto" (click)="closeMenu()">
+          <i class="fa-solid fa-envelope"></i> Contacto
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
