@@ -2,7 +2,9 @@
   <nav class="navbar">
     <!-- Logo -->
     <div class="logo">
-      <img src="https://www.fumisolucionesac.com/assets/img/logo.png" alt="Logo">
+      <a routerLink="/" (click)="closeMenu()">
+        <img src="https://www.fumisolucionesac.com/assets/img/logo.png" alt="Logo">
+      </a>
     </div>
 
     <!-- Hamburguesa -->
@@ -12,36 +14,37 @@
 
     <!-- Menú -->
     <ul class="nav-links" [class.open]="menuOpen">
-      <li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <a routerLink="/" (click)="closeMenu()">
           <i class="fa-solid fa-house"></i> Inicio
         </a>
       </li>
-      <li>
+      <li routerLinkActive="active">
         <a routerLink="/nosotros" (click)="closeMenu()">
           <i class="fa-solid fa-user-group"></i> Nosotros
         </a>
       </li>
-      <li>
+      <li routerLinkActive="active">
         <a routerLink="/experiencia" (click)="closeMenu()">
           <i class="fa-solid fa-briefcase"></i> Experiencia
         </a>
       </li>
-      <li>
+      <li routerLinkActive="active">
         <a routerLink="/servicios" (click)="closeMenu()">
           <i class="fa-solid fa-gears"></i> Servicios
         </a>
       </li>
-      <li>
+      <li routerLinkActive="active">
         <a routerLink="/productos" (click)="closeMenu()">
           <i class="fa-solid fa-box-open"></i> Productos
         </a>
       </li>
-      <li>
+      <li routerLinkActive="active">
         <a routerLink="/contacto" (click)="closeMenu()">
           <i class="fa-solid fa-envelope"></i> Contacto
         </a>
       </li>
     </ul>
+
   </nav>
 </header>
