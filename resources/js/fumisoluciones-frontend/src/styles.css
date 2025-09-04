@@ -63,8 +63,26 @@ p {
     margin: 0;
 }
 
-.container {
+.g_container {
     max-width: 1300px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.g_encabezado {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.g_encabezado h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #01274C;
+}
+
+.g_encabezado p {
+    font-size: 18px;
+    color: #01274C;
+    line-height: 1.6;
 }

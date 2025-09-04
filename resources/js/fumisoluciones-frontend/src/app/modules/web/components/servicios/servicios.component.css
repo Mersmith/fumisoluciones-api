@@ -1,38 +1,16 @@
-/* ===== SECCIÓN PRINCIPAL ===== */
-.servicios-section {
-  padding: 40px 20px;
-  text-align: center;
+.servicios {
+  margin: 70px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
 }
 
-/* Encabezado */
-.encabezado {
-  margin-bottom: 40px;
-}
-
-.encabezado h2 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #01274C;
-  margin-bottom: 10px;
-}
-
-.encabezado p {
-  font-size: 18px;
-  color: #01274C;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* ===== GRID ===== */
-.servicios-grid {
+.container {
   display: grid;
-  grid-template-columns: 1fr;
-  /* 1 columna en móvil */
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-/* ===== CARDS ===== */
 .card {
   background: #fff;
   border-radius: 14px;
@@ -42,26 +20,22 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  /* Centramos todo dentro */
   padding: 16px;
   border: 1px solid #E3E3E3;
 }
 
-/* Hover */
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
-/* Nombre */
 .card h3 {
-  font-size: 1.3rem;
+  font-size: 20px;
   font-weight: 600;
   color: #01274C;
   margin: 0 0 12px;
 }
 
-/* Imagen */
 .card img {
   width: 100%;
   height: 300px;
@@ -70,27 +44,30 @@
   margin-bottom: 12px;
 }
 
-/* Contenido */
 .card .contenido {
   padding: 0 10px 10px;
 }
 
 .card .contenido p {
-  color: #555;
-  font-size: 0.95rem;
+  color: #01274C;
+  font-size: 18px;
   line-height: 1.6;
 }
 
-/* Tablet → 2 columnas */
-@media (min-width: 640px) {
-  .servicios-grid {
+@media (max-width: 1000px) {
+  .servicios {
+    margin: 40px 0px;
+    gap: 40px;
+  }
+
+  .container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* PC → 3 columnas */
-@media (min-width: 1024px) {
-  .servicios-grid {
-    grid-template-columns: repeat(3, 1fr);
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr;
+
   }
 }

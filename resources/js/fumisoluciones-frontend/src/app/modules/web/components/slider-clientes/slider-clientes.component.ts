@@ -47,7 +47,7 @@ export class SliderClientesComponent implements OnInit {
   }
 
   updateVisibleSlides() {
-    this.visibleSlides = window.innerWidth <= 768 ? 2 : 4;
+    this.visibleSlides = window.innerWidth <= 600 ? 2 : 4;
     this.slideWidth = 100 / this.visibleSlides;
   }
 

@@ -1,21 +1,19 @@
-<div class="servicios-section">
-
-  <!-- Encabezado -->
-  <div class="encabezado">
-    <h2>Especialidades</h2>
-    <p>Nos diferenciamos por realizar tratamientos con un enfoque multiespecialidad.</p>
+<div class="servicios">
+  <div class="g_encabezado">
+    <h2>Fumigación, Desinfección, Limpieza y Sanitización</h2>
+    <p>
+      Te ofrecemos soluciones al alcance de tus manos: fumigación efectiva e integral, servicios preventivos,
+      limpieza y desinfección industrial. Con la calidad y confianza que nos caracteriza, también te brindamos el
+      mejor catálogo en productos nacionales e importados.
+    </p>
   </div>
 
-  <!-- Grid de servicios -->
-  <div class="servicios-grid">
+  <div class="container">
     <div class="card" *ngFor="let servicio of servicios">
-      <!-- Nombre -->
       <h3>{{ servicio.nombre }}</h3>
 
-      <!-- Imagen -->
       <img [src]="servicio.imagen" alt="{{ servicio.nombre }}">
 
-      <!-- Contenido -->
       <div class="contenido">
         <p>{{ servicio.descripcion }}</p>
       </div>

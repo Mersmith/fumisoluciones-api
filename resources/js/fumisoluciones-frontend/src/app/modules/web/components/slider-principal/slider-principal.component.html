@@ -10,7 +10,6 @@
     </div>
   </div>
 
-  <!-- Controles con iconos -->
   <!-- <button class="prev" (click)="prevSlide()">
     <i class="fa-solid fa-chevron-left"></i>
   </button>
@@ -18,7 +17,6 @@
     <i class="fa-solid fa-chevron-right"></i>
   </button>-->
 
-  <!-- Indicadores con iconos -->
   <div class="indicators">
     <span *ngFor="let slide of slides; let i = index" [class.active]="i === currentSlide" (click)="goToSlide(i)">
       <i class="fa-solid fa-circle"></i>
