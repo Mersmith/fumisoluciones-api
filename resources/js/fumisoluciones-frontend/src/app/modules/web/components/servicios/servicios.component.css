@@ -1,33 +1,96 @@
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem;
+/* ===== SECCIÓN PRINCIPAL ===== */
+.servicios-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Encabezado */
+.encabezado {
+  margin-bottom: 40px;
+}
+
+.encabezado h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #01274C;
+  margin-bottom: 10px;
+}
+
+.encabezado p {
+  font-size: 18px;
+  color: #01274C;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ===== GRID ===== */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* 1 columna en móvil */
+  gap: 24px;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  /* Centramos todo dentro */
+  padding: 16px;
+  border: 1px solid #E3E3E3;
+}
+
+/* Hover */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Nombre */
+.card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #01274C;
+  margin: 0 0 12px;
+}
+
+/* Imagen */
+.card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* Contenido */
+.card .contenido {
+  padding: 0 10px 10px;
+}
+
+.card .contenido p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Tablet → 2 columnas */
+@media (min-width: 640px) {
+  .servicios-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 1.2rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* PC → 3 columnas */
+@media (min-width: 1024px) {
+  .servicios-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .card h3 {
-    margin: 0 0 .5rem;
-    font-size: 1.25rem;
-    color: #2c3e50;
-  }
-  
-  .card p {
-    margin: 0;
-    color: #555;
-    font-size: .95rem;
-    line-height: 1.4;
-  }
-  
+}

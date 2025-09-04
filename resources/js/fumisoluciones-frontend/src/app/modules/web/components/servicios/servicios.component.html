@@ -1,7 +1,25 @@
-<div class="grid">
+<div class="servicios-section">
+
+  <!-- Encabezado -->
+  <div class="encabezado">
+    <h2>Especialidades</h2>
+    <p>Nos diferenciamos por realizar tratamientos con un enfoque multiespecialidad.</p>
+  </div>
+
+  <!-- Grid de servicios -->
+  <div class="servicios-grid">
     <div class="card" *ngFor="let servicio of servicios">
+      <!-- Nombre -->
       <h3>{{ servicio.nombre }}</h3>
-      <p>{{ servicio.descripcion }}</p>
+
+      <!-- Imagen -->
+      <img [src]="servicio.imagen" alt="{{ servicio.nombre }}">
+
+      <!-- Contenido -->
+      <div class="contenido">
+        <p>{{ servicio.descripcion }}</p>
+      </div>
     </div>
   </div>
-  
+
+</div>

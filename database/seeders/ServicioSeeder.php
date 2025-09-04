@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Servicio;
+use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ServicioSeeder extends Seeder
 {
@@ -12,16 +14,24 @@ class ServicioSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
+
         $servicios = [
-            'Diseño Web',
-            'Desarrollo de Software',
-            'Marketing Digital',
-            'Consultoría Tecnológica',
-            'Soporte Técnico',
+            'Fumigación',
+            'Desinfección',
+            'Limpieza',
+            'Sanitización',
+            'Desratización',
+            'Desinsectación',
         ];
 
-        foreach ($servicios as $servicio) {
-            Servicio::create(['nombre' => $servicio]);
+        foreach ($servicios as $nombre) {
+            Servicio::create([
+                'nombre' => $nombre,
+                'slug' => Str::slug($nombre),
+                'imagen' => "https://www.centromedicoosi.com/wp-content/uploads/2024/06/fisioterapia.jpg", // Imagen fake
+                'descripcion' => $faker->sentence(12), // Descripción random
+            ]);
         }
     }
 }
