@@ -8,7 +8,6 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { WebLayoutModule } from './layout/web-layout.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SliderPrincipalComponent } from './components/slider-principal/slider-principal.component';
 import { OfrecemosComponent } from './components/ofrecemos/ofrecemos.component';
 import { ServiciosListComponent } from './components/servicios/servicios.component';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
@@ -19,13 +18,13 @@ import { ProductoComponent } from './pages/producto/producto.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { ComponenteTrabajosComponent } from './components/componente-trabajos/componente-trabajos.component';
 import { ComponenteCallToActionComponent } from './components/componente-call-to-action/componente-call-to-action.component';
+import { ComponenteSliderPrincipalComponent } from './components/componente-slider-principal/componente-slider-principal.component';
 
 @NgModule({
   declarations: [
     InicioComponent,
     ProductosComponent,
     ContactoComponent,
-    SliderPrincipalComponent,
     OfrecemosComponent,
     ServiciosListComponent,
     ServiciosComponent,
@@ -36,6 +35,7 @@ import { ComponenteCallToActionComponent } from './components/componente-call-to
     BannerComponent,
     ComponenteTrabajosComponent,
     ComponenteCallToActionComponent,
+    ComponenteSliderPrincipalComponent,
   ],
   imports: [
     CommonModule,

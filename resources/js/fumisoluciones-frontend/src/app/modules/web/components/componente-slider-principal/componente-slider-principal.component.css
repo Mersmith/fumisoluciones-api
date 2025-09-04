@@ -31,7 +31,7 @@
   top: 50%;
   left: 10%;
   transform: translateY(-50%);
-  color: #fff;
+  color: var(--color-blanco);
   max-width: 30%;
   text-align: left;
 }
@@ -52,8 +52,8 @@
 
 .btn-caption {
   display: inline-block;
-  background: #00ac08;
-  color: white;
+  background: var(--color-verde);
+  color: var(--color-blanco);
   padding: 10px 20px;
   border-radius: 50px;
   text-decoration: none;
@@ -62,7 +62,7 @@
 }
 
 .btn-caption:hover {
-  background: #008f06;
+  background: var(--color-celeste);
 }
 
 .prev,
@@ -72,10 +72,9 @@
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
-  background: rgba(0, 0, 0, 0.4);
   border: none;
   cursor: pointer;
-  color: white;
+  color: var(--color-blanco);
   font-size: 18px;
   border-radius: 50%;
   display: flex;
@@ -86,7 +85,7 @@
 
 .prev:hover,
 .next:hover {
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--color-celeste);
 }
 
 .prev {
@@ -109,12 +108,12 @@
 .indicators span {
   cursor: pointer;
   font-size: 8px;
-  color: #ccc;
+  color: var(--color-blanco);
   transition: color 0.3s;
 }
 
 .indicators span.active i {
-  color: #00ac08;
+  color: var(--color-verde);
 }
 
 @media (max-width: 1000px) {

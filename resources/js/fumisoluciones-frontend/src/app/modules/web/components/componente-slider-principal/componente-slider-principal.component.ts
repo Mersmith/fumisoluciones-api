@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
-  selector: 'app-slider-principal',
-  templateUrl: './slider-principal.component.html',
-  styleUrls: ['./slider-principal.component.css']
+  selector: 'app-componente-slider-principal',
+  templateUrl: './componente-slider-principal.component.html',
+  styleUrls: ['./componente-slider-principal.component.css']
 })
-export class SliderPrincipalComponent implements OnInit, OnDestroy {
+export class ComponenteSliderPrincipalComponent implements OnInit, OnDestroy {
   slides = [
     {
       image: 'https://www.centromedicoosi.com/wp-content/uploads/2024/08/Banner-OSI-Home--2048x640.jpg',

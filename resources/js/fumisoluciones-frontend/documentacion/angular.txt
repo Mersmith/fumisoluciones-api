@@ -45,3 +45,4 @@ ng g component modules/web/layout/web-footer
 ng generate component modules/web/components/banner
 ng generate component modules/web/components/componente-trabajos
 ng generate component modules/web/components/componente-call-to-action
+ng generate component modules/web/components/componente-slider-principal
