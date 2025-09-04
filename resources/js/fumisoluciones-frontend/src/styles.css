@@ -102,10 +102,22 @@ p {
     line-height: 1.6;
 }
 
+.g_contenedor_columna {
+    margin: 70px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
 @media (max-width: 1000px) {
 
     .g_encabezado h2 {
         line-height: 35px;
+    }
+
+    .g_contenedor_columna {
+        margin: 40px 0px;
+        gap: 40px;
     }
 
 }
