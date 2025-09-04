@@ -3,14 +3,14 @@ import { ServiciosService } from '../../services/servicios.service';
 import { Servicio } from '../../../../models/servicio.model';
 
 @Component({
-  selector: 'app-servicios',
+  selector: 'app-servicios-list',
   templateUrl: './servicios.component.html',
   styleUrls: ['./servicios.component.css']
 })
-export class ServiciosComponent implements OnInit {
+export class ServiciosListComponent implements OnInit {
   servicios: Servicio[] = [];
 
-  constructor(private serviciosService: ServiciosService) {}
+  constructor(private serviciosService: ServiciosService) { }
 
   ngOnInit(): void {
     this.serviciosService.getServicios().subscribe({
