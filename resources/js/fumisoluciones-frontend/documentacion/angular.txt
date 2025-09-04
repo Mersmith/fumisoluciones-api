@@ -41,3 +41,5 @@ ng g c modules/web/components/back-to-top
 ng g c modules/web/components/whatsapp-button
 
 ng g component modules/web/layout/web-footer
+
+ng generate component modules/web/components/banner

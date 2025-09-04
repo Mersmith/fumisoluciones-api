@@ -15,6 +15,7 @@ import { SliderClientesComponent } from './components/slider-clientes/slider-cli
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ExperienciaComponent } from './pages/experiencia/experiencia.component';
 import { ProductoComponent } from './pages/producto/producto.component';
+import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ProductoComponent } from './pages/producto/producto.component';
     NosotrosComponent,
     ExperienciaComponent,
     ProductoComponent,
+    BannerComponent,
   ],
   imports: [
     CommonModule,

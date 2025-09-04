@@ -81,8 +81,20 @@ p {
     color: #01274C;
 }
 
+.g_encabezado h2 span {
+    color: #00ac08;
+}
+
 .g_encabezado p {
     font-size: 18px;
     color: #01274C;
     line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+
+    .g_encabezado h2 {
+        line-height: 35px;
+    }
+
 }
