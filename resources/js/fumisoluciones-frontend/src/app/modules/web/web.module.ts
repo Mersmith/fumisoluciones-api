@@ -18,6 +18,7 @@ import { ExperienciaComponent } from './pages/experiencia/experiencia.component'
 import { ProductoComponent } from './pages/producto/producto.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { ComponenteTrabajosComponent } from './components/componente-trabajos/componente-trabajos.component';
+import { ComponenteCallToActionComponent } from './components/componente-call-to-action/componente-call-to-action.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ComponenteTrabajosComponent } from './components/componente-trabajos/co
     ProductoComponent,
     BannerComponent,
     ComponenteTrabajosComponent,
+    ComponenteCallToActionComponent,
   ],
   imports: [
     CommonModule,
