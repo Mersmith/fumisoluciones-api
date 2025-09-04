@@ -1,11 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
-  selector: 'app-slider-clientes',
-  templateUrl: './slider-clientes.component.html',
-  styleUrls: ['./slider-clientes.component.css']
+  selector: 'app-componente-slider-clientes',
+  templateUrl: './componente-slider-clientes.component.html',
+  styleUrls: ['./componente-slider-clientes.component.css']
 })
-export class SliderClientesComponent implements OnInit {
+export class ComponenteSliderClientesComponent implements OnInit {
   clientes = [
     { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-1.jpg', nombre: 'Cliente 1' },
     { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-2.jpg', nombre: 'Cliente 2' },

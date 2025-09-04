@@ -9,7 +9,6 @@ import { WebLayoutModule } from './layout/web-layout.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
-import { SliderClientesComponent } from './components/slider-clientes/slider-clientes.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ExperienciaComponent } from './pages/experiencia/experiencia.component';
 import { ProductoComponent } from './pages/producto/producto.component';
@@ -19,6 +18,7 @@ import { ComponenteCallToActionComponent } from './components/componente-call-to
 import { ComponenteSliderPrincipalComponent } from './components/componente-slider-principal/componente-slider-principal.component';
 import { ComponenteOfrecemosComponent } from './components/componente-ofrecemos/componente-ofrecemos.component';
 import { ComponenteServiciosComponent } from './components/componente-servicios/componente-servicios.component';
+import { ComponenteSliderClientesComponent } from './components/componente-slider-clientes/componente-slider-clientes.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { ComponenteServiciosComponent } from './components/componente-servicios/
     ProductosComponent,
     ContactoComponent,
     ServiciosComponent,
-    SliderClientesComponent,
     NosotrosComponent,
     ExperienciaComponent,
     ProductoComponent,
@@ -36,6 +35,7 @@ import { ComponenteServiciosComponent } from './components/componente-servicios/
     ComponenteSliderPrincipalComponent,
     ComponenteOfrecemosComponent,
     ComponenteServiciosComponent,
+    ComponenteSliderClientesComponent,
   ],
   imports: [
     CommonModule,

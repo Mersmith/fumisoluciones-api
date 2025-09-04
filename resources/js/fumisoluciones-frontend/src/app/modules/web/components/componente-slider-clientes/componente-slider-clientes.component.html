@@ -1,0 +1,25 @@
+<div class="g_contenedor_columna">
+    <div class="g_encabezado">
+        <h2>Fumigación, Desinfección, Limpieza y Sanitización</h2>
+        <p>
+            Te ofrecemos soluciones al alcance de tus manos: fumigación efectiva e integral, servicios preventivos,
+            limpieza y desinfección industrial. Con la calidad y confianza que nos caracteriza, también te brindamos el
+            mejor catálogo en productos nacionales e importados.
+        </p>
+    </div>
+
+    <div class="slider-wrapper">
+        <!--<button class="control prev" (click)="prevSlide()">&#10094;</button>-->
+
+        <div class="slider-container">
+            <div class="slider" [style.transform]="'translateX(-' + currentIndex * slideWidth + '%)'"
+                [class.no-transition]="!transitioning">
+                <div class="slide" *ngFor="let cliente of loopClientes">
+                    <img [src]="cliente.logo" [alt]="cliente.nombre">
+                </div>
+            </div>
+        </div>
+
+        <!--<button class="control next" (click)="nextSlide()">&#10095;</button>-->
+    </div>
+</div>
