@@ -47,3 +47,6 @@ ng generate component modules/web/components/componente-trabajos
 ng generate component modules/web/components/componente-call-to-action
 ng generate component modules/web/components/componente-slider-principal
 ng generate component modules/web/components/componente-ofrecemos
+ng generate component modules/web/components/componente-ofrecemos
+ng generate component modules/web/components/componente-servicios
+ng generate component modules/web/components/componente-slider-clientes

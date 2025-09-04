@@ -3,11 +3,11 @@ import { ServiciosService } from '../../services/servicios.service';
 import { Servicio } from '../../../../models/servicio.model';
 
 @Component({
-  selector: 'app-servicios-list',
-  templateUrl: './servicios.component.html',
-  styleUrls: ['./servicios.component.css']
+  selector: 'app-componente-servicios',
+  templateUrl: './componente-servicios.component.html',
+  styleUrls: ['./componente-servicios.component.css']
 })
-export class ServiciosListComponent implements OnInit {
+export class ComponenteServiciosComponent implements OnInit {
   servicios: Servicio[] = [];
 
   constructor(private serviciosService: ServiciosService) { }
@@ -18,4 +18,5 @@ export class ServiciosListComponent implements OnInit {
       error: (err) => console.error('Error al cargar servicios', err)
     });
   }
+
 }
