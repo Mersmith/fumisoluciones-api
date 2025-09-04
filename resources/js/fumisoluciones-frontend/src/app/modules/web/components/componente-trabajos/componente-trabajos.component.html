@@ -1,4 +1,4 @@
-<div class="ofrecemos">
+<div class="g_contenedor_columna">
     <div class="g_encabezado">
         <h2>Fumigación, Desinfección, Limpieza y Sanitización</h2>
         <p>
@@ -8,7 +8,6 @@
         </p>
     </div>
 
-    <!-- Sub-nav de categorías -->
     <div class="sub-nav">
         <button *ngFor="let cat of categorias" (click)="selectCategoria(cat)"
             [class.active]="selectedCategoria === cat">
@@ -16,11 +15,9 @@
         </button>
     </div>
 
-    <!-- Grid de imágenes filtradas -->
     <div class="grid-imagenes">
         <div class="trabajo" *ngFor="let trabajo of trabajosFiltrados">
             <img [src]="trabajo.imagen" [alt]="trabajo.categoria">
         </div>
     </div>
-
 </div>
