@@ -14,13 +14,13 @@ export class SliderPrincipalComponent implements OnInit, OnDestroy {
       nombre_link: 'Reserva',
       link: '#',
     },
-    {
+    /*{
       image: 'https://www.centromedicoosi.com/wp-content/uploads/2024/08/Banner-OSI-Home--2048x640.jpg',
       title: 'Sana colita de rana.',
       descripcion: 'Nuestros tratamientos combinan diversas especialidades para una mejor y más rápida recuperación.',
       nombre_link: 'Más informes',
       link: '#',
-    },
+    },*/
   ];
 
   currentSlide = 0;
