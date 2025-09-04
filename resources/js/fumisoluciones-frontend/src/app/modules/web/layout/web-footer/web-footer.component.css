@@ -1,33 +1,77 @@
-/* ===== FOOTER GENERAL ===== */
 .footer {
-    background: #222;
-    color: #fff;
+    background: #F8F8FA;
+    color: #01274C;
     text-align: center;
-    padding: 40px 20px 20px;
+    padding: 50px 20px 20px;
+    font-family: Arial, sans-serif;
 }
 
-/* Info principal */
+.footer-contact h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.footer-contact p {
+    font-size: 25px;
+    margin: 0;
+    color: #00ac08;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-main {
+    display: flex;
+    flex-direction: column;
+    max-width: 1100px;
+    margin: 30px auto 0;
+    gap: 20px;
+}
+
 .footer-info h2 {
     font-size: 20px;
     margin-bottom: 8px;
-    color: #fff;
 }
 
 .footer-info p {
-    font-size: 14px;
-    color: #ccc;
+    font-size: 18px;
     margin: 0;
 }
 
-/* Derechos */
+.footer-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px;
+    width: 40px;
+    height: 40px;
+    background: #01274C;
+    color: #fff;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 20px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.footer-socials a:hover {
+    background: #009bdb;
+    transform: scale(1.1);
+}
+
 .footer-bottom {
-    margin-top: 20px;
-    font-size: 13px;
-    color: #aaa;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #01274C;
 }
 
 .footer-bottom a {
-    color: #00aaff;
+    color: #01274C;
     text-decoration: none;
 }
 
@@ -35,21 +79,23 @@
     text-decoration: underline;
 }
 
-/* ===== RESPONSIVO ===== */
-@media (max-width: 768px) {
-    .footer {
-        padding: 30px 15px;
-    }
+@media (max-width: 600px) { 
 
     .footer-info h2 {
-        font-size: 18px;
+        font-size: 1.3rem;
     }
 
     .footer-info p {
-        font-size: 13px;
+        font-size: 0.95rem;
+    }
+
+    .footer-socials a {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
     }
 
     .footer-bottom {
-        font-size: 12px;
+        font-size: 0.85rem;
     }
 }
