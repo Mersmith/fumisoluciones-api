@@ -1,11 +1,11 @@
 import { Component, HostListener } from '@angular/core';
 
 @Component({
-  selector: 'app-back-to-top',
-  templateUrl: './back-to-top.component.html',
-  styleUrls: ['./back-to-top.component.css']
+  selector: 'app-componente-back-to-top',
+  templateUrl: './componente-back-to-top.component.html',
+  styleUrls: ['./componente-back-to-top.component.css']
 })
-export class BackToTopComponent {
+export class ComponenteBackToTopComponent {
   isVisible = false;
 
   // Detecta el scroll

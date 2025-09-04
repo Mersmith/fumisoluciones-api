@@ -4,16 +4,16 @@ import { WebLayoutComponent } from './web-layout/web-layout.component';
 import { WebHeaderComponent } from './web-header/web-header.component';
 import { RouterModule } from '@angular/router';
 import { WebFooterComponent } from './web-footer/web-footer.component';
-import { BackToTopComponent } from '../components/back-to-top/back-to-top.component';
-import { WhatsappButtonComponent } from '../components/whatsapp-button/whatsapp-button.component';
+import { ComponenteBackToTopComponent } from '../components/componente-back-to-top/componente-back-to-top.component';
+import { ComponenteWhatsappButtonComponent } from '../components/componente-whatsapp-button/componente-whatsapp-button.component';
 
 @NgModule({
   declarations: [
     WebLayoutComponent,
     WebHeaderComponent,
     WebFooterComponent,
-    BackToTopComponent,
-    WhatsappButtonComponent,
+    ComponenteBackToTopComponent,
+    ComponenteWhatsappButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -23,8 +23,8 @@ import { WhatsappButtonComponent } from '../components/whatsapp-button/whatsapp-
     WebLayoutComponent,
     WebHeaderComponent,
     WebFooterComponent,
-    BackToTopComponent,
-    WhatsappButtonComponent,
+    ComponenteBackToTopComponent,
+    ComponenteWhatsappButtonComponent,
   ]
 })
 export class WebLayoutModule { }
