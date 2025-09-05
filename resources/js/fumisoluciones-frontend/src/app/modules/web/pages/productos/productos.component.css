@@ -1,0 +1,138 @@
+/* 📦 Contenedor general */
+.productos-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* 🏷️ Título */
+.productos-titulo {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 🔍 Filtros */
+.productos-filtros {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.productos-filtros input,
+.productos-filtros select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.productos-filtros select {
+    cursor: pointer;
+}
+
+/* 🛒 Grid de productos */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* 🃏 Tarjeta de producto */
+.producto-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 🏷️ Nombre */
+.producto-nombre {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: #333;
+}
+
+.producto-nombre a {
+    text-decoration: none;
+    color: #0077cc;
+    transition: color 0.2s ease;
+}
+
+.producto-nombre a:hover {
+    color: #ff5722;
+}
+
+/* 📝 Descripción (acortada a 2 líneas) */
+.producto-descripcion {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+    margin: 10px 0;
+    height: 42px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* 🖼 Imagen */
+.producto-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* 📑 Paginación */
+.productos-paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.productos-paginacion button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #0077cc;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.productos-paginacion button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.productos-paginacion button:hover:not(:disabled) {
+    background: #005fa3;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

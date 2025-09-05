@@ -53,3 +53,5 @@ ng generate component modules/web/components/componente-ofrecemos
 ng generate component modules/web/components/componente-servicios
 ng generate component modules/web/components/componente-slider-clientes
 ng generate component modules/web/components/componente-mision
+
+ng generate service modules/web/services/categorias

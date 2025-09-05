@@ -1,24 +1,37 @@
-<div>
-  <h2>Productos</h2>
+<div class="productos-container">
+  <h2 class="productos-titulo">Productos</h2>
 
-  <input type="text" [formControl]="buscarControl" placeholder="Buscar producto" />
+  <div class="productos-filtros">
+    <input type="text" [formControl]="buscarControl" placeholder="Buscar producto" />
+    <select [(ngModel)]="orden" (change)="cargarProductos()">
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
+    <select [(ngModel)]="categoriaSeleccionada" (change)="filtrarPorCategoria()">
+      <option [ngValue]="null">Todas</option>
+      <option *ngFor="let cat of categorias" [ngValue]="cat.id">
+        {{ cat.nombre }}
+      </option>
+    </select>
+    <button type="button" (click)="resetearFiltros()" class="btn-reset">
+      Resetear filtros
+    </button>
+  </div>
 
-  <select [(ngModel)]="orden" (change)="cargarProductos()">
-    <option value="asc">Ascendente</option>
-    <option value="desc">Descendente</option>
-  </select>
-
-  <ul>
-    <li *ngFor="let producto of productos">
-      <h3>
+  <ul class="productos-grid">
+    <li class="producto-card" *ngFor="let producto of productos">
+      <img *ngIf="producto.imagen" [src]="producto.imagen" alt="{{ producto.nombre }}" />
+      <small>
+        Categoría: {{ producto.categoria?.nombre }}
+      </small>
+      <h3 class="producto-nombre">
         <a [routerLink]="['/producto', producto.id]">{{ producto.nombre }}</a>
       </h3>
-      <p>{{ producto.descripcion }}</p>
-      <img *ngIf="producto.imagen" [src]="producto.imagen" alt="{{ producto.nombre }}" width="100" />
+      <p class="producto-descripcion">{{ producto.descripcion }}</p>
     </li>
   </ul>
 
-  <div class="paginacion">
+  <div class="productos-paginacion">
     <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">
       Anterior
     </button>
@@ -27,5 +40,4 @@
       Siguiente
     </button>
   </div>
-
 </div>

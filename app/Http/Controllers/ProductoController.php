@@ -9,16 +9,28 @@ class ProductoController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Producto::query();
+        $query = Producto::with('categoria');
 
-        if ($request->has('buscar') && $request->buscar != '') {
-            $query->where('nombre', 'like', '%' . $request->buscar . '%');
+        if ($request->filled('buscar')) {
+            $buscar = $request->buscar;
+            $query->where('nombre', 'like', "%{$buscar}%");
+        }
+
+        // 🏷️ Filtro por categoría
+        if ($request->filled('categoria_id')) {
+            $query->where('categoria_id', $request->categoria_id);
         }
 
         $orden = $request->get('orden', 'desc');
+        if (!in_array($orden, ['asc', 'desc'])) {
+            $orden = 'desc';
+        }
+
         $query->orderBy('created_at', $orden);
 
-        return $query->paginate(5);
+        $perPage = $request->get('per_page', 15);
+
+        return $query->paginate($perPage);
     }
 
     public function store(Request $request)

@@ -1,3 +1,8 @@
+export interface Categoria {
+  id: number;
+  nombre: string;
+}
+
 export interface Producto {
   id?: number;
   categoria_id?: number;
@@ -7,4 +12,5 @@ export interface Producto {
   descripcion?: string;
   created_at?: string;
   updated_at?: string;
+  categoria?: Categoria; // 👈 relación
 }

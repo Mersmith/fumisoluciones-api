@@ -11,11 +11,22 @@ export class ProductosService {
 
   constructor(private http: HttpClient) { }
 
-  getProductos(buscar: string = '', orden: string = 'desc', page: number = 1): Observable<any> {
+  getProductos(
+    buscar: string = '',
+    orden: string = 'desc',
+    page: number = 1,
+    categoriaId?: number
+  ): Observable<any> {
     let url = `${this.apiUrl}?orden=${orden}&page=${page}`;
+
     if (buscar) {
       url += `&buscar=${buscar}`;
     }
+
+    if (categoriaId) {
+      url += `&categoria_id=${categoriaId}`;
+    }
+
     return this.http.get<any>(url);
   }
 
