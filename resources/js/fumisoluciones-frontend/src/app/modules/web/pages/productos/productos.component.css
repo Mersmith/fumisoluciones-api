@@ -1,4 +1,3 @@
-/* 📦 Contenedor general */
 .productos-container {
     max-width: 1200px;
     margin: 40px auto;
@@ -6,15 +5,13 @@
     font-family: Arial, sans-serif;
 }
 
-/* 🏷️ Título */
 .productos-titulo {
     text-align: center;
     font-size: 1.8rem;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--color-negro);
 }
 
-/* 🔍 Filtros */
 .productos-filtros {
     display: flex;
     justify-content: center;
@@ -24,17 +21,39 @@
 
 .productos-filtros input,
 .productos-filtros select {
-    padding: 10px;
+    padding: 10px 15px;
     font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    border: var(--borde-card);
+    border-radius: 50px;
+    color: var(--color-negro);
+}
+
+.productos-filtros select {
+    padding-right: 30px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+    background-color: var(--color-blanco)
+}
+
+.productos-filtros button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: var(--color-verde);
+    border-radius: 50px;
+    color: var(--color-blanco);
+    font-weight: 600;
+}
+
+.productos-filtros button:hover {
+    background-color: var(--color-celeste);
 }
 
 .productos-filtros select {
     cursor: pointer;
 }
 
-/* 🛒 Grid de productos */
 .productos-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -44,13 +63,11 @@
     margin: 0;
 }
 
-
-/* 🃏 Tarjeta de producto */
 .producto-card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background: var(--color-blanco);
+    border: var(--borde-card);
+    border-radius: 12px;
+    box-shadow: var(--sombra);
     padding: 15px;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -58,30 +75,33 @@
 
 .producto-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 🏷️ Nombre */
+.producto-categoria {
+    font-size: 12px;
+    margin: 10px 0;
+    color: var(--color-celeste);
+    font-weight: 600;
+}
+
 .producto-nombre {
     font-size: 1.1rem;
     margin: 10px 0;
-    color: #333;
+    color: var(--color-negro);
 }
 
 .producto-nombre a {
     text-decoration: none;
-    color: #0077cc;
     transition: color 0.2s ease;
 }
 
 .producto-nombre a:hover {
-    color: #ff5722;
+    color: var(--color-verde);
 }
 
-/* 📝 Descripción (acortada a 2 líneas) */
 .producto-descripcion {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-negro);
     line-height: 1.4;
     margin: 10px 0;
     height: 42px;
@@ -92,7 +112,6 @@
     -webkit-box-orient: vertical;
 }
 
-/* 🖼 Imagen */
 .producto-card img {
     width: 100%;
     height: 160px;
@@ -101,7 +120,6 @@
     margin-top: 10px;
 }
 
-/* 📑 Paginación */
 .productos-paginacion {
     display: flex;
     justify-content: center;
@@ -113,26 +131,29 @@
 .productos-paginacion button {
     padding: 10px 16px;
     border: none;
-    border-radius: 6px;
-    background: #0077cc;
-    color: #fff;
+    border-radius: 50px;
+    background: var(--color-celeste);
+    color: var(--color-blanco);
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s ease;
 }
 
 .productos-paginacion button:disabled {
-    background: #ccc;
+    background: var(--color-gris);
     cursor: not-allowed;
 }
 
 .productos-paginacion button:hover:not(:disabled) {
-    background: #005fa3;
+    background: var(--color-verde);
 }
 
-/* 📱 Responsive */
 @media (max-width: 768px) {
     .productos-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .productos-filtros {
+        flex-direction: column;
     }
 }

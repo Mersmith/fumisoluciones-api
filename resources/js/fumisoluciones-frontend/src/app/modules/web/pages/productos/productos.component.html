@@ -3,16 +3,19 @@
 
   <div class="productos-filtros">
     <input type="text" [formControl]="buscarControl" placeholder="Buscar producto" />
-    <select [(ngModel)]="orden" (change)="cargarProductos()">
-      <option value="asc">Ascendente</option>
-      <option value="desc">Descendente</option>
-    </select>
+
     <select [(ngModel)]="categoriaSeleccionada" (change)="filtrarPorCategoria()">
       <option [ngValue]="null">Todas</option>
       <option *ngFor="let cat of categorias" [ngValue]="cat.id">
         {{ cat.nombre }}
       </option>
     </select>
+
+    <select [(ngModel)]="orden" (change)="cargarProductos()">
+      <option value="asc">Ascendente</option>
+      <option value="desc">Descendente</option>
+    </select>
+
     <button type="button" (click)="resetearFiltros()" class="btn-reset">
       Resetear filtros
     </button>
@@ -21,7 +24,7 @@
   <ul class="productos-grid">
     <li class="producto-card" *ngFor="let producto of productos">
       <img *ngIf="producto.imagen" [src]="producto.imagen" alt="{{ producto.nombre }}" />
-      <small>
+      <small class="producto-categoria">
         Categoría: {{ producto.categoria?.nombre }}
       </small>
       <h3 class="producto-nombre">
