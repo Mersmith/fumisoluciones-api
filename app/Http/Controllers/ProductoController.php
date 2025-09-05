@@ -47,7 +47,7 @@ class ProductoController extends Controller
 
     public function show($id)
     {
-        return Producto::findOrFail($id);
+        return Producto::with('categoria')->findOrFail($id);
     }
 
     public function update(Request $request, Producto $producto)

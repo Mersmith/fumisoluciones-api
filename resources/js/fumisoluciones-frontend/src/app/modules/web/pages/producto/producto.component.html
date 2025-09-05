@@ -1,8 +1,18 @@
-<div *ngIf="producto">
-    <h2>{{ producto.nombre }}</h2>
-    <img *ngIf="producto.imagen" [src]="producto.imagen" alt="{{ producto.nombre }}" width="200">
-    <p>{{ producto.descripcion }}</p>
+<div class="producto-container">
+  <div class="migas">
+    <a routerLink="/productos">← Volver a productos</a>
   </div>
-  
-  <a routerLink="/productos">← Volver a productos</a>
-  
+
+  <div *ngIf="producto" class="producto-detalle">
+    <div class="columna-imagen">
+      <img *ngIf="producto.imagen" [src]="producto.imagen" alt="{{ producto.nombre }}">
+    </div>
+
+    <div class="columna-detalles">
+      <p>{{ producto.categoria?.nombre }}</p>
+      <h2>{{ producto.nombre }}</h2>
+      <p>{{ producto.descripcion }}</p>
+      <a href="">Pedir por whatsapp</a>
+    </div>
+  </div>
+</div>
