@@ -1,0 +1,79 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card {
+    background: var(--color-blanco);
+    border-radius: 14px;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border: var(--borde-card);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-negro);
+    margin: 0 0 12px;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.card .contenido {
+    padding: 0 10px 10px;
+}
+
+.card .contenido p {
+    color: var(--color-negro);
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.card .contenido ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card .contenido ul li {
+    font-size: 16px;
+    color: var(--color-negro);
+    position: relative;
+}
+
+.card .contenido ul li::marker {
+    color: var(--color-verde);
+}
+
+@media (max-width: 1000px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+
+    }
+}

@@ -8,6 +8,7 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { ExperienciaComponent } from './pages/experiencia/experiencia.component';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
+import { PaginaSeguridadComponent } from './pages/pagina-seguridad/pagina-seguridad.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
       { path: 'servicios', component: ServiciosComponent },
       { path: 'productos', component: ProductosComponent },
       { path: 'producto/:id', component: ProductoComponent }, // 👈 detalle
-      { path: 'contacto', component: ContactoComponent }
+      { path: 'contacto', component: ContactoComponent },
+      { path: 'seguridad', component: PaginaSeguridadComponent },
     ]
   }
 ];

@@ -17,6 +17,7 @@ ng g component modules/web/pages/nosotros
 ng g component modules/web/pages/servicios
 ng g component modules/web/pages/experiencia
 ng g component modules/web/pages/producto
+ng g component modules/web/pages/pagina-seguridad
 
 ng g component admin/layout/admin-layout
 ng g component admin/pages/productos
@@ -48,7 +49,6 @@ ng generate component modules/web/components/componente-banner
 ng generate component modules/web/components/componente-trabajos
 ng generate component modules/web/components/componente-call-to-action
 ng generate component modules/web/components/componente-slider-principal
-ng generate component modules/web/components/componente-ofrecemos
 ng generate component modules/web/components/componente-ofrecemos
 ng generate component modules/web/components/componente-servicios
 ng generate component modules/web/components/componente-slider-clientes

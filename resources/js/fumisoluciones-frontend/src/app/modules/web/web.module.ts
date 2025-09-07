@@ -20,6 +20,7 @@ import { ComponenteServiciosComponent } from './components/componente-servicios/
 import { ComponenteSliderClientesComponent } from './components/componente-slider-clientes/componente-slider-clientes.component';
 import { ComponenteBannerComponent } from './components/componente-banner/componente-banner.component';
 import { ComponenteMisionComponent } from './components/componente-mision/componente-mision.component';
+import { PaginaSeguridadComponent } from './pages/pagina-seguridad/pagina-seguridad.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ComponenteMisionComponent } from './components/componente-mision/compon
     ComponenteSliderClientesComponent,
     ComponenteBannerComponent,
     ComponenteMisionComponent,
+    PaginaSeguridadComponent,
   ],
   imports: [
     CommonModule,
