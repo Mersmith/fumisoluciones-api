@@ -14,52 +14,52 @@
 
     <!-- Menú -->
     <ul class="nav-links" [class.open]="menuOpen">
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a routerLink="/" (click)="closeMenu()">
-          <i class="fa-solid fa-house"></i> Inicio
-        </a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="/nosotros" (click)="closeMenu()">
-          <i class="fa-solid fa-user-group"></i> Nosotros
-        </a>
-      </li>
-      <li>
-        <a>
-          <i class="fa-solid fa-leaf"></i> Saneamiento ambiental
-        </a>
-      </li>
-      <li>
-        <a>
-          <i class="fa-solid fa-fire"></i> Extintores
-        </a>
-      </li>
-      <li>
-        <a>
-          <i class="fa-solid fa-shield-halved"></i> Seguridad
-        </a>
-      </li>
-      <!--<li routerLinkActive="active">
-        <a routerLink="/experiencia" (click)="closeMenu()">
-          <i class="fa-solid fa-briefcase"></i> Experiencia
-        </a>
-      </li>-->
-      <li routerLinkActive="active">
-        <a routerLink="/servicios" (click)="closeMenu()">
-          <i class="fa-solid fa-gears"></i> Servicios
-        </a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="/productos" (click)="closeMenu()">
-          <i class="fa-solid fa-box-open"></i> Tienda
-        </a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="/contacto" (click)="closeMenu()">
-          <i class="fa-solid fa-envelope"></i> Contacto
-        </a>
-      </li>
+      <ng-container *ngFor="let item of menuItems">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+
+          <!-- Caso: item con route (enlace normal) -->
+          <a *ngIf="item.route" [routerLink]="item.route" (click)="closeMenu()">
+            <i [class]="item.icon"></i> {{ item.label }}
+          </a>
+
+          <!-- Caso: item con hijos -->
+          <div *ngIf="item.children" class="dropdown">
+            <span class="dropdown-toggle">
+              <i [class]="item.icon"></i> {{ item.label }}
+              <i class="fa-solid fa-chevron-down caret"></i>
+            </span>
+
+            <ul class="dropdown-menu">
+              <!-- recursivo -->
+              <ng-container *ngFor="let child of item.children">
+                <li>
+                  <a *ngIf="child.route" [routerLink]="child.route" (click)="closeMenu()">
+                    <i [class]="child.icon"></i> {{ child.label }}
+                  </a>
+
+                  <!-- subniveles -->
+                  <div *ngIf="child.children" class="dropdown">
+                    <span class="dropdown-toggle">
+                      <i [class]="child.icon"></i> {{ child.label }}
+                      <i class="fa-solid fa-chevron-right caret"></i>
+                    </span>
+
+                    <ul class="dropdown-menu sub">
+                      <li *ngFor="let sub of child.children">
+                        <a [routerLink]="sub.route" (click)="closeMenu()">
+                          <i [class]="sub.icon"></i> {{ sub.label }}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </li>
+      </ng-container>
     </ul>
+
 
   </nav>
 </header>

@@ -1,3 +1,4 @@
+/* --- Header general --- */
 .header {
   width: 100%;
   background: var(--color-blanco);
@@ -22,38 +23,82 @@
   height: 50px;
 }
 
+/* --- Menú principal --- */
 .nav-links {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
-.nav-links li.active a {
+.nav-links li {
+  position: relative;
+}
+
+.nav-links li.active>a {
   color: var(--color-verde);
 }
 
-.nav-links li a {
+.nav-links li a,
+.dropdown-toggle {
   text-decoration: none;
   color: var(--color-negro);
   font-weight: 600;
   font-size: 16px;
   transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.nav-links li a i {
+.nav-links li a i,
+.dropdown-toggle i {
   color: var(--color-celeste);
   margin-right: 6px;
   transition: color 0.3s;
 }
 
-.nav-links li a:hover {
+.nav-links li a:hover,
+.dropdown-toggle:hover {
   color: var(--color-verde);
 }
 
-.nav-links li a:hover i {
+.nav-links li a:hover i,
+.dropdown-toggle:hover i {
   color: var(--color-verde);
 }
 
+/* --- Dropdowns (desktop) --- */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--color-blanco);
+  box-shadow: var(--sombra);
+  list-style: none;
+  padding: 10px 10px;
+  min-width: 220px;
+  z-index: 1001;
+}
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+/* Subnivel (2º nivel) */
+.dropdown-menu.sub {
+  top: 0;
+  left: 100%;
+}
+
+/* Íconos de flechas */
+.caret {
+  margin-left: 5px;
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+/* --- Menú móvil --- */
 .hamburger {
   display: none;
   font-size: 20px;
@@ -70,18 +115,34 @@
   .nav-links {
     position: fixed;
     top: 0;
-    left: -250px;
+    left: -350px;
     height: 100%;
-    width: 220px;
+    width: 350px;
     background: var(--color-blanco);
     flex-direction: column;
     padding: 20px;
-    gap: 20px;
+    gap: 10px;
     transition: left 0.3s ease;
     box-shadow: var(--sombra);
+    overflow-y: auto;
   }
 
   .nav-links.open {
     left: 0;
+  }
+
+  .dropdown-menu {
+    position: static;
+    display: none;
+    box-shadow: none;
+    padding-left: 15px;
+  }
+
+  .dropdown.open>.dropdown-menu {
+    display: block;
+  }
+
+  .dropdown.open>.dropdown-toggle .caret {
+    transform: rotate(90deg);
   }
 }
