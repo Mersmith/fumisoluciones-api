@@ -1,0 +1,72 @@
+.contacto-formulario {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 320px;
+    background: var(--color-verde);
+    border-radius: 0 14px 14px 0;
+    box-shadow: var(--sombra);
+    padding: 16px;
+    z-index: 2000;
+}
+
+.contacto-formulario h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--color-blanco);
+}
+
+.contacto-formulario .form-group {
+    margin-bottom: 10px;
+}
+
+.contacto-formulario input,
+.contacto-formulario textarea,
+.contacto-formulario select {
+    width: 100%;
+    padding: 5px 10px;
+    border: var(--borde-card);
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    background: var(--color-blanco);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contacto-formulario input::placeholder,
+.contacto-formulario textarea::placeholder {
+    color: #999;
+    font-size: 0.95rem;
+}
+
+.contacto-formulario input:focus,
+.contacto-formulario textarea:focus,
+.contacto-formulario select:focus {
+    border-color: var(--color-verde);
+    box-shadow: 0 0 6px rgba(255, 87, 34, 0.4);
+}
+
+.contacto-formulario textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contacto-formulario button {
+    background: var(--color-blanco);
+    color: var(--color-negro);
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.contacto-formulario button:hover {
+    background: var(--color-negro);
+    transform: translateY(-2px);
+    color: var(--color-blanco);
+}

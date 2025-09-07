@@ -1,0 +1,23 @@
+<div class="contacto-formulario">
+    <h2>Cotización</h2>
+    <form (ngSubmit)="guardarCotizacion()">
+        <div class="form-group">
+            <input type="text" [(ngModel)]="nuevaCotizacion.nombre" name="nombre" placeholder="Nombre" required />
+        </div>
+
+        <div class="form-group">
+            <input type="email" [(ngModel)]="nuevaCotizacion.correo" name="correo" placeholder="Correo" required />
+        </div>
+
+        <div class="form-group">
+            <input type="text" [(ngModel)]="nuevaCotizacion.telefono" name="telefono" placeholder=" Teléfono"
+                required />
+        </div>
+
+        <div class="form-group">
+            <textarea [(ngModel)]="nuevaCotizacion.detalle" name="detalle" placeholder=" Detalle"></textarea>
+        </div>
+
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+    </form>
+</div>
