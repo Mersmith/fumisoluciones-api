@@ -12,7 +12,10 @@
       <p>{{ producto.categoria?.nombre }}</p>
       <h2>{{ producto.nombre }}</h2>
       <p>{{ producto.descripcion }}</p>
-      <a href="">Pedir por whatsapp</a>
+      <a [href]="'https://wa.me/51999999999?text=Hola, estoy interesado en el producto: ' + producto.nombre"
+        target="_blank" class="whatsapp-btn">
+        <i class="fa-brands fa-whatsapp"></i> Pedir por WhatsApp
+      </a>
     </div>
   </div>
 </div>
