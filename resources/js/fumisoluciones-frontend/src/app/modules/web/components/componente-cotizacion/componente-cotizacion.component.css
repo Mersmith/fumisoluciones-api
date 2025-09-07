@@ -1,14 +1,57 @@
+/* Botón flotante */
+.cotizacion-toggle {
+    position: fixed;
+    top: 70%;
+    left: 0px;
+    background: var(--color-verde);
+    color: white;
+    border: none;
+    border-radius: 0 14px 14px 0;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2100;
+    box-shadow: var(--sombra);
+    transition: font-size 0.2s ease;
+}
+
+.cotizacion-toggle:hover {
+    font-size: 18px;
+}
+
+/* Caja del formulario */
 .contacto-formulario {
     position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+    top: 40%;
+    left: -320px;
     width: 320px;
     background: var(--color-verde);
     border-radius: 0 14px 14px 0;
     box-shadow: var(--sombra);
     padding: 16px;
-    z-index: 2000;
+    z-index: 2200;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+/* Mostrar cuando se abre */
+.contacto-formulario.abierto {
+    left: 0;
+}
+
+.contacto-formulario .cerrar {
+    position: absolute;
+    right: 15px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--color-blanco);
+    text-align: end;
+    transition: font-size 0.2s ease;
+}
+
+.contacto-formulario .cerrar:hover {
+    font-size: 18px;
 }
 
 .contacto-formulario h2 {
@@ -69,4 +112,16 @@
     background: var(--color-negro);
     transform: translateY(-2px);
     color: var(--color-blanco);
+}
+
+@media(max-width: 1000px) {
+    .cotizacion-toggle {
+        top: auto;
+        height: 60px;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 14px 14px 0 0; /* redondeado solo arriba */
+    }
+
 }

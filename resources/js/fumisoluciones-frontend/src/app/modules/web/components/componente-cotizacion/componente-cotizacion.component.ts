@@ -14,6 +14,7 @@ export class ComponenteCotizacionComponent {
     telefono: '',
     detalle: '',
   };
+  mostrar = false;
 
   constructor(
     private cotizacionService: CotizacionService
