@@ -37,19 +37,19 @@ export class WebHeaderComponent {
             {
               label: 'Extintores PQS',
               icon: 'fa-solid fa-fire',
-              route: '/extintores/pqs'
+              route: '/seguridad'
             },
             {
               label: 'Extintores CO₂',
               icon: 'fa-solid fa-wind',
-              route: '/extintores/co2'
+              route: '/seguridad'
             }
           ]
         },
         {
           label: 'Recarga de extintores',
           icon: 'fa-solid fa-rotate',
-          route: '/extintores/recarga'
+          route: '/seguridad'
         }
       ]
     },
@@ -60,12 +60,12 @@ export class WebHeaderComponent {
         {
           label: 'Fumigación',
           icon: 'fa-solid fa-bug',
-          route: '/saneamiento/fumigacion'
+          route: '/seguridad'
         },
         {
           label: 'Limpieza',
           icon: 'fa-solid fa-soap',
-          route: '/saneamiento/limpieza'
+          route: '/seguridad'
         }
       ]
     },

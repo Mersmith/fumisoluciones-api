@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CotizacionService } from '../../services/cotizacion.service';
 import { Cotizacion } from '../../../../models/cotizacion.model';
 
@@ -7,7 +7,7 @@ import { Cotizacion } from '../../../../models/cotizacion.model';
   templateUrl: './componente-cotizacion.component.html',
   styleUrls: ['./componente-cotizacion.component.css']
 })
-export class ComponenteCotizacionComponent {
+export class ComponenteCotizacionComponent implements OnInit {
   nuevaCotizacion: Cotizacion = {
     nombre: '',
     correo: '',
@@ -19,6 +19,12 @@ export class ComponenteCotizacionComponent {
   constructor(
     private cotizacionService: CotizacionService
   ) { }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.mostrar = true;
+    }, 3000);
+  }
 
   guardarCotizacion() {
 
