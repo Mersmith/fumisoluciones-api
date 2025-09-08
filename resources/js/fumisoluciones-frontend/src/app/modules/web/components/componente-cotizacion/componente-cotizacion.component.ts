@@ -21,8 +21,15 @@ export class ComponenteCotizacionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Abre después de 3 segundos
     setTimeout(() => {
       this.mostrar = true;
+
+      // Cierra después de otros 3 segundos
+      setTimeout(() => {
+        this.mostrar = false;
+      }, 3000);
+
     }, 3000);
   }
 

@@ -8,16 +8,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class ComponenteSliderPrincipalComponent implements OnInit, OnDestroy {
   slides = [
     {
-      image: 'https://www.centromedicoosi.com/wp-content/uploads/2024/08/Banner-OSI-Home--2048x640.jpg',
-      title: 'Muévete sin dolor y vive mejor',
-      descripcion: 'Nuestros tratamientos combinan diversas especialidades para una mejor y más rápida recuperación.',
+      image: 'http://127.0.0.1:8000/imagenes/slider/slider-1.jpg',
+      title: 'Fumigación Profesional',
+      descripcion: 'Eliminamos plagas de forma rápida y segura, cuidando tu salud y protegiendo tus espacios.',
       nombre_link: 'Reserva',
       link: '#',
     },
     {
-      image: 'https://www.centromedicoosi.com/wp-content/uploads/2024/08/Banner-OSI-Home--2048x640.jpg',
-      title: 'Sana colita de rana.',
-      descripcion: 'Nuestros tratamientos combinan diversas especialidades para una mejor y más rápida recuperación.',
+      image: 'http://127.0.0.1:8000/imagenes/slider/slider-2.jpg',
+      title: 'Venta y Recarga de Extintores',
+      descripcion: 'Extintores certificados, recarga inmediata y mantenimiento confiable para tu seguridad.',
       nombre_link: 'Más informes',
       link: '#',
     },

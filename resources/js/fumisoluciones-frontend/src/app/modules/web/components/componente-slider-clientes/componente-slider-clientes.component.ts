@@ -7,14 +7,14 @@ import { Component, OnInit, HostListener } from '@angular/core';
 })
 export class ComponenteSliderClientesComponent implements OnInit {
   clientes = [
-    { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-1.jpg', nombre: 'Cliente 1' },
-    { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-2.jpg', nombre: 'Cliente 2' },
-    { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-3.jpg', nombre: 'Cliente 3' },
-    { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-4.jpg', nombre: 'Cliente 4' },
-    { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-5.jpg', nombre: 'Cliente 5' },
-    { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-6.jpg', nombre: 'Cliente 6' },
-    { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-7.jpg', nombre: 'Cliente 7' },
-    { logo: 'https://www.fumisolucionesac.com/assets/img/recent-photos/recent-photos-8.jpg', nombre: 'Cliente 8' },
+    { logo: 'http://127.0.0.1:8000/imagenes/clientes/clientes-1.jpg', nombre: 'Fumisoluciones' },
+    { logo: 'http://127.0.0.1:8000/imagenes/clientes/clientes-2.jpg', nombre: 'Fumisoluciones' },
+    { logo: 'http://127.0.0.1:8000/imagenes/clientes/clientes-3.jpg', nombre: 'Fumisoluciones' },
+    { logo: 'http://127.0.0.1:8000/imagenes/clientes/clientes-4.jpg', nombre: 'Fumisoluciones' },
+    { logo: 'http://127.0.0.1:8000/imagenes/clientes/clientes-5.jpg', nombre: 'Fumisoluciones' },
+    { logo: 'http://127.0.0.1:8000/imagenes/clientes/clientes-6.jpg', nombre: 'Fumisoluciones' },
+    { logo: 'http://127.0.0.1:8000/imagenes/clientes/clientes-7.jpg', nombre: 'Fumisoluciones' },
+    { logo: 'http://127.0.0.1:8000/imagenes/clientes/clientes-8.jpg', nombre: 'Fumisoluciones' },
   ];
 
   loopClientes: any[] = [];

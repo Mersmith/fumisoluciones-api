@@ -12,15 +12,15 @@ interface Trabajo {
 })
 export class ComponenteTrabajosComponent {
   trabajos: Trabajo[] = [
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/fumi-1.jpg', categoria: 'Fumigación' },
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/fumi-2.jpg', categoria: 'Fumigación' },
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/fumi-3.jpg', categoria: 'Fumigación' },
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/home-1.jpg', categoria: 'Desinfección' },
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/home-2.jpg', categoria: 'Desinfección' },
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/home-3.jpg', categoria: 'Desinfección' },
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/vacation-1.jpg', categoria: 'Sanitización' },
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/beach-2.jpg', categoria: 'Sanitización' },
-    { imagen: 'https://www.fumisolucionesac.com/assets/img/gallery/beach-3.jpg', categoria: 'Sanitización' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-11.jpg', categoria: 'Fumigación' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-12.jpg', categoria: 'Fumigación' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-13.jpg', categoria: 'Fumigación' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-14.jpg', categoria: 'Desinfección' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-15.jpg', categoria: 'Desinfección' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-16.jpg', categoria: 'Desinfección' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-17.jpg', categoria: 'Sanitización' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-18.jpg', categoria: 'Sanitización' },
+    { imagen: 'http://127.0.0.1:8000/imagenes/servicio/servicio-19.jpg', categoria: 'Sanitización' },
   ];
 
   categorias: string[] = [];

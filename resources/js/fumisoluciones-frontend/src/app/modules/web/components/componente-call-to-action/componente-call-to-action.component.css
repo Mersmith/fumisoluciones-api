@@ -9,6 +9,17 @@
   color: var(--color-blanco);
 }
 
+.cta-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45); /* negro semitransparente */
+  z-index: 1;
+}
+
 .cta-bg {
   position: absolute;
   top: 0;
@@ -18,6 +29,7 @@
   object-fit: cover;
   z-index: 0;
   filter: brightness(0.8);
+  object-position: 78% 33%;
 }
 
 .cta-content {
@@ -56,7 +68,7 @@
 
 @media (max-width: 1000px) {
   .cta-bg {
-    object-position: 58% 33%;
+    object-position: 90% 33%;
   }
 
 }
