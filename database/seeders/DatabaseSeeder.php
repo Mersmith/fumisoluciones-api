@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
             MenuPaginaSeeder::class,
             CategoriaSeeder::class,
             ProductoSeeder::class,
-            //ServicioSeeder::class,
-            //PaginaServicioSeeder::class,
-            //ContactoSeeder::class,
-            //CotizacionSeeder::class,
+            ServicioSeeder::class,
+            PaginaServicioSeeder::class,
+            ContactoSeeder::class,
+            CotizacionSeeder::class,
         ]);
     }
 }

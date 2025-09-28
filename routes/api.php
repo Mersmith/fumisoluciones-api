@@ -10,6 +10,7 @@ use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaginaController;
 use App\Http\Controllers\MenuPaginaController;
+use App\Http\Controllers\PaginaServicioController;
 
 Route::apiResource('menus', MenuController::class);
 Route::apiResource('paginas', PaginaController::class);
@@ -18,6 +19,9 @@ Route::apiResource('menu-paginas', MenuPaginaController::class)->only(['index', 
 Route::apiResource('categorias', CategoriaController::class);
 Route::apiResource('productos', ProductoController::class);
 Route::apiResource('servicios', ServicioController::class);
+
+Route::apiResource('pagina-servicios', PaginaServicioController::class);
+
 Route::apiResource('contactos', ContactoController::class);
 Route::apiResource('cotizaciones', CotizacionController::class);
 

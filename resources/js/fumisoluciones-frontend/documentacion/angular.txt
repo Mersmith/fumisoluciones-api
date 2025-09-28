@@ -58,6 +58,7 @@ ng generate component modules/web/components/componente-cotizacion
 ng g component modules/admin/pages/categorias
 ng g component modules/admin/pages/menus
 ng g component modules/admin/pages/servicios
+ng g component modules/admin/pages/paginas-servicios
 
 ng generate service modules/web/services/categorias
 ng generate service modules/web/services/cotizacion
@@ -65,6 +66,7 @@ ng generate service modules/web/services/cotizacion
 ng generate service modules/admin/services/menu
 ng generate service modules/admin/services/pagina
 ng generate service modules/admin/services/menu-pagina
+ng generate service modules/admin/services/pagina-servicios
 
 Ministerio de la Mujer
 ONPE

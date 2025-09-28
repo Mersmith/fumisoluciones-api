@@ -9,6 +9,7 @@ import { AdminLayoutModule } from './layout/admin-layout.module';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { MenusComponent } from './pages/menus/menus.component';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
+import { PaginasServiciosComponent } from './pages/paginas-servicios/paginas-servicios.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ServiciosComponent } from './pages/servicios/servicios.component';
     ContactoComponent,
     CategoriasComponent,
     MenusComponent,
-    ServiciosComponent
+    ServiciosComponent,
+    PaginasServiciosComponent
   ],
   imports: [
     CommonModule,

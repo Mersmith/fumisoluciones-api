@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { MenusComponent } from './pages/menus/menus.component';
 import { ProductosComponent } from './pages/productos/productos.component';
+import { PaginasServiciosComponent } from './pages/paginas-servicios/paginas-servicios.component';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'categorias', component: CategoriasComponent },
       { path: 'productos', component: ProductosComponent },
       { path: 'servicios', component: ServiciosComponent },
+      { path: 'paginas-servicios', component: PaginasServiciosComponent },
       { path: 'contacto', component: ContactoComponent }
     ]
   }
