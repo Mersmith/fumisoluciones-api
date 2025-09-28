@@ -9,7 +9,11 @@ class Servicio extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'slug', 'imagen', 'descripcion'];
+    protected $fillable = ['nombre', 'slug', 'categoria_id', 'imagen', 'descripcion', 'contenido'];
+
+    protected $casts = [
+        'contenido' => 'array',
+    ];
 
     public function contactos()
     {
