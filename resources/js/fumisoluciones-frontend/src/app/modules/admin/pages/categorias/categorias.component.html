@@ -1,14 +1,46 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-  
+<div class="categorias-container">
+  <h2>Gestión de Categorías</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <p>Nombre</p>
-    <input formControlName="nombre" placeholder="Nombre de la categoria">
-  
-    <p>Descripcion</p>
+    <input formControlName="nombre" placeholder="Nombre de la categoría">
+
+    <p>Descripción</p>
     <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
-  
+
+    <p>Tipo</p>
+    <select formControlName="tipo">
+      <option value="producto">Producto</option>
+      <option value="servicio">Servicio</option>
+    </select>
+
     <p>Imagen</p>
     <input type="file" (change)="onFileSelected($event)">
-  
+
     <button type="submit">Guardar</button>
   </form>
-  
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Descripción</th>
+        <th>Imagen</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cat of categorias">
+        <td>{{ cat.nombre }}</td>
+        <td>{{ cat.tipo }}</td>
+        <td>{{ cat.descripcion }}</td>
+        <td><img *ngIf="cat.imagen" [src]="'http://127.0.0.1:8000/storage/' + cat.imagen" width="60"></td>
+        <td>
+          <button (click)="editCategoria(cat)">Editar</button>
+          <button (click)="deleteCategoria(cat.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

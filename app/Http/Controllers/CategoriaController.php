@@ -17,6 +17,7 @@ class CategoriaController extends Controller
     {
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
+            'tipo' => 'required|in:producto,servicio', 
             'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
         ]);
@@ -36,6 +37,7 @@ class CategoriaController extends Controller
         $categoria = Categoria::create([
             'nombre'       => $validated['nombre'],
             'slug'         => $slug,
+            'tipo'         => $validated['tipo'],
             'descripcion'  => $validated['descripcion'] ?? null,
             'imagen'       => $path,
         ]);
@@ -53,6 +55,7 @@ class CategoriaController extends Controller
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'slug' => 'required|unique:categorias,slug,' . $categoria->id,
+            'tipo' => 'required|in:producto,servicio',
             'imagen' => 'nullable|string',
             'descripcion' => 'nullable|string',
         ]);

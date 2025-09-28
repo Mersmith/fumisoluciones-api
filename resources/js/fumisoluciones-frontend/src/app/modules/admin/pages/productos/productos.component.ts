@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Categoria } from '../../../../models/producto.model';
+import { Categoria } from '../../../../models/categoria.model';
 import { CategoriasService } from '../../../admin/services/categorias.service';
 import { ProductosService } from '../../../admin/services/productos.service';
 

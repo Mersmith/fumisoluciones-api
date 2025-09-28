@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Producto, Categoria } from '../../../../models/producto.model';
+import { Producto } from '../../../../models/producto.model';
+import { Categoria } from '../../../../models/categoria.model';
 import { ProductosService } from '../../services/productos.service';
 import { CategoriasService } from '../../services/categorias.service';
 

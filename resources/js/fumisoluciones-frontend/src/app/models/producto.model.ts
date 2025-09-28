@@ -1,7 +1,4 @@
-export interface Categoria {
-  id: number;
-  nombre: string;
-}
+import { Categoria } from './categoria.model';
 
 export interface Producto {
   id?: number;
@@ -12,5 +9,5 @@ export interface Producto {
   descripcion?: string;
   created_at?: string;
   updated_at?: string;
-  categoria?: Categoria; // 👈 relación
+  categoria?: Categoria; // 👈 ahora sí funciona
 }
