@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Categoria } from '../../../../app/models/categoria.model'; // 👈 usa solo esta
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Categoria } from '../../../../app/models/categoria.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +13,43 @@ export class CategoriasService {
   constructor(private http: HttpClient) {}
 
   getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.apiUrl);
+    return this.http.get<Categoria[]>(this.apiUrl)
+      .pipe(catchError(this.handleError));
   }
 
   createCategoria(formData: FormData): Observable<Categoria> {
-    return this.http.post<Categoria>(this.apiUrl, formData);
-  }
-
-  deleteCategoria(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.post<Categoria>(this.apiUrl, formData)
+      .pipe(catchError(this.handleError));
   }
 
   updateCategoria(id: number, formData: FormData): Observable<Categoria> {
-    // usamos POST con _method=PUT porque Laravel lo interpreta como update
-    return this.http.post<Categoria>(`${this.apiUrl}/${id}?_method=PUT`, formData);
+    return this.http.post<Categoria>(`${this.apiUrl}/${id}?_method=PUT`, formData)
+      .pipe(catchError(this.handleError));
   }
-  
+
+  deleteCategoria(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 422) {
+      // Errores de validación de Laravel
+      return throwError(() => ({
+        type: 'validation',
+        errors: error.error.errors
+      }));
+    }
+    if (error.status === 500) {
+      // Error interno del servidor
+      return throwError(() => ({
+        type: 'server',
+        message: 'Error en el servidor, intenta más tarde.'
+      }));
+    }
+    return throwError(() => ({
+      type: 'unknown',
+      message: 'Error desconocido, revisa tu conexión.'
+    }));
+  }
 }

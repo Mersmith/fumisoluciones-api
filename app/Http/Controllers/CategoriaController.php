@@ -17,17 +17,11 @@ class CategoriaController extends Controller
     {
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
+            'slug' => 'required|unique:categorias,slug',
             'tipo' => 'required|in:producto,servicio',
             'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
         ]);
-
-        $slug = Str::slug($validated['nombre']);
-
-        $count = Categoria::where('slug', 'like', "{$slug}%")->count();
-        if ($count > 0) {
-            $slug .= '-' . ($count + 1);
-        }
 
         $path = null;
         if ($request->hasFile('imagen')) {
@@ -36,7 +30,7 @@ class CategoriaController extends Controller
 
         $categoria = Categoria::create([
             'nombre' => $validated['nombre'],
-            'slug' => $slug,
+            'slug' =>  Str::slug($validated['slug']), 
             'tipo' => $validated['tipo'],
             'descripcion' => $validated['descripcion'] ?? null,
             'imagen' => $path,
@@ -55,28 +49,19 @@ class CategoriaController extends Controller
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'tipo' => 'required|in:producto,servicio',
-            'imagen' => 'nullable|image|max:2048', // 👈 aceptar imagen como archivo
+            'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
+            'slug' => 'required|unique:categorias,slug,' . $categoria->id, // 👈 valida único excepto el mismo
         ]);
 
-        // Generar slug automáticamente desde nombre
-        $slug = Str::slug($validated['nombre']);
-        $count = Categoria::where('slug', 'like', "{$slug}%")
-            ->where('id', '!=', $categoria->id) // evitar conflicto con el mismo
-            ->count();
-
-        if ($count > 0) {
-            $slug .= '-' . ($count + 1);
-        }
-
-        $path = $categoria->imagen; // mantener imagen anterior
+        $path = $categoria->imagen;
         if ($request->hasFile('imagen')) {
             $path = $request->file('imagen')->store('categorias', 'public');
         }
 
         $categoria->update([
             'nombre' => $validated['nombre'],
-            'slug' => $slug,
+            'slug' => Str::slug($validated['slug']), // 👈 normaliza el slug
             'tipo' => $validated['tipo'],
             'descripcion' => $validated['descripcion'] ?? null,
             'imagen' => $path,
