@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            MenuSeeder::class,
+            /*MenuSeeder::class,
             PaginaSeeder::class,
             MenuPaginaSeeder::class,
             CategoriaSeeder::class,
@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             ServicioSeeder::class,
             PaginaServicioSeeder::class,
             ContactoSeeder::class,
-            CotizacionSeeder::class,
+            CotizacionSeeder::class,*/
         ]);
     }
 }

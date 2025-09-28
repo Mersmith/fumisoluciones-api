@@ -4,10 +4,16 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <p>Nombre</p>
     <input formControlName="nombre" placeholder="Nombre de la categoría">
-
+    <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="error">
+      El nombre es obligatorio.
+    </div>
+    
     <p>Descripción</p>
     <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
-
+    <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="error">
+      La descripción es obligatoria.
+    </div>
+    
     <p>Tipo</p>
     <select formControlName="tipo">
       <option value="producto">Producto</option>
@@ -17,7 +23,10 @@
     <p>Imagen</p>
     <input type="file" (change)="onFileSelected($event)">
 
-    <button type="submit">Guardar</button>
+    <button type="submit">
+      {{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}
+    </button>
+
   </form>
 
   <table>

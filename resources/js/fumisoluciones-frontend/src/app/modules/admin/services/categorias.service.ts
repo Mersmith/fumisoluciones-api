@@ -22,4 +22,10 @@ export class CategoriasService {
   deleteCategoria(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  updateCategoria(id: number, formData: FormData): Observable<Categoria> {
+    // usamos POST con _method=PUT porque Laravel lo interpreta como update
+    return this.http.post<Categoria>(`${this.apiUrl}/${id}?_method=PUT`, formData);
+  }
+  
 }

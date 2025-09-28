@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Categoria;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CategoriaController extends Controller
@@ -17,7 +17,7 @@ class CategoriaController extends Controller
     {
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
-            'tipo' => 'required|in:producto,servicio', 
+            'tipo' => 'required|in:producto,servicio',
             'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
         ]);
@@ -35,11 +35,11 @@ class CategoriaController extends Controller
         }
 
         $categoria = Categoria::create([
-            'nombre'       => $validated['nombre'],
-            'slug'         => $slug,
-            'tipo'         => $validated['tipo'],
-            'descripcion'  => $validated['descripcion'] ?? null,
-            'imagen'       => $path,
+            'nombre' => $validated['nombre'],
+            'slug' => $slug,
+            'tipo' => $validated['tipo'],
+            'descripcion' => $validated['descripcion'] ?? null,
+            'imagen' => $path,
         ]);
 
         return response()->json($categoria, 201);
@@ -54,14 +54,35 @@ class CategoriaController extends Controller
     {
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
-            'slug' => 'required|unique:categorias,slug,' . $categoria->id,
             'tipo' => 'required|in:producto,servicio',
-            'imagen' => 'nullable|string',
+            'imagen' => 'nullable|image|max:2048', // 👈 aceptar imagen como archivo
             'descripcion' => 'nullable|string',
         ]);
 
-        $categoria->update($validated);
-        return $categoria;
+        // Generar slug automáticamente desde nombre
+        $slug = Str::slug($validated['nombre']);
+        $count = Categoria::where('slug', 'like', "{$slug}%")
+            ->where('id', '!=', $categoria->id) // evitar conflicto con el mismo
+            ->count();
+
+        if ($count > 0) {
+            $slug .= '-' . ($count + 1);
+        }
+
+        $path = $categoria->imagen; // mantener imagen anterior
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('categorias', 'public');
+        }
+
+        $categoria->update([
+            'nombre' => $validated['nombre'],
+            'slug' => $slug,
+            'tipo' => $validated['tipo'],
+            'descripcion' => $validated['descripcion'] ?? null,
+            'imagen' => $path,
+        ]);
+
+        return response()->json($categoria);
     }
 
     public function destroy(Categoria $categoria)
