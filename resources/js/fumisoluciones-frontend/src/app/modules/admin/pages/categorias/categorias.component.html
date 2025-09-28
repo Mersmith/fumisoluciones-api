@@ -12,8 +12,7 @@
     <input formControlName="slug" placeholder="Slug de la categoría">
     <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="error">
       El slug es obligatorio.
-    </div>
-    
+    </div>    
     <div *ngIf="form.get('slug')?.errors?.['backend']" class="error">
       {{ form.get('slug')?.errors?.['backend'] }}
     </div>

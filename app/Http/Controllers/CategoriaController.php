@@ -8,9 +8,15 @@ use Illuminate\Support\Str;
 
 class CategoriaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Categoria::all();
+        $tipo = $request->query('tipo'); // ej: producto o servicio
+
+        $categorias = Categoria::when($tipo, function ($query, $tipo) {
+            return $query->where('tipo', $tipo);
+        })->get();
+
+        return response()->json($categorias);
     }
 
     public function store(Request $request)
@@ -30,7 +36,7 @@ class CategoriaController extends Controller
 
         $categoria = Categoria::create([
             'nombre' => $validated['nombre'],
-            'slug' =>  Str::slug($validated['slug']), 
+            'slug' => Str::slug($validated['slug']),
             'tipo' => $validated['tipo'],
             'descripcion' => $validated['descripcion'] ?? null,
             'imagen' => $path,
@@ -51,7 +57,7 @@ class CategoriaController extends Controller
             'tipo' => 'required|in:producto,servicio',
             'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
-            'slug' => 'required|unique:categorias,slug,' . $categoria->id, // 👈 valida único excepto el mismo
+            'slug' => 'required|unique:categorias,slug,' . $categoria->id,
         ]);
 
         $path = $categoria->imagen;
@@ -61,7 +67,7 @@ class CategoriaController extends Controller
 
         $categoria->update([
             'nombre' => $validated['nombre'],
-            'slug' => Str::slug($validated['slug']), // 👈 normaliza el slug
+            'slug' => Str::slug($validated['slug']),
             'tipo' => $validated['tipo'],
             'descripcion' => $validated['descripcion'] ?? null,
             'imagen' => $path,

@@ -17,7 +17,6 @@ class ProductoController extends Controller
             $query->where('nombre', 'like', "%{$buscar}%");
         }
 
-        // 🏷️ Filtro por categoría
         if ($request->filled('categoria_id')) {
             $query->where('categoria_id', $request->categoria_id);
         }
@@ -37,19 +36,12 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'slug' => 'required|unique:productos,slug',
             'categoria_id' => 'required|exists:categorias,id',
-            'nombre'       => 'required|string|max:255',
-            'descripcion'  => 'nullable|string',
-            'imagen'       => 'nullable|image|max:2048',
+            'imagen' => 'nullable|image|max:2048',
+            'descripcion' => 'nullable|string',
         ]);
-
-        $slug = Str::slug($validated['nombre']);
-
-        // Evitar duplicados de slug
-        $count = Producto::where('slug', 'like', "{$slug}%")->count();
-        if ($count > 0) {
-            $slug .= '-' . ($count + 1);
-        }
 
         $path = null;
         if ($request->hasFile('imagen')) {
@@ -57,11 +49,11 @@ class ProductoController extends Controller
         }
 
         $producto = Producto::create([
+            'nombre' => $validated['nombre'],
+            'slug' => Str::slug($validated['slug']),
             'categoria_id' => $validated['categoria_id'],
-            'nombre'       => $validated['nombre'],
-            'slug'         => $slug,
-            'descripcion'  => $validated['descripcion'] ?? null,
-            'imagen'       => $path,
+            'imagen' => $path,
+            'descripcion' => $validated['descripcion'] ?? null,
         ]);
 
         return response()->json($producto, 201);
@@ -77,12 +69,27 @@ class ProductoController extends Controller
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'slug' => 'required|unique:productos,slug,' . $producto->id,
-            'imagen' => 'nullable|string',
+            'categoria_id' => 'required|exists:categorias,id',
+            'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
         ]);
 
-        $producto->update($validated);
-        return $producto;
+        $path = $producto->imagen;
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('productos', 'public');
+        }
+
+        $producto->update(
+            [
+                'nombre' => $validated['nombre'],
+                'slug' => Str::slug($validated['slug']),
+                'categoria_id' => $validated['categoria_id'],
+                'imagen' => $path,
+                'descripcion' => $validated['descripcion'] ?? null,
+            ]
+        );
+
+        return response()->json($producto);
     }
 
     public function destroy(Producto $producto)

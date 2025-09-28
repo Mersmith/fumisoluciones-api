@@ -12,9 +12,14 @@ export class CategoriasService {
 
   constructor(private http: HttpClient) {}
 
-  getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.apiUrl)
-      .pipe(catchError(this.handleError));
+  getCategorias(tipo?: 'producto' | 'servicio'): Observable<Categoria[]> {
+    let url = this.apiUrl;
+    if (tipo) {
+      url += `?tipo=${tipo}`;
+    }
+    return this.http.get<Categoria[]>(url).pipe(
+      catchError(this.handleError)
+    );
   }
 
   createCategoria(formData: FormData): Observable<Categoria> {
