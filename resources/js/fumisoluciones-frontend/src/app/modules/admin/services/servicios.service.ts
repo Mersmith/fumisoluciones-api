@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Servicio } from '../../../models/servicio.model';
 
 @Injectable({
@@ -11,7 +12,61 @@ export class ServiciosService {
 
   constructor(private http: HttpClient) { }
 
-  getServicios(): Observable<Servicio[]> {
-    return this.http.get<Servicio[]>(this.apiUrl);
+  getServicios(
+    buscar: string = '',
+    orden: string = 'desc',
+    page: number = 1,
+    categoriaId?: number
+  ): Observable<any> {
+    let url = `${this.apiUrl}?orden=${orden}&page=${page}`;
+
+    if (buscar) {
+      url += `&buscar=${buscar}`;
+    }
+
+    if (categoriaId) {
+      url += `&categoria_id=${categoriaId}`;
+    }
+
+    return this.http.get<any>(url).pipe(catchError(this.handleError));
+  }
+
+  getServicio(id: number): Observable<Servicio> {
+    return this.http.get<Servicio>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  createServicio(formData: FormData): Observable<any> {
+    return this.http.post<any>(this.apiUrl, formData)
+      .pipe(catchError(this.handleError));
+  }
+
+  updateServicio(id: number, formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${id}?_method=PUT`, formData)
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteServicio(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 422) {
+      return throwError(() => ({
+        type: 'validation',
+        errors: error.error.errors
+      }));
+    }
+    if (error.status === 500) {
+      return throwError(() => ({
+        type: 'server',
+        message: 'Error en el servidor, intenta más tarde.'
+      }));
+    }
+    return throwError(() => ({
+      type: 'unknown',
+      message: 'Error desconocido, revisa tu conexión.'
+    }));
   }
 }

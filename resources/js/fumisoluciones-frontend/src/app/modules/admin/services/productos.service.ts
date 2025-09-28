@@ -51,7 +51,6 @@ export class ProductosService {
       .pipe(catchError(this.handleError));
   }
 
-  // 🔥 igual que en CategoriasService
   private handleError(error: HttpErrorResponse) {
     if (error.status === 422) {
       return throwError(() => ({
