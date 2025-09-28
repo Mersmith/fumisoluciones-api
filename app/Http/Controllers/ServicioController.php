@@ -41,6 +41,8 @@ class ServicioController extends Controller
             'categoria_id' => 'required|exists:categorias,id',
             'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
+            'contenido' => 'nullable|array',
+            'contenido.*' => 'string',
         ]);
 
         $path = null;
@@ -54,6 +56,7 @@ class ServicioController extends Controller
             'categoria_id' => $validated['categoria_id'],
             'imagen' => $path,
             'descripcion' => $validated['descripcion'] ?? null,
+            'contenido' => $validated['contenido'] ?? []
         ]);
 
         return response()->json($servicio, 201);
@@ -72,6 +75,8 @@ class ServicioController extends Controller
             'categoria_id' => 'required|exists:categorias,id',
             'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
+            'contenido' => 'nullable|array',
+            'contenido.*' => 'string'
         ]);
 
         $path = $servicio->imagen;
@@ -85,6 +90,7 @@ class ServicioController extends Controller
             'categoria_id' => $validated['categoria_id'],
             'imagen' => $path,
             'descripcion' => $validated['descripcion'] ?? null,
+            'contenido' => $validated['contenido'] ?? []
         ]);
 
         return response()->json($servicio);

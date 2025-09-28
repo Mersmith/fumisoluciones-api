@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Categoria } from '../../../../models/categoria.model';
 import { Servicio } from '../../../../models/servicio.model';
 import { CategoriasService } from '../../../admin/services/categorias.service';
@@ -29,7 +29,8 @@ export class ServiciosComponent implements OnInit {
       slug: ['', Validators.required],
       categoria_id: ['', Validators.required],
       imagen: [null],
-      descripcion: ['', Validators.required]
+      descripcion: ['', Validators.required],
+      contenido: this.fb.array([])
     });
   }
 
@@ -57,6 +58,18 @@ export class ServiciosComponent implements OnInit {
       this.servicios = res.data;
       this.pagination = res;
     });
+  }
+
+  get contenido(): FormArray {
+    return this.form.get('contenido') as FormArray;
+  }
+
+  addContenido(item: string = '') {
+    this.contenido.push(this.fb.control(item, Validators.required));
+  }
+
+  removeContenido(index: number) {
+    this.contenido.removeAt(index);
   }
 
   aplicarFiltros() {
@@ -95,6 +108,10 @@ export class ServiciosComponent implements OnInit {
     if (this.form.get('imagen')?.value) {
       formData.append('imagen', this.form.get('imagen')?.value);
     }
+
+    this.contenido.value.forEach((item: string, index: number) => {
+      formData.append(`contenido[${index}]`, item);
+    });
 
     const id = this.form.get('id')?.value;
 
@@ -135,6 +152,11 @@ export class ServiciosComponent implements OnInit {
       descripcion: serv.descripcion,
       imagen: null
     });
+
+    this.contenido.clear();
+    if (serv.contenido && serv.contenido.length) {
+      serv.contenido.forEach(item => this.addContenido(item));
+    }
   }
 
   cancelEdit() {

@@ -7,6 +7,7 @@ export interface Servicio {
   slug?: string;
   imagen?: string;
   descripcion?: string;
+  contenido: string[];  
   created_at?: string;
   updated_at?: string;
   categoria?: Categoria;
