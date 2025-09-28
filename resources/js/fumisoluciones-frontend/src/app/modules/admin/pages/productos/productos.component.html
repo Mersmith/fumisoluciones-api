@@ -1,1 +1,17 @@
-<p>Admin-productos works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <p>Categorias</p>
+  <select formControlName="categoria_id">
+    <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
+  </select>
+
+  <p>Nombre</p>
+  <input formControlName="nombre" placeholder="Nombre del producto">
+
+  <p>Descripcion</p>
+  <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
+
+  <p>Imagen</p>
+  <input type="file" (change)="onFileSelected($event)">
+
+  <button type="submit">Guardar</button>
+</form>

@@ -15,4 +15,16 @@ class Servicio extends Model
     {
         return $this->hasMany(Contacto::class);
     }
+
+    // Relación con categoría
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+
+    // Relación con páginas
+    public function paginas()
+    {
+        return $this->belongsToMany(Pagina::class, 'pagina_servicios');
+    }
 }

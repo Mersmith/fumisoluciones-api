@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use Illuminate\Support\Str;
 
 class CategoriaController extends Controller
 {
@@ -16,12 +17,30 @@ class CategoriaController extends Controller
     {
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
-            'slug' => 'required|unique:categorias',
-            'imagen' => 'nullable|string',
+            'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
         ]);
 
-        return Categoria::create($validated);
+        $slug = Str::slug($validated['nombre']);
+
+        $count = Categoria::where('slug', 'like', "{$slug}%")->count();
+        if ($count > 0) {
+            $slug .= '-' . ($count + 1);
+        }
+
+        $path = null;
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('categorias', 'public');
+        }
+
+        $categoria = Categoria::create([
+            'nombre'       => $validated['nombre'],
+            'slug'         => $slug,
+            'descripcion'  => $validated['descripcion'] ?? null,
+            'imagen'       => $path,
+        ]);
+
+        return response()->json($categoria, 201);
     }
 
     public function show(Categoria $categoria)

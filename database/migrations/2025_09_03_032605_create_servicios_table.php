@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
-
+            
             $table->string('nombre');
             $table->string('slug')->unique();
+            $table->foreignId('categoria_id')->constrained('categorias')->onDelete('cascade');
             $table->string('imagen')->nullable();
             $table->text('descripcion')->nullable();
-
+            
             $table->timestamps();
         });
     }

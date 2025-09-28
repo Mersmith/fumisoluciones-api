@@ -1,0 +1,73 @@
+<div class="crud-container">
+    <h2>CRUD Menus, Paginas y Menu-Paginas</h2>
+
+    <!-- Menus -->
+    <section>
+        <h3>Menus</h3>
+        <form (ngSubmit)="addMenu()">
+            <input [(ngModel)]="newMenu.label" name="label" placeholder="Label">
+            <input [(ngModel)]="newMenu.route" name="route" placeholder="Route">
+
+            <!-- Select para elegir un menú padre -->
+            <select [(ngModel)]="newMenu.parent_id" name="parent_id">
+                <option [ngValue]="null">-- Sin Padre --</option>
+                <option *ngFor="let menu of menus" [ngValue]="menu.id">
+                    {{ menu.label }}
+                </option>
+            </select>
+
+            <input [(ngModel)]="newMenu.orden" name="orden" placeholder="Orden" type="number">
+
+            <button type="submit">Agregar Menu</button>
+        </form>
+
+        <ul>
+            <li *ngFor="let menu of menus">
+                {{ menu.label }} - {{ menu.route }}
+                <span *ngIf="menu.parent"> (Hijo de: {{ menu.parent.label }})</span>
+                <button (click)="deleteMenu(menu.id)">Eliminar</button>
+            </li>
+        </ul>
+    </section>
+
+
+    <!-- Paginas -->
+    <section>
+        <h3>Paginas</h3>
+        <form (ngSubmit)="addPagina()">
+            <input [(ngModel)]="newPagina.titulo" name="titulo" placeholder="Titulo">
+            <input [(ngModel)]="newPagina.slug" name="slug" placeholder="Slug">
+            <button type="submit">Agregar Pagina</button>
+        </form>
+
+        <ul>
+            <li *ngFor="let pagina of paginas">
+                {{ pagina.titulo }} - {{ pagina.slug }}
+                <button (click)="deletePagina(pagina.id)">Eliminar</button>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Menu_Paginas -->
+    <section>
+        <h3>Menu - Pagina</h3>
+        <form (ngSubmit)="addMenuPagina()">
+            <select [(ngModel)]="newMenuPagina.menu_id" name="menu_id">
+                <option *ngFor="let menu of menus" [value]="menu.id">{{ menu.label }}</option>
+            </select>
+
+            <select [(ngModel)]="newMenuPagina.pagina_id" name="pagina_id">
+                <option *ngFor="let pagina of paginas" [value]="pagina.id">{{ pagina.titulo }}</option>
+            </select>
+
+            <button type="submit">Relacionar</button>
+        </form>
+
+        <ul>
+            <li *ngFor="let mp of menuPaginas">
+                Menu: {{ mp.menu.label }} → Pagina: {{ mp.pagina.titulo }}
+                <button (click)="deleteMenuPagina(mp.id)">Eliminar</button>
+            </li>
+        </ul>
+    </section>
+</div>

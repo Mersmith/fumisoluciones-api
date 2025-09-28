@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  
+    <p>Nombre</p>
+    <input formControlName="nombre" placeholder="Nombre de la categoria">
+  
+    <p>Descripcion</p>
+    <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
+  
+    <p>Imagen</p>
+    <input type="file" (change)="onFileSelected($event)">
+  
+    <button type="submit">Guardar</button>
+  </form>
+  

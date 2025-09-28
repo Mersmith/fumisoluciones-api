@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Servicio;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use App\Models\Categoria;
 
 class ServicioSeeder extends Seeder
 {
@@ -47,12 +48,21 @@ class ServicioSeeder extends Seeder
         ];
 
         foreach ($servicios as $servicio) {
-            Servicio::create([
-                'nombre' => $servicio['nombre'],
-                'slug' => Str::slug($servicio['nombre']),
-                'imagen' => $servicio['imagen'],
-                'descripcion' => $servicio['descripcion'],
-            ]);
+            // Buscar la categoría correspondiente por nombre
+            $categoria = Categoria::where('tipo', 'servicio')
+                                  ->where('nombre', $servicio['nombre'])
+                                  ->first();
+
+            if ($categoria) {
+                Servicio::create([
+                    'nombre' => $servicio['nombre'],
+                    'slug' => Str::slug($servicio['nombre']),
+                    'imagen' => $servicio['imagen'],
+                    'descripcion' => $servicio['descripcion'],
+                    'categoria_id' => $categoria->id, // <-- asignar la categoría
+                ]);
+            }
         }
+
     }
 }

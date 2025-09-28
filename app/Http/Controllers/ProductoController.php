@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductoController extends Controller
 {
@@ -36,13 +37,34 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'slug' => 'required|unique:productos',
-            'imagen' => 'nullable|string',
-            'descripcion' => 'nullable|string',
+            'categoria_id' => 'required|exists:categorias,id',
+            'nombre'       => 'required|string|max:255',
+            'descripcion'  => 'nullable|string',
+            'imagen'       => 'nullable|image|max:2048',
         ]);
 
-        return Producto::create($validated);
+        $slug = Str::slug($validated['nombre']);
+
+        // Evitar duplicados de slug
+        $count = Producto::where('slug', 'like', "{$slug}%")->count();
+        if ($count > 0) {
+            $slug .= '-' . ($count + 1);
+        }
+
+        $path = null;
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('productos', 'public');
+        }
+
+        $producto = Producto::create([
+            'categoria_id' => $validated['categoria_id'],
+            'nombre'       => $validated['nombre'],
+            'slug'         => $slug,
+            'descripcion'  => $validated['descripcion'] ?? null,
+            'imagen'       => $path,
+        ]);
+
+        return response()->json($producto, 201);
     }
 
     public function show($id)

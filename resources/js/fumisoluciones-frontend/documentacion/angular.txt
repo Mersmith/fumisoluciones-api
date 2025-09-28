@@ -55,5 +55,21 @@ ng generate component modules/web/components/componente-slider-clientes
 ng generate component modules/web/components/componente-mision
 ng generate component modules/web/components/componente-cotizacion
 
+ng g component modules/admin/pages/categorias
+ng g component modules/admin/pages/menus
+
 ng generate service modules/web/services/categorias
 ng generate service modules/web/services/cotizacion
+
+ng generate service modules/admin/services/menu
+ng generate service modules/admin/services/pagina
+ng generate service modules/admin/services/menu-pagina
+
+Ministerio de la Mujer
+ONPE
+Empresa Jomaseda
+Colegio Diego Thompson
+Municipalidad de Mala
+Comisaria
+Pets Mundo Animal
+La familia Inversiones y Representaciones

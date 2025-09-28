@@ -27,6 +27,52 @@ export class WebHeaderComponent {
       route: '/nosotros'
     },
     {
+      label: 'Saneamiento ambiental',
+      icon: 'fa-solid fa-leaf',
+      children: [
+        {
+          label: 'Fumigación',
+          icon: 'fa-solid fa-bug',
+          route: '/seguridad'
+        },
+        {
+          label: 'Limpieza',
+          icon: 'fa-solid fa-soap',
+          route: '/seguridad'
+        },
+        {
+          label: 'Desinsectación',
+          icon: 'fa-solid fa-soap',
+          route: '/seguridad'
+        },
+        {
+          label: 'Desratización',
+          icon: 'fa-solid fa-soap',
+          route: '/seguridad'
+        },
+        {
+          label: 'Desinfección',
+          icon: 'fa-solid fa-soap',
+          route: '/seguridad'
+        },
+        {
+          label: 'Limpieza y Desinfección de Reservorios',
+          icon: 'fa-solid fa-soap',
+          route: '/seguridad'
+        },
+        {
+          label: 'Planes Oparativos de Saneamiento',
+          icon: 'fa-solid fa-soap',
+          route: '/seguridad'
+        },
+        {
+          label: 'Limpieza de ambientes',
+          icon: 'fa-solid fa-soap',
+          route: '/seguridad'
+        }
+      ]
+    },
+    {
       label: 'Extintores',
       icon: 'fa-solid fa-fire-extinguisher',
       children: [
@@ -43,6 +89,36 @@ export class WebHeaderComponent {
               label: 'Extintores CO₂',
               icon: 'fa-solid fa-wind',
               route: '/seguridad'
+            },
+            {
+              label: 'Extintores Halotrón',
+              icon: 'fa-solid fa-wind',
+              route: '/seguridad'
+            },
+            {
+              label: 'Extintores de Espuma',
+              icon: 'fa-solid fa-wind',
+              route: '/seguridad'
+            },
+            {
+              label: 'Extintores Clase D',
+              icon: 'fa-solid fa-wind',
+              route: '/seguridad'
+            },
+            {
+              label: 'Extintores Agua Prezurizada',
+              icon: 'fa-solid fa-wind',
+              route: '/seguridad'
+            },
+            {
+              label: 'Extintores de Demineralizada',
+              icon: 'fa-solid fa-wind',
+              route: '/seguridad'
+            },
+            {
+              label: 'Extintores Acetato de Potasio',
+              icon: 'fa-solid fa-wind',
+              route: '/seguridad'
             }
           ]
         },
@@ -50,21 +126,10 @@ export class WebHeaderComponent {
           label: 'Recarga de extintores',
           icon: 'fa-solid fa-rotate',
           route: '/seguridad'
-        }
-      ]
-    },
-    {
-      label: 'Saneamiento ambiental',
-      icon: 'fa-solid fa-leaf',
-      children: [
-        {
-          label: 'Fumigación',
-          icon: 'fa-solid fa-bug',
-          route: '/seguridad'
         },
         {
-          label: 'Limpieza',
-          icon: 'fa-solid fa-soap',
+          label: 'Mantenimientos de extintores',
+          icon: 'fa-solid fa-rotate',
           route: '/seguridad'
         }
       ]
