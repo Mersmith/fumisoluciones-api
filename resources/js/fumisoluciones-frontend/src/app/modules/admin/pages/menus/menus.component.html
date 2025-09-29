@@ -25,11 +25,10 @@
             <li *ngFor="let menu of menus">
                 {{ menu.label }} - {{ menu.route }}
                 <span *ngIf="menu.parent"> (Hijo de: {{ menu.parent.label }})</span>
-                <button (click)="deleteMenu(menu.id)">Eliminar</button>
+                <button *ngIf="menu.id" (click)="deleteMenu(menu.id)">Eliminar</button>
             </li>
         </ul>
     </section>
-
 
     <!-- Paginas -->
     <section>
@@ -43,7 +42,7 @@
         <ul>
             <li *ngFor="let pagina of paginas">
                 {{ pagina.titulo }} - {{ pagina.slug }}
-                <button (click)="deletePagina(pagina.id)">Eliminar</button>
+                <button *ngIf="pagina.id" (click)="deletePagina(pagina.id)">Eliminar</button>
             </li>
         </ul>
     </section>
@@ -65,8 +64,8 @@
 
         <ul>
             <li *ngFor="let mp of menuPaginas">
-                Menu: {{ mp.menu.label }} → Pagina: {{ mp.pagina.titulo }}
-                <button (click)="deleteMenuPagina(mp.id)">Eliminar</button>
+                Menu: {{ mp.menu?.label }} → Pagina: {{ mp.pagina?.titulo }}
+                <button *ngIf="mp.id" (click)="deleteMenuPagina(mp.id)">Eliminar</button>
             </li>
         </ul>
     </section>

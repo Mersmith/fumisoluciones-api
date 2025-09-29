@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../services/menu.service';
-import { PaginaService } from '../../services/pagina.service';
-import { MenuPaginaService } from '../../services/menu-pagina.service';
+import { MenuService } from '../../../../services/menu.service';
+import { PaginaService } from '../../../../services/pagina.service';
+import { MenuPaginaService } from '../../../../services/menu-pagina.service';
+import { Menu } from '../../../../models/menu.model';
+import { Pagina } from '../../../../models/pagina.model';
+import { MenuPagina } from '../../../../models/menu-pagina.model';
 
 @Component({
   selector: 'app-menus',
@@ -9,13 +12,13 @@ import { MenuPaginaService } from '../../services/menu-pagina.service';
   styleUrls: ['./menus.component.css']
 })
 export class MenusComponent implements OnInit {
-  menus: any[] = [];
-  paginas: any[] = [];
-  menuPaginas: any[] = [];
+  menus: Menu[] = [];
+  paginas: Pagina[] = [];
+  menuPaginas: MenuPagina[] = [];
 
-  newMenu = { label: '', route: '', icon: '', parent_id: null, orden: 0 };
-  newPagina = { titulo: '', slug: '', descripcion: '', imagen: '', contenido: '{}' };
-  newMenuPagina = { menu_id: null, pagina_id: null };
+  newMenu: Partial<Menu> = { label: '', route: '', icon: '', parent_id: undefined, orden: 0 };
+  newPagina: Partial<Pagina> = { titulo: '', slug: '', descripcion: '', imagen: '', contenido: '{}' };
+  newMenuPagina: Partial<MenuPagina> = { menu_id: undefined, pagina_id: undefined };
 
   constructor(
     private menuService: MenuService,
@@ -35,9 +38,9 @@ export class MenusComponent implements OnInit {
 
   // CRUD Menus
   addMenu() {
-    this.menuService.create(this.newMenu).subscribe(() => {
+    this.menuService.create(this.newMenu as Menu).subscribe(() => {
       this.loadData();
-      this.newMenu = { label: '', route: '', icon: '', parent_id: null, orden: 0 }; // reset
+      this.newMenu = { label: '', route: '', icon: '', parent_id: null, orden: 0 };
     });
   }
 
@@ -47,18 +50,15 @@ export class MenusComponent implements OnInit {
 
   // CRUD Paginas
   addPagina() {
-    // Si el contenido está como objeto, convertirlo a string JSON
     if (typeof this.newPagina.contenido !== 'string') {
       this.newPagina.contenido = JSON.stringify(this.newPagina.contenido || {});
     }
 
-    this.paginaService.create(this.newPagina).subscribe(() => {
+    this.paginaService.create(this.newPagina as Pagina).subscribe(() => {
       this.loadData();
-      // Reiniciar formulario con contenido como string
       this.newPagina = { titulo: '', slug: '', descripcion: '', imagen: '', contenido: '{}' };
     });
   }
-
 
   deletePagina(id: number) {
     this.paginaService.delete(id).subscribe(() => this.loadData());
@@ -66,7 +66,7 @@ export class MenusComponent implements OnInit {
 
   // CRUD MenuPaginas
   addMenuPagina() {
-    this.menuPaginaService.create(this.newMenuPagina).subscribe(() => this.loadData());
+    this.menuPaginaService.create(this.newMenuPagina as MenuPagina).subscribe(() => this.loadData());
   }
 
   deleteMenuPagina(id: number) {
