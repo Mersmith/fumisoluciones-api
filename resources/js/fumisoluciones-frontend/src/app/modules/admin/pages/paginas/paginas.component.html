@@ -1,0 +1,21 @@
+<p>paginas works!</p>
+<div class="crud-container">
+    <h2>CRUD Paginas</h2>
+
+    <!-- Paginas -->
+    <section>
+        <h3>Paginas</h3>
+        <form (ngSubmit)="addPagina()">
+            <input [(ngModel)]="newPagina.titulo" name="titulo" placeholder="Titulo">
+            <input [(ngModel)]="newPagina.slug" name="slug" placeholder="Slug">
+            <button type="submit">Agregar Pagina</button>
+        </form>
+
+        <ul>
+            <li *ngFor="let pagina of paginas">
+                {{ pagina.titulo }} - {{ pagina.slug }}
+                <button *ngIf="pagina.id" (click)="deletePagina(pagina.id)">Eliminar</button>
+            </li>
+        </ul>
+    </section>
+</div>

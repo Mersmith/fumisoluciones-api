@@ -58,6 +58,8 @@ ng generate component modules/web/components/componente-cotizacion
 ng g component modules/admin/pages/categorias
 ng g component modules/admin/pages/menus
 ng g component modules/admin/pages/servicios
+ng g component modules/admin/pages/paginas
+ng g component modules/admin/pages/menu-paginas
 ng g component modules/admin/pages/paginas-servicios
 
 ng generate service modules/web/services/categorias

@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AdminHeaderComponent {
 
+  isOpen = false;
+
+  toggleSidebar() {
+    this.isOpen = !this.isOpen;
+  }
+
 }

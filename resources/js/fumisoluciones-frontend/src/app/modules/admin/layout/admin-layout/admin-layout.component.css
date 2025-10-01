@@ -1,0 +1,35 @@
+/* Layout general */
+:host {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  /* Sidebar ocupa la izquierda */
+  app-admin-header {
+    flex-shrink: 0;
+  }
+  
+  /* Contenido principal */
+  .admin-content {
+    flex: 1;
+    padding: 20px;
+    background: #f8f8fa;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease;
+  }
+  
+  /* En escritorio: dejar espacio al costado del sidebar */
+  @media (min-width: 769px) {
+    .admin-content {
+      margin-left: 220px; /* igual al ancho del sidebar */
+    }
+  }
+  
+  /* En móvil: sidebar se superpone, así que contenido ocupa todo */
+  @media (max-width: 768px) {
+    .admin-content {
+      margin-left: 0;
+    }
+  }
+  

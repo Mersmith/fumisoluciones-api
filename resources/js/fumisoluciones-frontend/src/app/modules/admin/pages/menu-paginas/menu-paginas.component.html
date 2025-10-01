@@ -1,0 +1,27 @@
+<p>paginas works!</p>
+<div class="crud-container">
+    <h2>CRUD Menu-Paginas</h2>
+
+    <!-- Menu_Paginas -->
+    <section>
+        <h3>Menu - Pagina</h3>
+        <form (ngSubmit)="addMenuPagina()">
+            <select [(ngModel)]="newMenuPagina.menu_id" name="menu_id">
+                <option *ngFor="let menu of menus" [value]="menu.id">{{ menu.label }}</option>
+            </select>
+
+            <select [(ngModel)]="newMenuPagina.pagina_id" name="pagina_id">
+                <option *ngFor="let pagina of paginas" [value]="pagina.id">{{ pagina.titulo }}</option>
+            </select>
+
+            <button type="submit">Relacionar</button>
+        </form>
+
+        <ul>
+            <li *ngFor="let mp of menuPaginas">
+                Menu: {{ mp.menu?.label }} → Pagina: {{ mp.pagina?.titulo }}
+                <button *ngIf="mp.id" (click)="deleteMenuPagina(mp.id)">Eliminar</button>
+            </li>
+        </ul>
+    </section>
+</div>

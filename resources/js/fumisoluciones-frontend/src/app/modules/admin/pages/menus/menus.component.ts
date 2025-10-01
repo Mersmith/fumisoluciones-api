@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuService } from '../../../../services/menu.service';
-import { PaginaService } from '../../../../services/pagina.service';
-import { MenuPaginaService } from '../../../../services/menu-pagina.service';
 import { Menu } from '../../../../models/menu.model';
-import { Pagina } from '../../../../models/pagina.model';
-import { MenuPagina } from '../../../../models/menu-pagina.model';
 
 @Component({
   selector: 'app-menus',
@@ -12,64 +9,86 @@ import { MenuPagina } from '../../../../models/menu-pagina.model';
   styleUrls: ['./menus.component.css']
 })
 export class MenusComponent implements OnInit {
+  form: FormGroup;
   menus: Menu[] = [];
-  paginas: Pagina[] = [];
-  menuPaginas: MenuPagina[] = [];
-
-  newMenu: Partial<Menu> = { label: '', route: '', icon: '', parent_id: undefined, orden: 0 };
-  newPagina: Partial<Pagina> = { titulo: '', slug: '', descripcion: '', imagen: '', contenido: '{}' };
-  newMenuPagina: Partial<MenuPagina> = { menu_id: undefined, pagina_id: undefined };
+  editingId: number | null = null;
 
   constructor(
+    private fb: FormBuilder,
     private menuService: MenuService,
-    private paginaService: PaginaService,
-    private menuPaginaService: MenuPaginaService
-  ) { }
+  ) {
+    this.form = this.fb.group({
+      id: [null],
+      label: ['', Validators.required],
+      route: [''],
+      icon: [''],
+      parent_id: [null],
+      orden: [0, [Validators.required, Validators.min(0)]]
+    });
+  }
 
   ngOnInit(): void {
-    this.loadData();
+    this.loadMenus();
   }
 
-  loadData() {
-    this.menuService.getAll().subscribe(data => this.menus = data);
-    this.paginaService.getAll().subscribe(data => this.paginas = data);
-    this.menuPaginaService.getAll().subscribe(data => this.menuPaginas = data);
-  }
-
-  // CRUD Menus
-  addMenu() {
-    this.menuService.create(this.newMenu as Menu).subscribe(() => {
-      this.loadData();
-      this.newMenu = { label: '', route: '', icon: '', parent_id: null, orden: 0 };
+  loadMenus() {
+    this.menuService.getAll().subscribe({
+      next: (data) => this.menus = data,
+      error: (err) => alert(err.message)
     });
+  }
+
+  submit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const id = this.form.get('id')?.value;
+
+    const request$ = id
+      ? this.menuService.update(id, this.form.value)
+      : this.menuService.create(this.form.value);
+
+    request$.subscribe({
+      next: () => {
+        this.loadMenus();
+        this.resetForm();
+      },
+      error: (err) => this.handleBackendErrors(err)
+    });
+  }
+
+  editMenu(menu: Menu) {
+    this.form.patchValue(menu);
+    this.editingId = menu.id!;
+  }
+
+  cancelEdit() {
+    this.resetForm();
   }
 
   deleteMenu(id: number) {
-    this.menuService.delete(id).subscribe(() => this.loadData());
-  }
-
-  // CRUD Paginas
-  addPagina() {
-    if (typeof this.newPagina.contenido !== 'string') {
-      this.newPagina.contenido = JSON.stringify(this.newPagina.contenido || {});
+    if (confirm('¿Seguro de eliminar?')) {
+      this.menuService.delete(id).subscribe(() => this.loadMenus());
     }
-
-    this.paginaService.create(this.newPagina as Pagina).subscribe(() => {
-      this.loadData();
-      this.newPagina = { titulo: '', slug: '', descripcion: '', imagen: '', contenido: '{}' };
-    });
   }
 
-  deletePagina(id: number) {
-    this.paginaService.delete(id).subscribe(() => this.loadData());
+  private resetForm() {
+    this.form.reset({ id: null, label: '', route: '', icon: '', parent_id: null, orden: 0 });
+    this.editingId = null;
   }
 
-  // CRUD MenuPaginas
-  addMenuPagina() {
-    this.menuPaginaService.create(this.newMenuPagina as MenuPagina).subscribe(() => this.loadData());
-  }
-
-  deleteMenuPagina(id: number) {
-    this.menuPaginaService.delete(id).subscribe(() => this.loadData());
+  private handleBackendErrors(err: any) {
+    if (err.type === 'validation') {
+      Object.keys(err.errors).forEach(field => {
+        const control = this.form.get(field);
+        if (control) {
+          control.setErrors({ backend: err.errors[field][0] });
+        }
+      });
+    } else {
+      alert(err.message || 'Error inesperado. Intenta de nuevo.');
+    }
   }
 }

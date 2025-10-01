@@ -10,6 +10,8 @@ import { CategoriasComponent } from './pages/categorias/categorias.component';
 import { MenusComponent } from './pages/menus/menus.component';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
 import { PaginasServiciosComponent } from './pages/paginas-servicios/paginas-servicios.component';
+import { PaginasComponent } from './pages/paginas/paginas.component';
+import { MenuPaginasComponent } from './pages/menu-paginas/menu-paginas.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { PaginasServiciosComponent } from './pages/paginas-servicios/paginas-ser
     CategoriasComponent,
     MenusComponent,
     ServiciosComponent,
-    PaginasServiciosComponent
+    PaginasServiciosComponent,
+    PaginasComponent,
+    MenuPaginasComponent
   ],
   imports: [
     CommonModule,
