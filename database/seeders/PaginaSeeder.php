@@ -22,10 +22,6 @@ class PaginaSeeder extends Seeder
                 'slug' => str($menu->label)->slug('-'),
                 'imagen' => str($menu->label)->slug('-') . '.jpg',
                 'descripcion' => "Página de {$menu->label}",
-                'contenido' => json_encode([
-                    'bloque1' => "Contenido principal de {$menu->label}",
-                    'bloque2' => "Información adicional de {$menu->label}",
-                ]),
             ]);
         }
     }

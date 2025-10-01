@@ -9,12 +9,8 @@ class Pagina extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['titulo', 'slug', 'imagen', 'descripcion', 'contenido'];
-
-    protected $casts = [
-        'contenido' => 'array', // JSON → array automático
-    ];
-
+    protected $fillable = ['titulo', 'slug', 'imagen', 'descripcion'];
+  
     // Relación con menús
     public function menus()
     {

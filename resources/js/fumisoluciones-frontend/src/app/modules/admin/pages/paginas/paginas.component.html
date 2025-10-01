@@ -1,21 +1,67 @@
-<p>paginas works!</p>
-<div class="crud-container">
-    <h2>CRUD Paginas</h2>
+<div class="paginas-container">
+    <h2>Gestión de Páginas</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()">
+  
+      <p>Título</p>
+      <input formControlName="titulo" placeholder="Título">
+      <div *ngIf="form.get('titulo')?.touched && form.get('titulo')?.invalid" class="error">
+        El titulo es obligatorio.
+      </div>
+      <p>Slug</p>
+      <input formControlName="slug" placeholder="Slug">
+      <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="error">
+        El slug es obligatorio.
+      </div>
+  
+      <p>Descripción</p>
+      <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
+      <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="error">
+        La descripción es obligatoria.
+      </div>
 
-    <!-- Paginas -->
-    <section>
-        <h3>Paginas</h3>
-        <form (ngSubmit)="addPagina()">
-            <input [(ngModel)]="newPagina.titulo" name="titulo" placeholder="Titulo">
-            <input [(ngModel)]="newPagina.slug" name="slug" placeholder="Slug">
-            <button type="submit">Agregar Pagina</button>
-        </form>
-
-        <ul>
-            <li *ngFor="let pagina of paginas">
-                {{ pagina.titulo }} - {{ pagina.slug }}
-                <button *ngIf="pagina.id" (click)="deletePagina(pagina.id)">Eliminar</button>
-            </li>
-        </ul>
-    </section>
-</div>
+      <p>Imagen</p>
+      <input type="file" (change)="onFileSelected($event)">
+      <div *ngIf="form.get('imagen')?.errors?.['backend']" class="error">
+        {{ form.get('imagen')?.errors?.['backend'] }}
+      </div>
+        
+      <button type="submit">{{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}</button>
+      <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">Cancelar</button>
+    </form>
+  
+    <div class="filtros">
+      <input type="text" [(ngModel)]="buscar" (ngModelChange)="loadData(1)" placeholder="Buscar página..." name="buscar">
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Slug</th>
+          <th>Descripción</th>
+          <th>Imagen</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pag of paginas">
+          <td>{{ pag.titulo }}</td>
+          <td>{{ pag.slug }}</td>
+          <td>{{ pag.descripcion }}</td>
+          <td><img *ngIf="pag.imagen" [src]="'http://127.0.0.1:8000/storage/' + pag.imagen" width="60"></td>
+          <td>
+            <button (click)="editPagina(pag)">Editar</button>
+            <button (click)="deletePagina(pag.id!)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination" *ngIf="pagination.total">
+      <button [disabled]="pagination.current_page === 1" (click)="loadData(pagination.current_page - 1)">« Anterior</button>
+      <span>Página {{ pagination.current_page }} de {{ pagination.last_page }}</span>
+      <button [disabled]="pagination.current_page === pagination.last_page" (click)="loadData(pagination.current_page + 1)">Siguiente »</button>
+    </div>
+  </div>
+  

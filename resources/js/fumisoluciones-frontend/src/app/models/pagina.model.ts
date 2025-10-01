@@ -4,7 +4,6 @@ export interface Pagina {
   slug: string;
   imagen?: string | null;
   descripcion?: string | null;
-  contenido?: string; // JSON como string
   created_at?: string;
   updated_at?: string;
 }
