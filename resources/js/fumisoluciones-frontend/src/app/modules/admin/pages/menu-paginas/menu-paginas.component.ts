@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuPaginaService } from '../../../../services/menu-pagina.service';
-import { MenuPagina } from '../../../../models/menu-pagina.model';
-import { PaginaService } from '../../../../services/pagina.service';
 import { MenuService } from '../../../../services/menu.service';
+import { PaginaService } from '../../../../services/pagina.service';
 import { Menu } from '../../../../models/menu.model';
 import { Pagina } from '../../../../models/pagina.model';
 
@@ -14,10 +13,9 @@ import { Pagina } from '../../../../models/pagina.model';
 export class MenuPaginasComponent implements OnInit {
   menus: Menu[] = [];
   paginas: Pagina[] = [];
+  menuPaginas: any[] = [];
 
-  menuPaginas: MenuPagina[] = [];
-
-  newMenuPagina: Partial<MenuPagina> = { menu_id: undefined, pagina_id: undefined };
+  newMenuPagina: { menu_id?: number, pagina_id?: number } = {};
 
   constructor(
     private menuPaginaService: MenuPaginaService,
@@ -32,15 +30,25 @@ export class MenuPaginasComponent implements OnInit {
   loadData() {
     this.menuPaginaService.getAll().subscribe(data => this.menuPaginas = data);
     this.menuService.getAll().subscribe(data => this.menus = data);
-    this.paginaService.getAll().subscribe(data => this.paginas = data);
+    this.paginaService.getAll().subscribe(res => this.paginas = res.data || res); // 👈 si es paginado
   }
 
-  // CRUD MenuPaginas
   addMenuPagina() {
-    this.menuPaginaService.create(this.newMenuPagina as MenuPagina).subscribe(() => this.loadData());
+    if (!this.newMenuPagina.menu_id || !this.newMenuPagina.pagina_id) {
+      alert("Selecciona un menú y una página");
+      return;
+    }
+    this.menuPaginaService.create(this.newMenuPagina as any).subscribe(() => {
+      this.newMenuPagina = {};
+      this.loadData();
+    });
   }
 
-  deleteMenuPagina(id: number) {
-    this.menuPaginaService.delete(id).subscribe(() => this.loadData());
+  deleteMenuPagina(menu_id: number, pagina_id: number) {
+    if (confirm('¿Seguro de eliminar esta relación?')) {
+      this.menuPaginaService.delete({ menu_id, pagina_id }).subscribe(() => {
+        this.loadData();
+      });
+    }
   }
 }
