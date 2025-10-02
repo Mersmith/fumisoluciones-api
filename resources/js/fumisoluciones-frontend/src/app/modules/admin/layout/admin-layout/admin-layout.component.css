@@ -17,3 +17,14 @@
     margin-left: 200px; /* igual al ancho del sidebar */
   }
 }
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  /* Empujar el contenido debajo del topbar */
+  .admin-content {
+    margin-top: 50px;
+  }
+}
