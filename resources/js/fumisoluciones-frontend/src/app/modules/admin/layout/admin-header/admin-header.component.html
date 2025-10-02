@@ -2,8 +2,9 @@
   <!-- Botón hamburguesa solo en móvil -->
   <button class="hamburger" (click)="toggleSidebar()">☰</button>
 
-  <!-- Menú -->
+  <!-- Sidebar -->
   <nav class="sidebar" [class.open]="isOpen">
+    <span class="close-btn" (click)="toggleSidebar()">✕</span>
     <ul>
       <li><a routerLink="/admin/menus" routerLinkActive="active">Menus</a></li>
       <li><a routerLink="/admin/paginas" routerLinkActive="active">Páginas</a></li>
