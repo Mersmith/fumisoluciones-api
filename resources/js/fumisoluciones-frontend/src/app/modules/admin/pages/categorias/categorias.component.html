@@ -1,77 +1,87 @@
-<div class="categorias-container">
-  <h2>Gestión de Categorías</h2>
+<div class="g_contenedor_pagina">
+  <div class="g_pagina_header g_card">
+    <h2>Gestión de Categorias</h2>
+  </div>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <p>Nombre</p>
-    <input formControlName="nombre" placeholder="Nombre de la categoría">
-    <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="error">
-      El nombre es obligatorio.
+  <div class="g_pagina_body g_grid">
+    <div class="g_grid_col_1" class="g_form g_card">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>Nombre</p>
+        <input formControlName="nombre" placeholder="Nombre de la categoría">
+        <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="error">
+          El nombre es obligatorio.
+        </div>
+
+        <p>Slug</p>
+        <input formControlName="slug" placeholder="Slug de la categoría">
+        <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="error">
+          El slug es obligatorio.
+        </div>
+        <div *ngIf="form.get('slug')?.errors?.['backend']" class="error">
+          {{ form.get('slug')?.errors?.['backend'] }}
+        </div>
+
+
+        <p>Descripción</p>
+        <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
+        <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="error">
+          La descripción es obligatoria.
+        </div>
+
+        <p>Tipo</p>
+        <select formControlName="tipo">
+          <option value="" disabled selected>-- Selecciona tipo --</option>
+          <option value="producto">Producto</option>
+          <option value="servicio">Servicio</option>
+        </select>
+        <div *ngIf="form.get('tipo')?.touched && form.get('tipo')?.invalid" class="error">
+          El tipo es obligatorio.
+        </div>
+
+        <p>Imagen</p>
+        <input type="file" (change)="onFileSelected($event)">
+        <div *ngIf="form.get('imagen')?.errors?.['backend']" class="error">
+          {{ form.get('imagen')?.errors?.['backend'] }}
+        </div>
+
+        <button type="submit">
+          {{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}
+        </button>
+
+        <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">
+          Cancelar
+        </button>
+      </form>
+
+
     </div>
 
-    <p>Slug</p>
-    <input formControlName="slug" placeholder="Slug de la categoría">
-    <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="error">
-      El slug es obligatorio.
-    </div>    
-    <div *ngIf="form.get('slug')?.errors?.['backend']" class="error">
-      {{ form.get('slug')?.errors?.['backend'] }}
+    <div class="g_grid_col_2" class="g_form g_card">
+      <table class="g_tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Slug</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of categorias">
+            <td>{{ cat.nombre }}</td>
+            <td>{{ cat.slug }}</td>
+            <td>{{ cat.tipo }}</td>
+            <td>{{ cat.descripcion }}</td>
+            <td><img *ngIf="cat.imagen" [src]="'http://127.0.0.1:8000/storage/' + cat.imagen" width="60"></td>
+            <td>
+              <button (click)="editCategoria(cat)">Editar</button>
+              <button (click)="deleteCategoria(cat.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
-
-    <p>Descripción</p>
-    <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
-    <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="error">
-      La descripción es obligatoria.
-    </div>
-
-    <p>Tipo</p>
-    <select formControlName="tipo">
-      <option value="" disabled selected>-- Selecciona tipo --</option>
-      <option value="producto">Producto</option>
-      <option value="servicio">Servicio</option>
-    </select>
-    <div *ngIf="form.get('tipo')?.touched && form.get('tipo')?.invalid" class="error">
-      El tipo es obligatorio.
-    </div>
-
-    <p>Imagen</p>
-    <input type="file" (change)="onFileSelected($event)">
-    <div *ngIf="form.get('imagen')?.errors?.['backend']" class="error">
-      {{ form.get('imagen')?.errors?.['backend'] }}
-    </div>
-
-    <button type="submit">
-      {{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}
-    </button>
-
-    <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">
-      Cancelar
-    </button>
-  </form>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Slug</th>
-        <th>Tipo</th>
-        <th>Descripción</th>
-        <th>Imagen</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let cat of categorias">
-        <td>{{ cat.nombre }}</td>
-        <td>{{ cat.slug }}</td>
-        <td>{{ cat.tipo }}</td>
-        <td>{{ cat.descripcion }}</td>
-        <td><img *ngIf="cat.imagen" [src]="'http://127.0.0.1:8000/storage/' + cat.imagen" width="60"></td>
-        <td>
-          <button (click)="editCategoria(cat)">Editar</button>
-          <button (click)="deleteCategoria(cat.id)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  </div>
 </div>

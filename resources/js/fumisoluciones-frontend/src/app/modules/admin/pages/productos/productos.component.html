@@ -1,96 +1,103 @@
-<div class="categorias-container">
-  <h2>Gestión de Productos</h2>
-
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <p>Categoría</p>
-    <select formControlName="categoria_id">
-      <option value="" disabled selected>-- Selecciona --</option>
-      <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
-    </select>
-    <div *ngIf="form.get('categoria_id')?.touched && form.get('categoria_id')?.invalid" class="error">
-      La categoria es obligatorio.
-    </div>
-
-    <p>Nombre</p>
-    <input formControlName="nombre" placeholder="Nombre del producto">
-    <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="error">
-      El nombre es obligatorio.
-    </div>
-
-    <p>Slug</p>
-    <input formControlName="slug" placeholder="Slug de la categoría">
-    <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="error">
-      El slug es obligatorio.
-    </div>
-
-    <p>Descripción</p>
-    <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
-    <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="error">
-      La descripción es obligatoria.
-    </div>
-
-    <p>Imagen</p>
-    <input type="file" (change)="onFileSelected($event)">
-    <div *ngIf="form.get('imagen')?.errors?.['backend']" class="error">
-      {{ form.get('imagen')?.errors?.['backend'] }}
-    </div>
-
-    <button type="submit">
-      {{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}
-    </button>
-
-    <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">
-      Cancelar
-    </button>
-  </form>
-
-  <div class="filtros">
-    <input type="text" placeholder="Buscar producto..." [(ngModel)]="buscar" (ngModelChange)="aplicarFiltros()"
-      name="buscar">
-
-    <select [(ngModel)]="filtroCategoria" (change)="aplicarFiltros()" name="filtroCategoria">
-      <option [ngValue]="null">-- Todas las categorías --</option>
-      <option *ngFor="let cat of categorias" [ngValue]="cat.id">{{ cat.nombre }}</option>
-    </select>
+<div class="g_contenedor_pagina">
+  <div class="g_pagina_header g_card">
+    <h2>Gestión de Productos</h2>
   </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Categoría</th>
-        <th>Nombre</th>
-        <th>Slug</th>
-        <th>Descripción</th>
-        <th>Imagen</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let prod of productos">
-        <td>{{ prod.categoria?.nombre }}</td>
-        <td>{{ prod.nombre }}</td>
-        <td>{{ prod.slug }}</td>
-        <td>{{ prod.descripcion }}</td>
-        <td><img *ngIf="prod.imagen" [src]="'http://127.0.0.1:8000/storage/' + prod.imagen" width="60"></td>
-        <td>
-          <button (click)="editProducto(prod)">Editar</button>
-          <button (click)="deleteProducto(prod.id)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="g_pagina_body g_grid">
+    <div class="g_grid_col_1" class="g_form g_card">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>Categoría</p>
+        <select formControlName="categoria_id">
+          <option value="" disabled selected>-- Selecciona --</option>
+          <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
+        </select>
+        <div *ngIf="form.get('categoria_id')?.touched && form.get('categoria_id')?.invalid" class="error">
+          La categoria es obligatorio.
+        </div>
 
-  <div class="pagination" *ngIf="pagination.total">
-    <button [disabled]="pagination.current_page === 1" (click)="loadProductos(pagination.current_page - 1)">
-      « Anterior
-    </button>
+        <p>Nombre</p>
+        <input formControlName="nombre" placeholder="Nombre del producto">
+        <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="error">
+          El nombre es obligatorio.
+        </div>
 
-    <span>Página {{ pagination.current_page }} de {{ pagination.last_page }}</span>
+        <p>Slug</p>
+        <input formControlName="slug" placeholder="Slug de la categoría">
+        <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="error">
+          El slug es obligatorio.
+        </div>
 
-    <button [disabled]="pagination.current_page === pagination.last_page"
-      (click)="loadProductos(pagination.current_page + 1)">
-      Siguiente »
-    </button>
+        <p>Descripción</p>
+        <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
+        <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="error">
+          La descripción es obligatoria.
+        </div>
+
+        <p>Imagen</p>
+        <input type="file" (change)="onFileSelected($event)">
+        <div *ngIf="form.get('imagen')?.errors?.['backend']" class="error">
+          {{ form.get('imagen')?.errors?.['backend'] }}
+        </div>
+
+        <button type="submit">
+          {{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}
+        </button>
+
+        <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">
+          Cancelar
+        </button>
+      </form>
+    </div>
+
+    <div class="g_grid_col_2" class="g_form g_card">
+      <div class="filtros">
+        <input type="text" placeholder="Buscar producto..." [(ngModel)]="buscar" (ngModelChange)="aplicarFiltros()"
+          name="buscar">
+
+        <select [(ngModel)]="filtroCategoria" (change)="aplicarFiltros()" name="filtroCategoria">
+          <option [ngValue]="null">-- Todas las categorías --</option>
+          <option *ngFor="let cat of categorias" [ngValue]="cat.id">{{ cat.nombre }}</option>
+        </select>
+      </div>
+
+      <table class="g_tabla">
+        <thead>
+          <tr>
+            <th>Categoría</th>
+            <th>Nombre</th>
+            <th>Slug</th>
+            <th>Descripción</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prod of productos">
+            <td>{{ prod.categoria?.nombre }}</td>
+            <td>{{ prod.nombre }}</td>
+            <td>{{ prod.slug }}</td>
+            <td>{{ prod.descripcion }}</td>
+            <td><img *ngIf="prod.imagen" [src]="'http://127.0.0.1:8000/storage/' + prod.imagen" width="60"></td>
+            <td>
+              <button (click)="editProducto(prod)">Editar</button>
+              <button (click)="deleteProducto(prod.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination" *ngIf="pagination.total">
+        <button [disabled]="pagination.current_page === 1" (click)="loadProductos(pagination.current_page - 1)">
+          « Anterior
+        </button>
+
+        <span>Página {{ pagination.current_page }} de {{ pagination.last_page }}</span>
+
+        <button [disabled]="pagination.current_page === pagination.last_page"
+          (click)="loadProductos(pagination.current_page + 1)">
+          Siguiente »
+        </button>
+      </div>
+    </div>
   </div>
-
 </div>

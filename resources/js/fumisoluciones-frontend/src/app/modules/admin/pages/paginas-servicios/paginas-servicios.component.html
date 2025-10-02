@@ -1,52 +1,60 @@
-<div class="pagina-servicios-container">
-  <h2>Relación Página - Servicios</h2>
+<div class="g_contenedor_pagina">
+  <div class="g_pagina_header g_card">
+    <h2>Gestión de Páginas Servicios</h2>
+  </div>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="form-group">
-      <label>Página:</label>
-      <select formControlName="pagina_id">
-        <option value="">Seleccione una página</option>
-        <option *ngFor="let pagina of paginas" [value]="pagina.id">
-          {{ pagina.titulo }}
-        </option>
-      </select>
+  <div class="g_pagina_body g_grid">
+    <div class="g_grid_col_1" class="g_form g_card">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-group">
+          <label>Página:</label>
+          <select formControlName="pagina_id">
+            <option value="">Seleccione una página</option>
+            <option *ngFor="let pagina of paginas" [value]="pagina.id">
+              {{ pagina.titulo }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Servicio:</label>
+          <select formControlName="servicio_id">
+            <option value="">Seleccione un servicio</option>
+            <option *ngFor="let servicio of servicios" [value]="servicio.id">
+              {{ servicio.nombre }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit">{{ editingId ? 'Actualizar' : 'Crear' }}</button>
+          <button type="button" (click)="reset()">Cancelar</button>
+        </div>
+      </form>
     </div>
 
-    <div class="form-group">
-      <label>Servicio:</label>
-      <select formControlName="servicio_id">
-        <option value="">Seleccione un servicio</option>
-        <option *ngFor="let servicio of servicios" [value]="servicio.id">
-          {{ servicio.nombre }}
-        </option>
-      </select>
+    <div class="g_grid_col_2" class="g_form g_card">
+      <table class="g_tabla">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Página</th>
+            <th>Servicio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of paginaServicios">
+            <td>{{ item.id }}</td>
+            <td>{{ item.pagina?.titulo || '—' }}</td>
+            <td>{{ item.servicio?.nombre || '—' }}</td>
+            <td>
+              <button (click)="edit(item)">Editar</button>
+              <button (click)="delete(item.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-    <div class="form-actions">
-      <button type="submit">{{ editingId ? 'Actualizar' : 'Crear' }}</button>
-      <button type="button" (click)="reset()">Cancelar</button>
-    </div>
-  </form>
-
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Página</th>
-        <th>Servicio</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of paginaServicios">
-        <td>{{ item.id }}</td>
-        <td>{{ item.pagina?.titulo || '—' }}</td>
-        <td>{{ item.servicio?.nombre || '—' }}</td>
-        <td>
-          <button (click)="edit(item)">Editar</button>
-          <button (click)="delete(item.id)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  </div>
 </div>

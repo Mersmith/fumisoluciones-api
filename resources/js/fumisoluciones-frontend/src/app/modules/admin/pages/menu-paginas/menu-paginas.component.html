@@ -1,24 +1,52 @@
-<div class="crud-container">
-    <h2>CRUD Menu-Paginas</h2>
+<div class="g_contenedor_pagina">
+    <div class="g_pagina_header g_card">
+        <h2>Gestión de Menú Páginas</h2>
+    </div>
 
-    <form (ngSubmit)="addMenuPagina()">
-        <select [(ngModel)]="newMenuPagina.menu_id" name="menu_id">
-            <option [ngValue]="null">-- Selecciona un menú --</option>
-            <option *ngFor="let menu of menus" [value]="menu.id">{{ menu.label }}</option>
-        </select>
+    <div class="g_pagina_body g_grid">
+        <div class="g_grid_col_1" class="g_form g_card">
+            <form (ngSubmit)="addMenuPagina()">
+                <div class="g_form_item">
+                    <label for="menu_id">Menu <span class="obligatorio"><i
+                                class="fa-solid fa-asterisk"></i></span></label>
+                    <select id="menu_id" [(ngModel)]="newMenuPagina.menu_id" name="menu_id">
+                        <option [ngValue]="null">-- Selecciona un menú --</option>
+                        <option *ngFor="let menu of menus" [value]="menu.id">{{ menu.label }}</option>
+                    </select>
+                </div>
 
-        <select [(ngModel)]="newMenuPagina.pagina_id" name="pagina_id">
-            <option [ngValue]="null">-- Selecciona una página --</option>
-            <option *ngFor="let pagina of paginas" [value]="pagina.id">{{ pagina.titulo }}</option>
-        </select>
+                <div class="g_form_item">
+                    <label for="pagina_id">Página <span class="obligatorio"><i
+                                class="fa-solid fa-asterisk"></i></span></label>
+                    <select id="pagina_id" [(ngModel)]="newMenuPagina.pagina_id" name="pagina_id">
+                        <option [ngValue]="null">-- Selecciona una página --</option>
+                        <option *ngFor="let pagina of paginas" [value]="pagina.id">{{ pagina.titulo }}</option>
+                    </select>
+                </div>
 
-        <button type="submit">Relacionar</button>
-    </form>
+                <button type="submit">Relacionar</button>
+            </form>
+        </div>
 
-    <ul>
-        <li *ngFor="let mp of menuPaginas">
-            Menu: {{ mp.menu?.label }} → Página: {{ mp.pagina?.titulo }}
-            <button (click)="deleteMenuPagina(mp.menu_id, mp.pagina_id)">Eliminar</button>
-        </li>
-    </ul>
+        <div class="g_grid_col_2" class="g_form g_card">
+            <table class="g_tabla">
+                <thead>
+                    <tr>
+                        <th>Menu</th>
+                        <th>Página</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let mp of menuPaginas">
+                        <td>{{ mp.menu?.label }}</td>
+                        <td>{{ mp.pagina?.titulo }}</td>
+                        <td>
+                            <button (click)="deleteMenuPagina(mp.menu_id, mp.pagina_id)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

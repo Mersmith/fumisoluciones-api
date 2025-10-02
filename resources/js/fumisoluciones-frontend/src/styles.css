@@ -162,6 +162,7 @@ p {
 }
 
 .g_form input,
+.g_form textarea,
 .g_form select {
     padding: 8px 10px;
     border: 1px solid var(--color-gris);
