@@ -1,20 +1,13 @@
-:host {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-}
-
-/* El main debe ocupar todo el espacio libre */
 .admin-content {
   flex: 1;
   padding: 20px;
   transition: margin-left 0.3s ease-in-out;
+  background-color: var(--color-plomo);
 }
 
-/* En desktop, el main se corre por el sidebar */
 @media (min-width: 769px) {
   .admin-content {
-    margin-left: 200px; /* igual al ancho del sidebar */
+    margin-left: 200px; 
   }
 }
 
@@ -23,7 +16,6 @@
     display: block;
   }
 
-  /* Empujar el contenido debajo del topbar */
   .admin-content {
     margin-top: 50px;
   }

@@ -1,43 +1,85 @@
-<div class="crud-container">
-  <h2>Gestión de Menús</h2>
+<div class="g_contenedor_pagina">
+  <div class="g_pagina_header g_card">
+    <h2>Gestión de Menús</h2>
+  </div>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <p>Label</p>
-    <input formControlName="label" placeholder="Label">
-    <div *ngIf="form.get('label')?.touched && form.get('label')?.invalid" class="error">
-      {{ form.get('label')?.errors?.['required'] ? 'El label es obligatorio.' : form.get('label')?.errors?.['backend'] }}
+  <div class="g_pagina_body g_grid">
+    <div class="g_grid_col_1" class="g_form g_card">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="g_form_item">
+          <label for="label">Nombre <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
+          <input id="label" formControlName="label">
+          <div *ngIf="form.get('label')?.touched && form.get('label')?.invalid" class="g_error">
+            <p>
+              {{ form.get('label')?.errors?.['required']
+              ? 'El label es obligatorio.'
+              : form.get('label')?.errors?.['backend'] }}
+            </p>
+          </div>
+        </div>
+
+        <div class="g_form_item">
+          <label for="route">URL</label>
+          <input id="route" formControlName="route">
+        </div>
+
+        <div class="g_form_item">
+          <label for="icon">Icono</label>
+          <input id="icon" formControlName="icon">
+        </div>
+
+        <div class="g_form_item">
+          <label for="parent_id">Menu padre</label>
+          <select id="parent_id" formControlName="parent_id">
+            <option [ngValue]="null">-- Sin Padre --</option>
+            <option *ngFor="let m of menus" [ngValue]="m.id">{{ m.label }}</option>
+          </select>
+        </div>
+
+        <div class="g_form_item">
+          <label for="orden">Orden</label>
+          <input formControlName="orden" type="number">
+          <div *ngIf="form.get('orden')?.touched && form.get('orden')?.invalid" class="g_error">
+            <p>
+              {{ form.get('orden')?.errors?.['min'] ? 'El orden no puede ser negativo.' :
+              form.get('orden')?.errors?.['backend']
+              }}
+            </p>
+          </div>
+        </div>
+
+        <button type="submit">
+          {{ editingId ? 'Actualizar' : 'Crear' }}
+        </button>
+        <button type="button" *ngIf="editingId" (click)="cancelEdit()">Cancelar</button>
+      </form>
+    </div>
+    <div class="g_grid_col_2" class="g_form g_card">
+      <table  class="g_tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>URL</th>
+            <th>Padre</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let menu of menus">
+            <td>{{ menu.label }}</td>
+            <td>{{ menu.route }}</td>
+            <td>
+              <span *ngIf="menu.parent"> {{ menu.parent.label }} </span>
+              <span *ngIf="!menu.parent"> — </span>
+            </td>
+            <td>
+              <button (click)="editMenu(menu)">Editar</button>
+              <button (click)="deleteMenu(menu.id!)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <p>Route</p>
-    <input formControlName="route" placeholder="Route">
-
-    <p>Icon</p>
-    <input formControlName="icon" placeholder="Icon">
-
-    <p>Padre</p>
-    <select formControlName="parent_id">
-      <option [ngValue]="null">-- Sin Padre --</option>
-      <option *ngFor="let m of menus" [ngValue]="m.id">{{ m.label }}</option>
-    </select>
-
-    <p>Orden</p>
-    <input formControlName="orden" type="number" placeholder="Orden">
-    <div *ngIf="form.get('orden')?.touched && form.get('orden')?.invalid" class="error">
-      {{ form.get('orden')?.errors?.['min'] ? 'El orden no puede ser negativo.' : form.get('orden')?.errors?.['backend'] }}
-    </div>
-
-    <button type="submit">
-      {{ editingId ? 'Actualizar' : 'Crear' }}
-    </button>
-    <button type="button" *ngIf="editingId" (click)="cancelEdit()">Cancelar</button>
-  </form>
-
-  <ul>
-    <li *ngFor="let menu of menus">
-      {{ menu.label }} - {{ menu.route }}
-      <span *ngIf="menu.parent"> (Hijo de: {{ menu.parent.label }})</span>
-      <button (click)="editMenu(menu)">Editar</button>
-      <button (click)="deleteMenu(menu.id!)">Eliminar</button>
-    </li>
-  </ul>
+  </div>
 </div>

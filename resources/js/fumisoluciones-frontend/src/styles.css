@@ -109,6 +109,154 @@ p {
     gap: 70px;
 }
 
+/*.g_contenedor_pagina {
+    background-color: var(--color-gris);
+}*/
+
+.g_pagina_header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-negro);
+}
+
+/*.g_pagina_body {
+    max-width: 800px;
+    margin: 20px auto;
+}*/
+
+.g_grid {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 20px;
+}
+
+.g_grid_col_1,
+.g_grid_col_2 {
+    width: 100%;
+}
+
+.g_card {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--color-plomo);
+    border: 1px solid var(--color-gris);
+    border-radius: 8px;
+    background: var(--color-blanco);
+}
+
+/*INICIO FORMULARIO*/
+.g_form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.g_form label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.g_form .obligatorio {
+    color: #FF6692;
+    font-size: 8px;
+}
+
+.g_form input,
+.g_form select {
+    padding: 8px 10px;
+    border: 1px solid var(--color-gris);
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.g_form button {
+    background: var(--color-verde);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.g_form button:hover {
+    background: var(--color-celeste);
+}
+
+.g_error {
+    color: red;
+    font-size: 13px;
+    margin-top: -6px;
+}
+
+.g_form_item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/*FIN FORMULARIO*/
+
+/*TABLA INICIO*/
+
+.g_tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.g_tabla thead {
+    background: var(--color-celeste);
+    color: var(--color-blanco);
+}
+
+.g_tabla thead th {
+    padding: 10px;
+    text-align: left;
+}
+
+.g_tabla tbody tr {
+    border-bottom: 1px solid var(--color-gris);
+    transition: background 0.3s ease;
+}
+
+.g_tabla tbody tr:hover {
+    background: var(--color-plomo);
+}
+
+.g_tabla tbody td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.g_tabla tbody td img {
+    border-radius: 6px;
+    border: 1px solid var(--color-gris);
+}
+
+/* Botones de acciones */
+.g_tabla tbody td button {
+    margin-right: 6px;
+    background: var(--color-negro);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.g_tabla tbody td button:hover {
+    background: var(--color-verde);
+}
+/*TABLA FIN*/
+
 @media (max-width: 1000px) {
 
     .g_encabezado h2 {
@@ -118,6 +266,10 @@ p {
     .g_contenedor_columna {
         margin: 40px 0px;
         gap: 40px;
+    }
+
+    .g_grid {
+        grid-template-columns: 1fr;
     }
 
 }
