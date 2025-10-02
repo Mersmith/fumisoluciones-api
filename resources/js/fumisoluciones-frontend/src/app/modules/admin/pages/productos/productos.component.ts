@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categoria } from '../../../../models/categoria.model';
 import { Producto } from '../../../../models/producto.model';
-import { CategoriasService } from '../../../admin/services/categorias.service';
-import { ProductosService } from '../../../admin/services/productos.service';
+import { CategoriasService } from '../../../../services/categorias.service';
+import { ProductosService } from '../../../../services/productos.service';
 
 @Component({
   selector: 'app-admin-productos',

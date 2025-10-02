@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Servicio } from '../../../models/servicio.model';
+import { Producto } from '../models/producto.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServiciosService {
-  private apiUrl = 'http://127.0.0.1:8000/api/servicios';
+export class ProductosService {
+  private apiUrl = 'http://127.0.0.1:8000/api/productos';
 
   constructor(private http: HttpClient) { }
 
-  getServicios(
+  getProductos(
     buscar: string = '',
     orden: string = 'desc',
     page: number = 1,
@@ -31,22 +31,22 @@ export class ServiciosService {
     return this.http.get<any>(url).pipe(catchError(this.handleError));
   }
 
-  getServicio(id: number): Observable<Servicio> {
-    return this.http.get<Servicio>(`${this.apiUrl}/${id}`)
+  getProducto(id: number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  createServicio(formData: FormData): Observable<any> {
+  createProducto(formData: FormData): Observable<any> {
     return this.http.post<any>(this.apiUrl, formData)
       .pipe(catchError(this.handleError));
   }
 
-  updateServicio(id: number, formData: FormData): Observable<any> {
+  updateProducto(id: number, formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${id}?_method=PUT`, formData)
       .pipe(catchError(this.handleError));
   }
 
-  deleteServicio(id: number): Observable<void> {
+  deleteProducto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
   }

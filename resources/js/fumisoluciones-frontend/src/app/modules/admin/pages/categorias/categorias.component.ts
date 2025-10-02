@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categoria } from '../../../../models/categoria.model';
-import { CategoriasService } from '../../../admin/services/categorias.service';
+import { CategoriasService } from '../../../../services/categorias.service';
 
 @Component({
   selector: 'app-categorias',

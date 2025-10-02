@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PaginaServiciosService } from '../../../admin/services/pagina-servicios.service';
+import { PaginaServiciosService } from '../../../../services/pagina-servicios.service';
 import { PaginaServicio } from '../../../../models/pagina-servicio.model';
-import { PaginaService } from '../../services/pagina.service';
-import { ServiciosService } from '../../../admin/services/servicios.service';
+import { PaginaService } from '../../../../services/pagina.service';
+import { ServiciosService } from '../../../../services/servicios.service';
 
 @Component({
   selector: 'app-paginas-servicios',

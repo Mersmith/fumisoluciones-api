@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Categoria } from '../../../../models/categoria.model';
 import { Servicio } from '../../../../models/servicio.model';
-import { CategoriasService } from '../../../admin/services/categorias.service';
-import { ServiciosService } from '../../../admin/services/servicios.service';
+import { CategoriasService } from '../../../../services/categorias.service';
+import { ServiciosService } from '../../../../services/servicios.service';
 
 @Component({
   selector: 'app-admin-servicios',
