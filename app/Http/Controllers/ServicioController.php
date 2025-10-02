@@ -8,6 +8,13 @@ use Illuminate\Support\Str;
 
 class ServicioController extends Controller
 {
+    public function indexWeb()
+    {
+        $query = Servicio::all();
+
+        return $query;
+    }
+
     public function index(Request $request)
     {
         $query = Servicio::with('categoria');

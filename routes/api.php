@@ -44,6 +44,7 @@ Route::put('productos/{producto}', [ProductoController::class, 'update'])->name(
 Route::patch('productos/{producto}', [ProductoController::class, 'update']);
 Route::delete('productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
+Route::get('servicios/web', [ServicioController::class, 'indexWeb'])->name('servicios-web.index');
 Route::get('servicios', [ServicioController::class, 'index'])->name('servicios.index');
 Route::post('servicios', [ServicioController::class, 'store'])->name('servicios.store');
 Route::get('servicios/{servicio}', [ServicioController::class, 'show'])->name('servicios.show');

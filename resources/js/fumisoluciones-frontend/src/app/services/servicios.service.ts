@@ -12,6 +12,11 @@ export class ServiciosService {
 
   constructor(private http: HttpClient) { }
 
+  getServiciosWeb(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/web`)
+      .pipe(catchError(this.handleError));
+  }
+
   getServicios(
     buscar: string = '',
     orden: string = 'desc',

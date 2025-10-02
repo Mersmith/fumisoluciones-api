@@ -13,7 +13,7 @@ export class ComponenteServiciosComponent implements OnInit {
   constructor(private serviciosService: ServiciosService) { }
 
   ngOnInit(): void {
-    this.serviciosService.getServicios().subscribe({
+    this.serviciosService.getServiciosWeb().subscribe({
       next: (data) => this.servicios = data,
       error: (err) => console.error('Error al cargar servicios', err)
     });
