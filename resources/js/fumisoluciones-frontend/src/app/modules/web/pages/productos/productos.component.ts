@@ -51,7 +51,11 @@ export class ProductosComponent implements OnInit {
 
   cargarProductos(): void {
     this.productosService
-      .getProductos(this.buscarControl.value, this.orden, this.paginaActual, this.categoriaSeleccionada ?? undefined)
+      .getProductos(
+        this.buscarControl.value, 
+        this.orden, 
+        this.paginaActual, 
+        this.categoriaSeleccionada ?? undefined)
       .subscribe({
         next: (res) => {
           this.productos = res.data;
