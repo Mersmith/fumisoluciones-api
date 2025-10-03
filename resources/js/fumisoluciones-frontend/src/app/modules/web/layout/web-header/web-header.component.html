@@ -7,24 +7,28 @@
       </a>
     </div>
 
-    <!-- Hamburguesa -->
+    <!-- Hamburguesa (móvil) -->
     <div class="hamburger" (click)="toggleMenu()">
       <i class="fa-solid fa-bars"></i>
     </div>
 
-    <!-- Menú -->
+    <!-- Menú principal -->
     <ul class="nav-links" [class.open]="menuOpen">
       <ng-container *ngFor="let item of menuItems">
         <ng-container *ngTemplateOutlet="renderMenu; context:{ $implicit: item }"></ng-container>
       </ng-container>
     </ul>
 
+    <!-- Template recursivo del menú -->
     <ng-template #renderMenu let-item>
       <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a *ngIf="item.route" [routerLink]="item.route" (click)="closeMenu()">
+
+        <!-- Mostrar enlace solo si no tiene hijos -->
+        <a *ngIf="!item.children || item.children.length === 0" [routerLink]="item.route" (click)="closeMenu()">
           <i [class]="item.icon"></i> {{ item.label }}
         </a>
 
+        <!-- Mostrar dropdown si tiene hijos -->
         <div *ngIf="item.children && item.children.length > 0" class="dropdown">
           <span class="dropdown-toggle">
             <i [class]="item.icon"></i> {{ item.label }}
@@ -39,7 +43,5 @@
         </div>
       </li>
     </ng-template>
-
-
   </nav>
 </header>
