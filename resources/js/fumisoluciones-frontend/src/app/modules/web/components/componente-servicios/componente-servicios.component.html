@@ -12,11 +12,11 @@
         <div class="card" *ngFor="let servicio of servicios">
             <h3>{{ servicio.nombre }}</h3>
 
-            <img [src]="servicio.imagen" alt="{{ servicio.nombre }}">
+            <img [src]="servicio.imagen ? 'http://127.0.0.1:8000/storage/' + servicio.imagen : 'ruta/default-servicio.jpg'" alt="{{ servicio.nombre }}">
 
-            <div class="contenido">
+            <!--<div class="contenido">
                 <p>{{ servicio.descripcion }}</p>
-            </div>
+            </div>-->
         </div>
     </div>
 
