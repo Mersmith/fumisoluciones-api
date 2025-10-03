@@ -15,50 +15,30 @@
     <!-- Menú -->
     <ul class="nav-links" [class.open]="menuOpen">
       <ng-container *ngFor="let item of menuItems">
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-
-          <!-- Caso: item con route (enlace normal) -->
-          <a *ngIf="item.route" [routerLink]="item.route" (click)="closeMenu()">
-            <i [class]="item.icon"></i> {{ item.label }}
-          </a>
-
-          <!-- Caso: item con hijos -->
-          <div *ngIf="item.children" class="dropdown">
-            <span class="dropdown-toggle">
-              <i [class]="item.icon"></i> {{ item.label }}
-              <i class="fa-solid fa-chevron-down caret"></i>
-            </span>
-
-            <ul class="dropdown-menu">
-              <!-- recursivo -->
-              <ng-container *ngFor="let child of item.children">
-                <li>
-                  <a *ngIf="child.route" [routerLink]="child.route" (click)="closeMenu()">
-                    <i [class]="child.icon"></i> {{ child.label }}
-                  </a>
-
-                  <!-- subniveles -->
-                  <div *ngIf="child.children" class="dropdown">
-                    <span class="dropdown-toggle">
-                      <i [class]="child.icon"></i> {{ child.label }}
-                      <i class="fa-solid fa-chevron-right caret"></i>
-                    </span>
-
-                    <ul class="dropdown-menu sub">
-                      <li *ngFor="let sub of child.children">
-                        <a [routerLink]="sub.route" (click)="closeMenu()">
-                          <i [class]="sub.icon"></i> {{ sub.label }}
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ng-container>
-            </ul>
-          </div>
-        </li>
+        <ng-container *ngTemplateOutlet="renderMenu; context:{ $implicit: item }"></ng-container>
       </ng-container>
     </ul>
+
+    <ng-template #renderMenu let-item>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a *ngIf="item.route" [routerLink]="item.route" (click)="closeMenu()">
+          <i [class]="item.icon"></i> {{ item.label }}
+        </a>
+
+        <div *ngIf="item.children && item.children.length > 0" class="dropdown">
+          <span class="dropdown-toggle">
+            <i [class]="item.icon"></i> {{ item.label }}
+            <i class="fa-solid fa-chevron-down caret"></i>
+          </span>
+
+          <ul class="dropdown-menu">
+            <ng-container *ngFor="let child of item.children">
+              <ng-container *ngTemplateOutlet="renderMenu; context:{ $implicit: child }"></ng-container>
+            </ng-container>
+          </ul>
+        </div>
+      </li>
+    </ng-template>
 
 
   </nav>

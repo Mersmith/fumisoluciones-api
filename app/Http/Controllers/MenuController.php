@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Menu;
+use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -19,12 +19,32 @@ class MenuController extends Controller
             'icon' => 'nullable|string',
             'route' => 'nullable|string',
             'parent_id' => 'nullable|exists:menus,id',
-            'orden' => 'integer'
+            'orden' => 'integer',
         ]);
 
         $menu = Menu::create($data);
 
         return response()->json($menu, 201);
+    }
+
+    public function webMenu()
+    {
+        $menus = Menu::with('children')->orderBy('orden')->get();
+
+        $formatMenu = function ($items) use (&$formatMenu) {
+            return $items->map(function ($item) use ($formatMenu) {
+                return [
+                    'label' => $item->label,
+                    'icon' => $item->icon,
+                    'route' => $item->route,
+                    'children' => $item->children->isNotEmpty() ? $formatMenu($item->children) : [],
+                ];
+            });
+        };
+
+        $rootMenus = $menus->whereNull('parent_id');
+
+        return response()->json(array_values($formatMenu($rootMenus)->toArray()));
     }
 
     public function show(Menu $menu)
@@ -39,7 +59,7 @@ class MenuController extends Controller
             'icon' => 'nullable|string',
             'route' => 'nullable|string',
             'parent_id' => 'nullable|exists:menus,id',
-            'orden' => 'integer'
+            'orden' => 'integer',
         ]);
 
         $menu->update($data);

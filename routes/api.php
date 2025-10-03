@@ -12,6 +12,7 @@ use App\Http\Controllers\ServicioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::get('menus/web', [MenuController::class, 'webMenu'])->name('menus.web');
 Route::get('menus', [MenuController::class, 'index'])->name('menus.index'); //
 Route::post('menus', [MenuController::class, 'store'])->name('menus.store'); //
 Route::get('menus/{menu}', [MenuController::class, 'show'])->name('menus.show'); //

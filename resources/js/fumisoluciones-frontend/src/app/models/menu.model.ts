@@ -12,3 +12,10 @@ export interface Menu {
     children?: Menu[];
     paginas?: any[];
 }
+
+export interface MenuItem {
+    label: string;
+    icon?: string | null;
+    route?: string | null;
+    children?: MenuItem[]; // submenús anidados
+}
