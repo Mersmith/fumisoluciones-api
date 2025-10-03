@@ -4,6 +4,8 @@ import { Categoria } from '../../../../models/categoria.model';
 import { Producto } from '../../../../models/producto.model';
 import { CategoriasService } from '../../../../services/categorias.service';
 import { ProductosService } from '../../../../services/productos.service';
+import { slugify } from '../../../../utils/slugify';
+import { handleBackendErrors } from '../../../../utils/handleBackendErrors';
 
 @Component({
   selector: 'app-admin-productos',
@@ -17,6 +19,7 @@ export class ProductosComponent implements OnInit {
   pagination: any = {};
   buscar: string = '';
   filtroCategoria: number | null = null;
+  imagePreview: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -28,8 +31,8 @@ export class ProductosComponent implements OnInit {
       nombre: ['', Validators.required],
       slug: ['', Validators.required],
       categoria_id: ['', Validators.required],
-      imagen: [null],
-      descripcion: ['', Validators.required]
+      descripcion: [''],
+      imagen: [null]
     });
   }
 
@@ -42,7 +45,7 @@ export class ProductosComponent implements OnInit {
 
     this.form.get('nombre')?.valueChanges.subscribe(nombre => {
       if (nombre) {
-        this.form.patchValue({ slug: this.slugify(nombre) }, { emitEvent: false });
+        this.form.patchValue({ slug: slugify(nombre) }, { emitEvent: false });
       }
     });
   }
@@ -63,21 +66,16 @@ export class ProductosComponent implements OnInit {
     this.loadProductos(1);
   }
 
-  slugify(text: string): string {
-    return text
-      .toString()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-  }
-
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.form.patchValue({ imagen: file });
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -108,32 +106,21 @@ export class ProductosComponent implements OnInit {
         this.resetForm();
         this.loadProductos(this.pagination.current_page);
       },
-      error: (err) => this.handleBackendErrors(err)
+      error: (err) => handleBackendErrors(err, this.form)
     });
   }
 
-  handleBackendErrors(err: any) {
-    if (err.type === 'validation') {
-
-      Object.keys(err.errors).forEach(field => {
-        const control = this.form.get(field);
-        if (control) {
-          control.setErrors({ backend: err.errors[field][0] });
-        }
-      });
-    } else {
-      alert(err.message || 'Error inesperado. Intenta de nuevo.');
-    }
-  }
-
   editProducto(prod: Producto) {
-    this.form.patchValue({
-      id: prod.id,
-      nombre: prod.nombre,
-      slug: prod.slug,
-      categoria_id: prod.categoria_id,
-      descripcion: prod.descripcion,
-      imagen: null
+    this.productosService.getProducto(prod.id).subscribe(res => {
+      this.form.patchValue({
+        id: res.id,
+        nombre: res.nombre,
+        slug: res.slug,
+        categoria_id: res.categoria_id,
+        descripcion: res.descripcion,
+        imagen: null
+      });
+      this.imagePreview = res.imagen ? `http://127.0.0.1:8000/storage/${res.imagen}` : null;
     });
   }
 
@@ -159,6 +146,7 @@ export class ProductosComponent implements OnInit {
       tipo: '',
       imagen: null
     });
+    this.imagePreview = null;
   }
 
 }

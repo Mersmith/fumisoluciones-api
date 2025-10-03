@@ -48,7 +48,7 @@
         <div class="g_form_item">
           <label for="imagen">Imagen</label>
           <input id="imagen" type="file" (change)="onFileSelected($event)">
-          <div *ngIf="form.get('imagen')?.errors?.['backend']" class="error">
+          <div *ngIf="form.get('imagen')?.errors?.['backend']" class="g_error">
             {{ form.get('imagen')?.errors?.['backend'] }}
           </div>
 

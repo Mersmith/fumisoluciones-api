@@ -5,8 +5,8 @@ export interface Producto {
   categoria_id: number;
   nombre: string;
   slug?: string;
-  imagen?: string;
-  descripcion?: string;
+  imagen?: string | null;
+  descripcion?: string | null;
   created_at?: string;
   updated_at?: string;
   categoria?: Categoria;

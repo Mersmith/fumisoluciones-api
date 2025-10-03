@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Categoria } from '../models/categoria.model';
+import { handleHttpError } from '../utils/handleHttpError';
 
 @Injectable({
   providedIn: 'root'
@@ -18,46 +19,31 @@ export class CategoriasService {
       url += `?tipo=${tipo}`;
     }
     return this.http.get<Categoria[]>(url).pipe(
-      catchError(this.handleError)
+      catchError(handleHttpError)
     );
   }
 
   getCategoria(id: number): Observable<Categoria> {
-    return this.http.get<Categoria>(`${this.apiUrl}/${id}`)
-      .pipe(catchError(this.handleError));
+    return this.http.get<Categoria>(`${this.apiUrl}/${id}`).pipe(
+      catchError(handleHttpError)
+    );
   }
 
   createCategoria(formData: FormData): Observable<Categoria> {
-    return this.http.post<Categoria>(this.apiUrl, formData)
-      .pipe(catchError(this.handleError));
+    return this.http.post<Categoria>(this.apiUrl, formData).pipe(
+      catchError(handleHttpError)
+    );
   }
 
   updateCategoria(id: number, formData: FormData): Observable<Categoria> {
-    return this.http.post<Categoria>(`${this.apiUrl}/${id}?_method=PUT`, formData)
-      .pipe(catchError(this.handleError));
+    return this.http.post<Categoria>(`${this.apiUrl}/${id}?_method=PUT`, formData).pipe(
+      catchError(handleHttpError)
+    );
   }
 
   deleteCategoria(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`)
-      .pipe(catchError(this.handleError));
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 422) {
-      return throwError(() => ({
-        type: 'validation',
-        errors: error.error.errors
-      }));
-    }
-    if (error.status === 500) {
-      return throwError(() => ({
-        type: 'server',
-        message: 'Error en el servidor, intenta más tarde.'
-      }));
-    }
-    return throwError(() => ({
-      type: 'unknown',
-      message: 'Error desconocido, revisa tu conexión.'
-    }));
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      catchError(handleHttpError)
+    );
   }
 }
