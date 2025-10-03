@@ -31,7 +31,7 @@ export class ContactoComponent implements OnInit {
   }
 
   cargarServicios() {
-    this.serviciosService.getServicios().subscribe({
+    this.serviciosService.getServiciosWeb().subscribe({
       next: (res) => {
         this.servicios = res;
       },

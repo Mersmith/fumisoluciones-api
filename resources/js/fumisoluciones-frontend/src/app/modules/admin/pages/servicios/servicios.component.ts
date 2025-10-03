@@ -4,6 +4,8 @@ import { Categoria } from '../../../../models/categoria.model';
 import { Servicio } from '../../../../models/servicio.model';
 import { CategoriasService } from '../../../../services/categorias.service';
 import { ServiciosService } from '../../../../services/servicios.service';
+import { slugify } from '../../../../utils/slugify';
+import { handleBackendErrors } from '../../../../utils/handleBackendErrors';
 
 @Component({
   selector: 'app-admin-servicios',
@@ -17,6 +19,7 @@ export class ServiciosComponent implements OnInit {
   pagination: any = {};
   buscar: string = '';
   filtroCategoria: number | null = null;
+  imagePreview: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -28,9 +31,9 @@ export class ServiciosComponent implements OnInit {
       nombre: ['', Validators.required],
       slug: ['', Validators.required],
       categoria_id: ['', Validators.required],
-      imagen: [null],
-      descripcion: ['', Validators.required],
-      contenido: this.fb.array([])
+      descripcion: [''],
+      contenido: this.fb.array([]),
+      imagen: [null]
     });
   }
 
@@ -43,7 +46,7 @@ export class ServiciosComponent implements OnInit {
 
     this.form.get('nombre')?.valueChanges.subscribe(nombre => {
       if (nombre) {
-        this.form.patchValue({ slug: this.slugify(nombre) }, { emitEvent: false });
+        this.form.patchValue({ slug: slugify(nombre) }, { emitEvent: false });
       }
     });
   }
@@ -60,6 +63,23 @@ export class ServiciosComponent implements OnInit {
     });
   }
 
+  aplicarFiltros() {
+    this.loadServicios(1);
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.form.patchValue({ imagen: file });
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   get contenido(): FormArray {
     return this.form.get('contenido') as FormArray;
   }
@@ -70,28 +90,6 @@ export class ServiciosComponent implements OnInit {
 
   removeContenido(index: number) {
     this.contenido.removeAt(index);
-  }
-
-  aplicarFiltros() {
-    this.loadServicios(1);
-  }
-
-  slugify(text: string): string {
-    return text
-      .toString()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-  }
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.form.patchValue({ imagen: file });
-    }
   }
 
   submit() {
@@ -125,38 +123,27 @@ export class ServiciosComponent implements OnInit {
         this.resetForm();
         this.loadServicios(this.pagination.current_page);
       },
-      error: (err) => this.handleBackendErrors(err)
+      error: (err) => handleBackendErrors(err, this.form)
     });
-  }
-
-  handleBackendErrors(err: any) {
-    if (err.type === 'validation') {
-
-      Object.keys(err.errors).forEach(field => {
-        const control = this.form.get(field);
-        if (control) {
-          control.setErrors({ backend: err.errors[field][0] });
-        }
-      });
-    } else {
-      alert(err.message || 'Error inesperado. Intenta de nuevo.');
-    }
   }
 
   editServicio(serv: Servicio) {
-    this.form.patchValue({
-      id: serv.id,
-      nombre: serv.nombre,
-      slug: serv.slug,
-      categoria_id: serv.categoria_id,
-      descripcion: serv.descripcion,
-      imagen: null
-    });
+    this.serviciosService.getServicio(serv.id).subscribe(res => {
+      this.form.patchValue({
+        id: serv.id,
+        nombre: serv.nombre,
+        slug: serv.slug,
+        categoria_id: serv.categoria_id,
+        descripcion: serv.descripcion,
+        imagen: null
+      });
 
-    this.contenido.clear();
-    if (serv.contenido && serv.contenido.length) {
-      serv.contenido.forEach(item => this.addContenido(item));
-    }
+      this.contenido.clear();
+      if (serv.contenido && serv.contenido.length) {
+        serv.contenido.forEach(item => this.addContenido(item));
+      }
+      this.imagePreview = res.imagen ? `http://127.0.0.1:8000/storage/${res.imagen}` : null;
+    });
   }
 
   cancelEdit() {
@@ -179,8 +166,11 @@ export class ServiciosComponent implements OnInit {
       slug: '',
       descripcion: '',
       tipo: '',
+      contenido: [],
       imagen: null
     });
+    this.contenido.clear();
+    this.imagePreview = null;
   }
 
 }

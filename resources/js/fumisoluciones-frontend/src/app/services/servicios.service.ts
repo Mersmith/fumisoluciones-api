@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Servicio } from '../models/servicio.model';
+import { Paginated } from '../models/paginated.model';
+import { handleHttpError } from '../utils/handleHttpError';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +14,9 @@ export class ServiciosService {
 
   constructor(private http: HttpClient) { }
 
-  getServiciosWeb(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/web`)
-      .pipe(catchError(this.handleError));
+  getServiciosWeb(): Observable<Servicio[]> {
+    return this.http.get<Servicio[]>(`${this.apiUrl}/web`)
+      .pipe(catchError(handleHttpError));
   }
 
   getServicios(
@@ -22,7 +24,7 @@ export class ServiciosService {
     orden: string = 'desc',
     page: number = 1,
     categoriaId?: number
-  ): Observable<any> {
+  ): Observable<Paginated<Servicio>> {
     let url = `${this.apiUrl}?orden=${orden}&page=${page}`;
 
     if (buscar) {
@@ -33,45 +35,27 @@ export class ServiciosService {
       url += `&categoria_id=${categoriaId}`;
     }
 
-    return this.http.get<any>(url).pipe(catchError(this.handleError));
+    return this.http.get<Paginated<Servicio>>(url)
+      .pipe(catchError(handleHttpError));
   }
 
   getServicio(id: number): Observable<Servicio> {
     return this.http.get<Servicio>(`${this.apiUrl}/${id}`)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(handleHttpError));
   }
 
-  createServicio(formData: FormData): Observable<any> {
-    return this.http.post<any>(this.apiUrl, formData)
-      .pipe(catchError(this.handleError));
+  createServicio(formData: FormData): Observable<Servicio> {
+    return this.http.post<Servicio>(this.apiUrl, formData)
+      .pipe(catchError(handleHttpError));
   }
 
-  updateServicio(id: number, formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${id}?_method=PUT`, formData)
-      .pipe(catchError(this.handleError));
+  updateServicio(id: number, formData: FormData): Observable<Servicio> {
+    return this.http.post<Servicio>(`${this.apiUrl}/${id}?_method=PUT`, formData)
+      .pipe(catchError(handleHttpError));
   }
 
   deleteServicio(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`)
-      .pipe(catchError(this.handleError));
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 422) {
-      return throwError(() => ({
-        type: 'validation',
-        errors: error.error.errors
-      }));
-    }
-    if (error.status === 500) {
-      return throwError(() => ({
-        type: 'server',
-        message: 'Error en el servidor, intenta más tarde.'
-      }));
-    }
-    return throwError(() => ({
-      type: 'unknown',
-      message: 'Error desconocido, revisa tu conexión.'
-    }));
+      .pipe(catchError(handleHttpError));
   }
 }
