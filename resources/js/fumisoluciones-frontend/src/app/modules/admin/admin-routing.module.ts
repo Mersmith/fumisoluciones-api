@@ -8,12 +8,13 @@ import { ProductosComponent } from './pages/productos/productos.component';
 import { PaginasServiciosComponent } from './pages/paginas-servicios/paginas-servicios.component';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { CotizacionesComponent } from './pages/cotizaciones/cotizaciones.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminLayoutComponent,  // layout principal
+    component: AdminLayoutComponent,
     children: [
       { path: 'menus', component: MenusComponent },
       { path: 'paginas', component: PaginasComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
       { path: 'productos', component: ProductosComponent },
       { path: 'servicios', component: ServiciosComponent },
       { path: 'paginas-servicios', component: PaginasServiciosComponent },
-      { path: 'contacto', component: ContactoComponent }
+      { path: 'contactos', component: ContactoComponent },
+      { path: 'cotizaciones', component: CotizacionesComponent }
     ]
   }
 ];

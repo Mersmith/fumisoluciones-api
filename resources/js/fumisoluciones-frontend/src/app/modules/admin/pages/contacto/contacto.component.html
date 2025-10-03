@@ -5,9 +5,18 @@
 
     <div class="g_pagina_body">
         <div class="g_card">
-            <div class="g_form_item">
-                <input type="text" placeholder="Buscar contacto..." [(ngModel)]="buscar"
-                    (ngModelChange)="aplicarFiltros()" name="buscar">
+            <div class="g_form">
+                <div class="g_form_item">
+                    <input type="text" placeholder="Buscar producto..." [(ngModel)]="buscar"
+                        (ngModelChange)="aplicarFiltros()" name="buscar">
+                </div>
+
+                <div class="g_form_item">
+                    <select [(ngModel)]="filtroServicio" (change)="aplicarFiltros()" name="filtroServicio">
+                        <option [ngValue]="null">-- Todas los servicios --</option>
+                        <option *ngFor="let cat of servicios" [ngValue]="cat.id">{{ cat.nombre }}</option>
+                    </select>
+                </div>
             </div>
 
             <table class="g_tabla">

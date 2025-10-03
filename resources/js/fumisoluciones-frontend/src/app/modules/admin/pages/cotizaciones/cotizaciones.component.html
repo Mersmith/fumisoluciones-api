@@ -1,0 +1,66 @@
+<div class="g_contenedor_pagina">
+    <div class="g_pagina_header g_card">
+        <h2>Gestión de Cotizaciones</h2>
+    </div>
+
+    <div class="g_pagina_body">
+        <div class="g_card">
+            <div class="g_form">
+                <div class="g_form_item">
+                    <input type="text" placeholder="Buscar producto..." [(ngModel)]="buscar"
+                        (ngModelChange)="aplicarFiltros()" name="buscar">
+                </div>
+            </div>
+            <table class="g_tabla">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let c of cotizaciones">
+                        <tr>
+                            <td>{{ c.nombre }}</td>
+                            <td>{{ c.correo }}</td>
+                            <td>{{ c.telefono }}</td>
+                            <td>{{ c.created_at | date:'short' }}</td>
+                            <td>
+                                <button (click)="toggleVerCotizacion(c.id!)">
+                                    {{ isCotizacionAbierta(c.id!) ? 'Ocultar' : 'Ver' }}
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="isCotizacionAbierta(c.id!)" class="detalle-fila">
+                            <td colspan="5">
+                                <strong>Nombre:</strong> {{ c.nombre }}<br>
+                                <strong>Correo:</strong> {{ c.correo }}<br>
+                                <strong>Detalle:</strong> {{ c.detalle || '-' }} <br>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+            <br>
+
+            <div class="g_pagination" *ngIf="pagination.total">
+                <button [disabled]="pagination.current_page === 1"
+                    (click)="loadCotizaciones(pagination.current_page - 1)">
+                    « Anterior
+                </button>
+
+                <span>Página {{ pagination.current_page }} de {{ pagination.last_page }}</span>
+
+                <button [disabled]="pagination.current_page === pagination.last_page"
+                    (click)="loadCotizaciones(pagination.current_page + 1)">
+                    Siguiente »
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

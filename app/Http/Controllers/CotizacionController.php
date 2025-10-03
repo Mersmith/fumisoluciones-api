@@ -2,14 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Cotizacion;
+use Illuminate\Http\Request;
 
 class CotizacionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Cotizacion::all();
+        $query = Cotizacion::query();
+
+        if ($request->filled('buscar')) {
+            $buscar = $request->buscar;
+            $query->where('nombre', 'like', "%{$buscar}%");
+        }
+
+        $orden = $request->get('orden', 'desc');
+        if (!in_array($orden, ['asc', 'desc'])) {
+            $orden = 'desc';
+        }
+
+        $query->orderBy('created_at', $orden);
+
+        $perPage = $request->get('per_page', 15);
+
+        return $query->paginate($perPage);
     }
 
     public function store(Request $request)

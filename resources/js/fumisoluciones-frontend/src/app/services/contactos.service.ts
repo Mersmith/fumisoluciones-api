@@ -12,12 +12,13 @@ import { handleHttpError } from '../utils/handleHttpError';
 export class ContactosService {
   private apiUrl = 'http://127.0.0.1:8000/api/contactos';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getContactos(
     buscar: string = '',
     orden: string = 'desc',
-    page: number = 1
+    page: number = 1,
+    servicioId?: number
   ): Observable<Paginated<Contacto>> {
     let url = `${this.apiUrl}?orden=${orden}&page=${page}`;
 
@@ -25,12 +26,11 @@ export class ContactosService {
       url += `&buscar=${buscar}`;
     }
 
-    return this.http.get<Paginated<Contacto>>(url)
-      .pipe(catchError(handleHttpError));
-  }
+    if (servicioId) {
+      url += `&servicio_id=${servicioId}`;
+    }
 
-  getAll(): Observable<Contacto[]> {
-    return this.http.get<Contacto[]>(this.apiUrl)
+    return this.http.get<Paginated<Contacto>>(url)
       .pipe(catchError(handleHttpError));
   }
 
@@ -41,16 +41,6 @@ export class ContactosService {
 
   createContacto(contacto: Contacto): Observable<Contacto> {
     return this.http.post<Contacto>(this.apiUrl, contacto)
-      .pipe(catchError(handleHttpError));
-  }
-
-  updateContacto(id: number, contacto: Contacto): Observable<Contacto> {
-    return this.http.put<Contacto>(`${this.apiUrl}/${id}`, contacto)
-      .pipe(catchError(handleHttpError));
-  }
-
-  deleteContacto(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`)
       .pipe(catchError(handleHttpError));
   }
 }

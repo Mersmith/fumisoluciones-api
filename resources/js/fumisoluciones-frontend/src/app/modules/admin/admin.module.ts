@@ -12,6 +12,7 @@ import { ServiciosComponent } from './pages/servicios/servicios.component';
 import { PaginasServiciosComponent } from './pages/paginas-servicios/paginas-servicios.component';
 import { PaginasComponent } from './pages/paginas/paginas.component';
 import { MenuPaginasComponent } from './pages/menu-paginas/menu-paginas.component';
+import { CotizacionesComponent } from './pages/cotizaciones/cotizaciones.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MenuPaginasComponent } from './pages/menu-paginas/menu-paginas.componen
     ServiciosComponent,
     PaginasServiciosComponent,
     PaginasComponent,
-    MenuPaginasComponent
+    MenuPaginasComponent,
+    CotizacionesComponent
   ],
   imports: [
     CommonModule,
