@@ -1,1 +1,70 @@
-<p>Admin-contacto works!</p>
+<div class="g_contenedor_pagina">
+    <div class="g_pagina_header g_card">
+        <h2>Gestión de Contactos</h2>
+    </div>
+
+    <div class="g_pagina_body">
+        <div class="g_card">
+            <div class="g_form_item">
+                <input type="text" placeholder="Buscar contacto..." [(ngModel)]="buscar"
+                    (ngModelChange)="aplicarFiltros()" name="buscar">
+            </div>
+
+            <table class="g_tabla">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Servicio</th>
+                        <th>Detalle</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let c of contactos">
+                        <tr>
+                            <td>{{ c.nombre }} {{ c.apellido }}</td>
+                            <td>{{ c.correo }}</td>
+                            <td>{{ c.telefono }}</td>
+                            <td>{{ c.servicio?.nombre }}</td>
+                            <td>{{ c.detalle }}</td>
+                            <td>
+                                <button (click)="toggleVerContacto(c.id!)">
+                                    {{ isContactoAbierto(c.id!) ? 'Ocultar' : 'Ver' }}
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="isContactoAbierto(c.id!)" class="detalle-fila">
+                            <td colspan="6">
+                                <div>
+                                    <strong>Nombre:</strong> {{ c.nombre }} {{ c.apellido }}<br>
+                                    <strong>Correo:</strong> {{ c.correo }}<br>
+                                    <strong>Teléfono:</strong> {{ c.telefono }}<br>
+                                    <strong>Servicio:</strong> {{ c.servicio?.nombre || '-' }}<br>
+                                    <strong>Detalle:</strong> {{ c.detalle || '-' }}
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+            <br>
+
+            <div class="g_pagination" *ngIf="pagination.total">
+                <button [disabled]="pagination.current_page === 1" (click)="loadContactos(pagination.current_page - 1)">
+                    « Anterior
+                </button>
+
+                <span>Página {{ pagination.current_page }} de {{ pagination.last_page }}</span>
+
+                <button [disabled]="pagination.current_page === pagination.last_page"
+                    (click)="loadContactos(pagination.current_page + 1)">
+                    Siguiente »
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

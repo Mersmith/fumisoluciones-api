@@ -2,13 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Contacto;
+use Illuminate\Http\Request;
+
 class ContactoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Contacto::with('servicio')->get();
+        $query = Contacto::with('servicio');
+
+        if ($request->filled('buscar')) {
+            $buscar = $request->buscar;
+            $query->where('nombre', 'like', "%{$buscar}%");
+        }
+
+        if ($request->filled('servicio_id')) {
+            $query->where('servicio_id', $request->servicio_id);
+        }
+
+        $orden = $request->get('orden', 'desc');
+        if (!in_array($orden, ['asc', 'desc'])) {
+            $orden = 'desc';
+        }
+
+        $query->orderBy('created_at', $orden);
+
+        $perPage = $request->get('per_page', 15);
+
+        return $query->paginate($perPage);
     }
 
     public function store(Request $request)

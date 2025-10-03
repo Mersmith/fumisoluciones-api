@@ -1,0 +1,8 @@
+.detalle-fila {
+    background-color: #f9f9f9;
+}
+
+.detalle-fila div {
+    padding: 10px;
+    border-left: 3px solid #007bff;
+}
