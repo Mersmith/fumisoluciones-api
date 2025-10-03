@@ -4,8 +4,8 @@
   </div>
 
   <div class="g_pagina_body g_grid">
-    <div class="g_grid_col_1" class="g_form g_card">
-      <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="g_grid_col_1" class="g_card">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="g_form">
         <div class="g_form_item">
           <label for="label">Nombre <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
           <input id="label" formControlName="label">

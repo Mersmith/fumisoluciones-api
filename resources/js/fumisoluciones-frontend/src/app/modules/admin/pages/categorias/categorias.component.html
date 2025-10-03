@@ -4,56 +4,70 @@
   </div>
 
   <div class="g_pagina_body g_grid">
-    <div class="g_grid_col_1" class="g_form g_card">
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <p>Nombre</p>
-        <input formControlName="nombre" placeholder="Nombre de la categoría">
-        <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="error">
-          El nombre es obligatorio.
+    <div class="g_grid_col_1" class="g_card">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="g_form">
+        <div class="g_form_item">
+          <label for="label">Nombre <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
+          <input id="label" formControlName="nombre">
+          <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" class="g_error">
+            El nombre es obligatorio.
+          </div>
         </div>
 
-        <p>Slug</p>
-        <input formControlName="slug" placeholder="Slug de la categoría">
-        <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="error">
-          El slug es obligatorio.
-        </div>
-        <div *ngIf="form.get('slug')?.errors?.['backend']" class="error">
-          {{ form.get('slug')?.errors?.['backend'] }}
-        </div>
-
-
-        <p>Descripción</p>
-        <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
-        <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="error">
-          La descripción es obligatoria.
+        <div class="g_form_item">
+          <label for="slug">URL <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
+          <input id="slug" formControlName="slug">
+          <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="g_error">
+            El slug es obligatorio.
+          </div>
+          <div *ngIf="form.get('slug')?.errors?.['backend']" class="g_error">
+            {{ form.get('slug')?.errors?.['backend'] }}
+          </div>
         </div>
 
-        <p>Tipo</p>
-        <select formControlName="tipo">
-          <option value="" disabled selected>-- Selecciona tipo --</option>
-          <option value="producto">Producto</option>
-          <option value="servicio">Servicio</option>
-        </select>
-        <div *ngIf="form.get('tipo')?.touched && form.get('tipo')?.invalid" class="error">
-          El tipo es obligatorio.
+        <div class="g_form_item">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" formControlName="descripcion"></textarea>
+          <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="g_error">
+            La descripción es obligatoria.
+          </div>
         </div>
 
-        <p>Imagen</p>
-        <input type="file" (change)="onFileSelected($event)">
-        <div *ngIf="form.get('imagen')?.errors?.['backend']" class="error">
-          {{ form.get('imagen')?.errors?.['backend'] }}
+        <div class="g_form_item">
+          <label for="tipo">Tipo <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
+          <select id="tipo" formControlName="tipo">
+            <option value="" disabled selected>-- Selecciona tipo --</option>
+            <option value="producto">Producto</option>
+            <option value="servicio">Servicio</option>
+          </select>
+          <div *ngIf="form.get('tipo')?.touched && form.get('tipo')?.invalid" class="g_error">
+            El tipo es obligatorio.
+          </div>
         </div>
 
-        <button type="submit">
-          {{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}
-        </button>
+        <div class="g_form_item">
+          <label for="imagen">Imagen</label>
+          <input id="imagen" type="file" (change)="onFileSelected($event)">
+          <div *ngIf="form.get('imagen')?.errors?.['backend']" class="error">
+            {{ form.get('imagen')?.errors?.['backend'] }}
+          </div>
 
-        <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">
-          Cancelar
-        </button>
+          <div *ngIf="imagePreview" class="preview">
+            <p>Previsualización:</p>
+            <img [src]="imagePreview" width="120">
+          </div>
+        </div>
+
+        <div class="g_form_item">
+          <button type="submit">
+            {{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}
+          </button>
+
+          <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">
+            Cancelar
+          </button>
+        </div>
       </form>
-
-
     </div>
 
     <div class="g_grid_col_2" class="g_form g_card">

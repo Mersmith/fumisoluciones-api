@@ -13,6 +13,7 @@ import { handleBackendErrors } from '../../../../utils/handleBackendErrors';
 export class CategoriasComponent implements OnInit {
   form: FormGroup;
   categorias: Categoria[] = [];
+  imagePreview: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +24,7 @@ export class CategoriasComponent implements OnInit {
       nombre: ['', Validators.required],
       slug: ['', Validators.required],
       tipo: ['', Validators.required],
-      descripcion: ['', Validators.required],
+      descripcion: [''],
       imagen: [null]
     });
   }
@@ -48,6 +49,12 @@ export class CategoriasComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.form.patchValue({ imagen: file });
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -83,13 +90,17 @@ export class CategoriasComponent implements OnInit {
   }
 
   editCategoria(cat: Categoria) {
-    this.form.patchValue({
-      id: cat.id,
-      nombre: cat.nombre,
-      slug: cat.slug,
-      tipo: cat.tipo,
-      descripcion: cat.descripcion,
-      imagen: null
+    this.categoriasService.getCategoria(cat.id).subscribe(res => {
+      this.form.patchValue({
+        id: res.id,
+        nombre: res.nombre,
+        slug: res.slug,
+        tipo: res.tipo,
+        descripcion: res.descripcion,
+        imagen: null
+      });
+
+      this.imagePreview = res.imagen ? `http://127.0.0.1:8000/storage/${res.imagen}` : null;
     });
   }
 
@@ -114,5 +125,7 @@ export class CategoriasComponent implements OnInit {
       descripcion: '',
       imagen: null
     });
+    this.imagePreview = null;
   }
+
 }
