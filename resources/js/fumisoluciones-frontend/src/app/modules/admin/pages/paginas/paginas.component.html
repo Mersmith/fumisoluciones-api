@@ -4,15 +4,13 @@
   </div>
 
   <div class="g_pagina_body g_grid">
-    <div class="g_grid_col_1" class="g_form g_card">
-      <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="g_grid_col_1" class="g_card">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="g_form">
         <div class="g_form_item">
-          <label for="titulo">Titulo <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
+          <label for="titulo">Nombre <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
           <input id="titulo" formControlName="titulo">
           <div *ngIf="form.get('titulo')?.touched && form.get('titulo')?.invalid" class="g_error">
-            <p>
-              El titulo es obligatorio.
-            </p>
+            El nombre es obligatorio.
           </div>
         </div>
 
@@ -20,40 +18,47 @@
           <label for="slug">URL <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
           <input id="slug" formControlName="slug">
           <div *ngIf="form.get('slug')?.touched && form.get('slug')?.hasError('required')" class="g_error">
-            <p>
-              El slug es obligatorio.
-            </p>
+            El slug es obligatorio.
+          </div>
+          <div *ngIf="form.get('slug')?.errors?.['backend']" class="g_error">
+            {{ form.get('slug')?.errors?.['backend'] }}
           </div>
         </div>
 
         <div class="g_form_item">
-          <label for="descripcion">Descripción <span class="obligatorio"><i
-                class="fa-solid fa-asterisk"></i></span></label>
-          <textarea id="descripcion" formControlName="descripcion" placeholder="Descripción"></textarea>
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" formControlName="descripcion"></textarea>
           <div *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.invalid" class="g_error">
-            <p>
-              La descripción es obligatoria.
-            </p>
+            La descripción es obligatoria.
           </div>
         </div>
 
         <div class="g_form_item">
-          <label for="imagen">Imagen </label>
+          <label for="imagen">Imagen</label>
           <input id="imagen" type="file" (change)="onFileSelected($event)">
           <div *ngIf="form.get('imagen')?.errors?.['backend']" class="g_error">
             {{ form.get('imagen')?.errors?.['backend'] }}
           </div>
+
+          <div *ngIf="imagePreview" class="preview">
+            <p>Previsualización:</p>
+            <img [src]="imagePreview" width="120">
+          </div>
         </div>
 
-        <button type="submit">{{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}</button>
-        <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">Cancelar</button>
+        <div class="g_form_item">
+          <button type="submit">{{ form.get('id')?.value ? 'Actualizar' : 'Crear' }}</button>
+          <button type="button" *ngIf="form.get('id')?.value" (click)="cancelEdit()">Cancelar</button>
+        </div>
       </form>
     </div>
 
-    <div class="g_grid_col_2" class="g_form g_card">
-      <div class="filtros">
-        <input type="text" [(ngModel)]="buscar" (ngModelChange)="loadData(1)" placeholder="Buscar página..."
-          name="buscar">
+    <div class="g_grid_col_2" class="g_card">
+      <div class="g_form">
+        <div class="g_form_item">
+          <input type="text" [(ngModel)]="buscar" (ngModelChange)="loadData(1)" placeholder="Buscar página..."
+            name="buscar">
+        </div>
       </div>
 
       <table class="g_tabla">
@@ -80,10 +85,14 @@
         </tbody>
       </table>
 
-      <div class="pagination" *ngIf="pagination.total">
+      <br>
+
+      <div class="g_pagination" *ngIf="pagination.total">
         <button [disabled]="pagination.current_page === 1" (click)="loadData(pagination.current_page - 1)">«
           Anterior</button>
+
         <span>Página {{ pagination.current_page }} de {{ pagination.last_page }}</span>
+
         <button [disabled]="pagination.current_page === pagination.last_page"
           (click)="loadData(pagination.current_page + 1)">Siguiente »</button>
       </div>

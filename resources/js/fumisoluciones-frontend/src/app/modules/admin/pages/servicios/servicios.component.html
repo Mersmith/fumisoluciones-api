@@ -87,18 +87,16 @@
 
     <div class="g_grid_col_2" class="g_card">
       <div class="g_form">
-        <div class="filtros">
-          <div class="g_form_item">
-            <input type="text" placeholder="Buscar producto..." [(ngModel)]="buscar" (ngModelChange)="aplicarFiltros()"
-              name="buscar">
-          </div>
+        <div class="g_form_item">
+          <input type="text" placeholder="Buscar producto..." [(ngModel)]="buscar" (ngModelChange)="aplicarFiltros()"
+            name="buscar">
+        </div>
 
-          <div class="g_form_item">
-            <select [(ngModel)]="filtroCategoria" (change)="aplicarFiltros()" name="filtroCategoria">
-              <option [ngValue]="null">-- Todas las categorías --</option>
-              <option *ngFor="let cat of categorias" [ngValue]="cat.id">{{ cat.nombre }}</option>
-            </select>
-          </div>
+        <div class="g_form_item">
+          <select [(ngModel)]="filtroCategoria" (change)="aplicarFiltros()" name="filtroCategoria">
+            <option [ngValue]="null">-- Todas las categorías --</option>
+            <option *ngFor="let cat of categorias" [ngValue]="cat.id">{{ cat.nombre }}</option>
+          </select>
         </div>
       </div>
 

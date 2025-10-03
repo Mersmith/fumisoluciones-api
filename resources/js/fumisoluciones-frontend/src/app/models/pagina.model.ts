@@ -1,5 +1,5 @@
 export interface Pagina {
-  id?: number;
+  id: number;
   titulo: string;
   slug: string;
   imagen?: string | null;

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Pagina } from '../models/pagina.model';
-import { PaginaServicio } from '../models/pagina-servicio.model';
 import { Paginated } from '../models/paginated.model';
 import { handleHttpError } from '../utils/handleHttpError';
 

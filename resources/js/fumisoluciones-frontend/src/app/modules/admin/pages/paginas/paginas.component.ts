@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PaginaService } from '../../../../services/pagina.service';
 import { Pagina } from '../../../../models/pagina.model';
+import { slugify } from '../../../../utils/slugify';
+import { handleBackendErrors } from '../../../../utils/handleBackendErrors';
 
 @Component({
   selector: 'app-paginas',
@@ -14,6 +16,7 @@ export class PaginasComponent implements OnInit {
   paginas: Pagina[] = [];
   pagination: any = {};
   buscar: string = '';
+  imagePreview: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +26,7 @@ export class PaginasComponent implements OnInit {
       id: [null],
       titulo: ['', Validators.required],
       slug: ['', Validators.required],
-      descripcion: ['', Validators.required],
+      descripcion: [''],
       imagen: [null],
     });
   }
@@ -32,7 +35,7 @@ export class PaginasComponent implements OnInit {
     this.loadData();
     this.form.get('titulo')?.valueChanges.subscribe(titulo => {
       if (titulo) {
-        this.form.patchValue({ slug: this.slugify(titulo) }, { emitEvent: false });
+        this.form.patchValue({ slug: slugify(titulo) }, { emitEvent: false });
       }
     });
   }
@@ -44,21 +47,16 @@ export class PaginasComponent implements OnInit {
     });
   }
 
-  slugify(text: string): string {
-    return text
-      .toString()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-  }
-
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.form.patchValue({ imagen: file });
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -76,7 +74,6 @@ export class PaginasComponent implements OnInit {
       formData.append('imagen', this.form.get('imagen')?.value);
     }
 
-
     const id = this.form.get('id')?.value;
     const request$ = id
       ? this.paginaService.update(id, formData)
@@ -87,17 +84,21 @@ export class PaginasComponent implements OnInit {
         this.resetForm();
         this.loadData(this.pagination.current_page);
       },
-      error: (err) => this.handleBackendErrors(err)
+      error: (err) => handleBackendErrors(err, this.form)
     });
   }
 
   editPagina(pag: Pagina) {
-    this.form.patchValue({
-      id: pag.id,
-      titulo: pag.titulo,
-      slug: pag.slug,
-      descripcion: pag.descripcion,
-      imagen: null
+    this.paginaService.get(pag.id).subscribe(res => {
+      this.form.patchValue({
+        id: pag.id,
+        titulo: pag.titulo,
+        slug: pag.slug,
+        descripcion: pag.descripcion,
+        imagen: null
+      });
+
+      this.imagePreview = res.imagen ? `http://127.0.0.1:8000/storage/${res.imagen}` : null;
     });
   }
 
@@ -106,7 +107,7 @@ export class PaginasComponent implements OnInit {
   }
 
   deletePagina(id: number) {
-    if (confirm('¿Seguro de eliminar esta página?')) {
+    if (confirm('¿Seguro de eliminar?')) {
       this.paginaService.delete(id).subscribe(() => {
         this.loadData(this.pagination.current_page);
       });
@@ -121,18 +122,7 @@ export class PaginasComponent implements OnInit {
       descripcion: '',
       imagen: null
     });
-  }
 
-  handleBackendErrors(err: any) {
-    if (err.type === 'validation') {
-      Object.keys(err.errors).forEach(field => {
-        const control = this.form.get(field);
-        if (control) {
-          control.setErrors({ backend: err.errors[field][0] });
-        }
-      });
-    } else {
-      alert(err.message || 'Error inesperado. Intenta de nuevo.');
-    }
+    this.imagePreview = null;
   }
 }

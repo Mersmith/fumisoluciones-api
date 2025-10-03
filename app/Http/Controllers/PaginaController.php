@@ -67,7 +67,7 @@ class PaginaController extends Controller
     {
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',
-            'slug' => 'required|string|unique:paginas,slug,' . $pagina->id . ',id',
+            'slug' => 'required|unique:paginas,slug,' . $pagina->id,
             'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
         ]);
