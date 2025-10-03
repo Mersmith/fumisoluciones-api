@@ -36,23 +36,22 @@ export class PaginasServiciosComponent implements OnInit {
 
   load() {
     this.service.getAll().subscribe(res => {
-      // Aseguramos que sea array
       this.paginaServicios = Array.isArray(res) ? res : [];
     });
   }
 
   loadPaginas() {
-    this.paginaService.getAll().subscribe(res => {
+    this.paginaService.getAllWeb().subscribe(res => {
       this.paginas = Array.isArray(res) ? res : [];
     });
   }
-  
+
   loadServicios() {
     this.serviciosService.getServicios().subscribe(res => {
       this.servicios = Array.isArray(res.data) ? res.data : [];
     });
   }
-  
+
   submit() {
     if (this.form.invalid) return;
 
@@ -80,11 +79,16 @@ export class PaginasServiciosComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.service.delete(id).subscribe(() => this.load());
-  }
+    if (confirm('¿Seguro de eliminar?')) {
+      this.service.delete(id).subscribe(() => this.load());
+    }
+  }  
 
   reset() {
-    this.form.reset();
+    this.form.reset({
+      pagina_id: '',
+      servicio_id: ''
+    });
     this.editingId = null;
   }
 }

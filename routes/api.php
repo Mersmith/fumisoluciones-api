@@ -19,6 +19,7 @@ Route::put('menus/{menu}', [MenuController::class, 'update'])->name('menus.updat
 Route::patch('menus/{menu}', [MenuController::class, 'update']);
 Route::delete('menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
 
+Route::get('paginas/web', [PaginaController::class, 'indexWeb'])->name('paginas-web.index');
 Route::get('paginas', [PaginaController::class, 'index'])->name('paginas.index');
 Route::post('paginas', [PaginaController::class, 'store'])->name('paginas.store');
 Route::get('paginas/{pagina}', [PaginaController::class, 'show'])->name('paginas.show');
@@ -52,12 +53,12 @@ Route::put('servicios/{servicio}', [ServicioController::class, 'update'])->name(
 Route::patch('servicios/{servicio}', [ServicioController::class, 'update']);//
 Route::delete('servicios/{servicio}', [ServicioController::class, 'destroy'])->name('servicios.destroy');//
 
-Route::get('pagina-servicios', [PaginaServicioController::class, 'index'])->name('pagina-servicios.index');
-Route::post('pagina-servicios', [PaginaServicioController::class, 'store'])->name('pagina-servicios.store');
-Route::get('pagina-servicios/{paginaServicio}', [PaginaServicioController::class, 'show'])->name('pagina-servicios.show');
-Route::put('pagina-servicios/{paginaServicio}', [PaginaServicioController::class, 'update'])->name('pagina-servicios.update');
-Route::patch('pagina-servicios/{paginaServicio}', [PaginaServicioController::class, 'update']);
-Route::delete('pagina-servicios/{paginaServicio}', [PaginaServicioController::class, 'destroy'])->name('pagina-servicios.destroy');
+Route::get('pagina-servicios', [PaginaServicioController::class, 'index'])->name('pagina-servicios.index');//
+Route::post('pagina-servicios', [PaginaServicioController::class, 'store'])->name('pagina-servicios.store');//
+Route::get('pagina-servicios/{paginaServicio}', [PaginaServicioController::class, 'show'])->name('pagina-servicios.show');//
+Route::put('pagina-servicios/{paginaServicio}', [PaginaServicioController::class, 'update'])->name('pagina-servicios.update');//
+Route::patch('pagina-servicios/{paginaServicio}', [PaginaServicioController::class, 'update']);//
+Route::delete('pagina-servicios/{paginaServicio}', [PaginaServicioController::class, 'destroy'])->name('pagina-servicios.destroy');//
 
 Route::get('contactos', [ContactoController::class, 'index'])->name('contactos.index');
 Route::post('contactos', [ContactoController::class, 'store'])->name('contactos.store');

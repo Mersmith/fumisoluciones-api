@@ -8,6 +8,13 @@ use Illuminate\Support\Str;
 
 class PaginaController extends Controller
 {
+    public function indexWeb()
+    {
+        $query = Pagina::all();
+
+        return $query;
+    }
+
     public function index(Request $request)
     {
         $query = Pagina::query();

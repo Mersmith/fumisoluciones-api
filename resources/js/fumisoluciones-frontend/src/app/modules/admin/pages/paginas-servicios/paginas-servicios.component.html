@@ -4,11 +4,11 @@
   </div>
 
   <div class="g_pagina_body g_grid">
-    <div class="g_grid_col_1" class="g_form g_card">
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <div class="form-group">
-          <label>Página:</label>
-          <select formControlName="pagina_id">
+    <div class="g_grid_col_1" class="g_card">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="g_form">
+        <div class="g_form_item">
+          <label for="pagina_id">Página <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span></label>
+          <select id="pagina_id" formControlName="pagina_id">
             <option value="">Seleccione una página</option>
             <option *ngFor="let pagina of paginas" [value]="pagina.id">
               {{ pagina.titulo }}
@@ -16,8 +16,9 @@
           </select>
         </div>
 
-        <div class="form-group">
-          <label>Servicio:</label>
+        <div class="g_form_item">
+          <label for="servicio_id">Servicio <span class="obligatorio"><i
+                class="fa-solid fa-asterisk"></i></span></label>
           <select formControlName="servicio_id">
             <option value="">Seleccione un servicio</option>
             <option *ngFor="let servicio of servicios" [value]="servicio.id">
@@ -26,14 +27,14 @@
           </select>
         </div>
 
-        <div class="form-actions">
+        <div class="g_form_item">
           <button type="submit">{{ editingId ? 'Actualizar' : 'Crear' }}</button>
           <button type="button" (click)="reset()">Cancelar</button>
         </div>
       </form>
     </div>
 
-    <div class="g_grid_col_2" class="g_form g_card">
+    <div class="g_grid_col_2" class="g_card">
       <table class="g_tabla">
         <thead>
           <tr>
