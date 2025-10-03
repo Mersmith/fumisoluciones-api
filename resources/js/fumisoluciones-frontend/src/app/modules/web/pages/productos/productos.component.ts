@@ -40,7 +40,7 @@ export class ProductosComponent implements OnInit {
   }
 
   cargarCategorias() {
-    this.categoriasService.getCategorias().subscribe(res => {
+    this.categoriasService.getCategorias('producto').subscribe(res => {
       this.categorias = res;
     });
   }

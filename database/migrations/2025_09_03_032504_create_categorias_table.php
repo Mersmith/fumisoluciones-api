@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('slug')->unique();
             $table->enum('tipo', ['producto', 'servicio']);
-            $table->string('imagen')->nullable();
             $table->text('descripcion')->nullable();
+            $table->string('imagen')->nullable();
 
             $table->timestamps();
         });

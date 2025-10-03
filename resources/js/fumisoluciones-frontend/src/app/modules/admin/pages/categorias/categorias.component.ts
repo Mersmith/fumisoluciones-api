@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categoria } from '../../../../models/categoria.model';
 import { CategoriasService } from '../../../../services/categorias.service';
+import { slugify } from '../../../../utils/slugify';
+import { handleBackendErrors } from '../../../../utils/handleBackendErrors';
 
 @Component({
   selector: 'app-categorias',
@@ -20,8 +22,8 @@ export class CategoriasComponent implements OnInit {
       id: [null],
       nombre: ['', Validators.required],
       slug: ['', Validators.required],
-      descripcion: ['', Validators.required],
       tipo: ['', Validators.required],
+      descripcion: ['', Validators.required],
       imagen: [null]
     });
   }
@@ -31,7 +33,7 @@ export class CategoriasComponent implements OnInit {
 
     this.form.get('nombre')?.valueChanges.subscribe(nombre => {
       if (nombre) {
-        this.form.patchValue({ slug: this.slugify(nombre) }, { emitEvent: false });
+        this.form.patchValue({ slug: slugify(nombre) }, { emitEvent: false });
       }
     });
   }
@@ -40,17 +42,6 @@ export class CategoriasComponent implements OnInit {
     this.categoriasService.getCategorias().subscribe(res => {
       this.categorias = res;
     });
-  }
-
-  slugify(text: string): string {
-    return text
-      .toString()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
   }
 
   onFileSelected(event: any) {
@@ -87,22 +78,8 @@ export class CategoriasComponent implements OnInit {
         this.resetForm();
         this.loadCategorias();
       },
-      error: (err) => this.handleBackendErrors(err)
+      error: (err) => handleBackendErrors(err, this.form)
     });
-  }
-
-  handleBackendErrors(err: any) {
-    if (err.type === 'validation') {
-
-      Object.keys(err.errors).forEach(field => {
-        const control = this.form.get(field);
-        if (control) {
-          control.setErrors({ backend: err.errors[field][0] });
-        }
-      });
-    } else {
-      alert(err.message || 'Error inesperado. Intenta de nuevo.');
-    }
   }
 
   editCategoria(cat: Categoria) {
@@ -110,8 +87,8 @@ export class CategoriasComponent implements OnInit {
       id: cat.id,
       nombre: cat.nombre,
       slug: cat.slug,
-      descripcion: cat.descripcion,
       tipo: cat.tipo,
+      descripcion: cat.descripcion,
       imagen: null
     });
   }
@@ -133,8 +110,8 @@ export class CategoriasComponent implements OnInit {
       id: null,
       nombre: '',
       slug: '',
-      descripcion: '',
       tipo: '',
+      descripcion: '',
       imagen: null
     });
   }

@@ -10,7 +10,7 @@ class CategoriaController extends Controller
 {
     public function index(Request $request)
     {
-        $tipo = $request->query('tipo'); // ej: producto o servicio
+        $tipo = $request->query('tipo');
 
         $categorias = Categoria::when($tipo, function ($query, $tipo) {
             return $query->where('tipo', $tipo);
@@ -25,8 +25,8 @@ class CategoriaController extends Controller
             'nombre' => 'required|string|max:255',
             'slug' => 'required|unique:categorias,slug',
             'tipo' => 'required|in:producto,servicio',
-            'imagen' => 'nullable|image|max:2048',
             'descripcion' => 'nullable|string',
+            'imagen' => 'nullable|image|max:2048',
         ]);
 
         $path = null;
@@ -54,10 +54,10 @@ class CategoriaController extends Controller
     {
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
-            'tipo' => 'required|in:producto,servicio',
-            'imagen' => 'nullable|image|max:2048',
-            'descripcion' => 'nullable|string',
             'slug' => 'required|unique:categorias,slug,' . $categoria->id,
+            'tipo' => 'required|in:producto,servicio',
+            'descripcion' => 'nullable|string',
+            'imagen' => 'nullable|image|max:2048',
         ]);
 
         $path = $categoria->imagen;

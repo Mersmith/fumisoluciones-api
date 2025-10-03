@@ -10,7 +10,7 @@ import { Categoria } from '../models/categoria.model';
 export class CategoriasService {
   private apiUrl = 'http://127.0.0.1:8000/api/categorias';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getCategorias(tipo?: 'producto' | 'servicio'): Observable<Categoria[]> {
     let url = this.apiUrl;
@@ -20,6 +20,11 @@ export class CategoriasService {
     return this.http.get<Categoria[]>(url).pipe(
       catchError(this.handleError)
     );
+  }
+
+  getCategoria(id: number): Observable<Categoria> {
+    return this.http.get<Categoria>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   createCategoria(formData: FormData): Observable<Categoria> {
@@ -39,14 +44,12 @@ export class CategoriasService {
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 422) {
-      // Errores de validación de Laravel
       return throwError(() => ({
         type: 'validation',
         errors: error.error.errors
       }));
     }
     if (error.status === 500) {
-      // Error interno del servidor
       return throwError(() => ({
         type: 'server',
         message: 'Error en el servidor, intenta más tarde.'
