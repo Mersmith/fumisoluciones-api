@@ -48,20 +48,23 @@
           </div>
         </div>
 
-        <button type="submit">
-          {{ editingId ? 'Actualizar' : 'Crear' }}
-        </button>
-        <button type="button" *ngIf="editingId" (click)="cancelEdit()">Cancelar</button>
+        <div class="g_form_item">
+          <button type="submit">
+            {{ editingId ? 'Actualizar' : 'Crear' }}
+          </button>
+          <button type="button" *ngIf="editingId" (click)="cancelEdit()">Cancelar</button>
+        </div>
       </form>
     </div>
-    
-    <div class="g_grid_col_2" class="g_form g_card">
-      <table  class="g_tabla">
+
+    <div class="g_grid_col_2" class="g_card">
+      <table class="g_tabla">
         <thead>
           <tr>
             <th>Nombre</th>
             <th>URL</th>
             <th>Padre</th>
+            <th>Icono</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -72,6 +75,10 @@
             <td>
               <span *ngIf="menu.parent"> {{ menu.parent.label }} </span>
               <span *ngIf="!menu.parent"> — </span>
+            </td>
+            <td>
+              <i *ngIf="menu.icon" [class]="menu.icon"></i>
+              <span *ngIf="!menu.icon">—</span>
             </td>
             <td>
               <button (click)="editMenu(menu)">Editar</button>

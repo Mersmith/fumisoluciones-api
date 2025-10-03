@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuService } from '../../../../services/menu.service';
 import { Menu } from '../../../../models/menu.model';
+import { slugify } from '../../../../utils/slugify';
+import { handleBackendErrors } from '../../../../utils/handleBackendErrors';
 
 @Component({
   selector: 'app-menus',
@@ -29,6 +31,12 @@ export class MenusComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMenus();
+
+    this.form.get('label')?.valueChanges.subscribe(label => {
+      if (label) {
+        this.form.patchValue({ route: slugify(label) }, { emitEvent: false });
+      }
+    });
   }
 
   loadMenus() {
@@ -55,13 +63,13 @@ export class MenusComponent implements OnInit {
         this.loadMenus();
         this.resetForm();
       },
-      error: (err) => this.handleBackendErrors(err)
+      error: (err) => handleBackendErrors(err, this.form)
     });
   }
 
   editMenu(menu: Menu) {
     this.form.patchValue(menu);
-    this.editingId = menu.id!;
+    this.editingId = menu.id ?? null;
   }
 
   cancelEdit() {
@@ -75,20 +83,14 @@ export class MenusComponent implements OnInit {
   }
 
   private resetForm() {
-    this.form.reset({ id: null, label: '', route: '', icon: '', parent_id: null, orden: 0 });
+    this.form.reset({
+      id: null,
+      label: '',
+      route: '',
+      icon: '',
+      parent_id: null,
+      orden: 0
+    });
     this.editingId = null;
-  }
-
-  private handleBackendErrors(err: any) {
-    if (err.type === 'validation') {
-      Object.keys(err.errors).forEach(field => {
-        const control = this.form.get(field);
-        if (control) {
-          control.setErrors({ backend: err.errors[field][0] });
-        }
-      });
-    } else {
-      alert(err.message || 'Error inesperado. Intenta de nuevo.');
-    }
   }
 }

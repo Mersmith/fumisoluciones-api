@@ -12,12 +12,12 @@ use App\Http\Controllers\ServicioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('menus', [MenuController::class, 'index'])->name('menus.index');
-Route::post('menus', [MenuController::class, 'store'])->name('menus.store');
-Route::get('menus/{menu}', [MenuController::class, 'show'])->name('menus.show');
-Route::put('menus/{menu}', [MenuController::class, 'update'])->name('menus.update');
-Route::patch('menus/{menu}', [MenuController::class, 'update']);
-Route::delete('menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
+Route::get('menus', [MenuController::class, 'index'])->name('menus.index');//
+Route::post('menus', [MenuController::class, 'store'])->name('menus.store');//
+Route::get('menus/{menu}', [MenuController::class, 'show'])->name('menus.show');//
+Route::put('menus/{menu}', [MenuController::class, 'update'])->name('menus.update');//
+Route::patch('menus/{menu}', [MenuController::class, 'update']);//
+Route::delete('menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');//
 
 Route::get('paginas/web', [PaginaController::class, 'indexWeb'])->name('paginas-web.index');
 Route::get('paginas', [PaginaController::class, 'index'])->name('paginas.index');
