@@ -1,0 +1,16 @@
+<div *ngIf="pagina">
+    <h1>{{ pagina.titulo }}</h1>
+    <img *ngIf="pagina.imagen" [src]="pagina.imagen" alt="{{ pagina.titulo }}">
+    <p>{{ pagina.descripcion }}</p>
+  
+    <div *ngIf="pagina.servicios?.length">
+      <h2>Servicios</h2>
+      <ul>
+        <li *ngFor="let s of pagina.servicios">
+          <h3>{{ s.nombre }}</h3>
+          <p>{{ s.descripcion }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

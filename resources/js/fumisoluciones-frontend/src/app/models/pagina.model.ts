@@ -1,3 +1,5 @@
+import { Servicio } from './servicio.model';
+
 export interface Pagina {
   id: number;
   titulo: string;
@@ -6,4 +8,5 @@ export interface Pagina {
   descripcion?: string | null;
   created_at?: string;
   updated_at?: string;
+  servicios?: Servicio[];
 }

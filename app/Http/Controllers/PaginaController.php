@@ -22,8 +22,8 @@ class PaginaController extends Controller
         if ($request->filled('buscar')) {
             $buscar = $request->buscar;
             $query->where('titulo', 'like', "%{$buscar}%")
-                  ->orWhere('slug', 'like', "%{$buscar}%")
-                  ->orWhere('descripcion', 'like', "%{$buscar}%");
+                ->orWhere('slug', 'like', "%{$buscar}%")
+                ->orWhere('descripcion', 'like', "%{$buscar}%");
         }
 
         $orden = $request->get('orden', 'desc');
@@ -61,6 +61,12 @@ class PaginaController extends Controller
     public function show(Pagina $pagina)
     {
         return $pagina->load('menus');
+    }
+
+    public function showBySlug($slug)
+    {
+        $pagina = Pagina::with('servicios')->where('slug', $slug)->firstOrFail();
+        return response()->json($pagina);
     }
 
     public function update(Request $request, Pagina $pagina)

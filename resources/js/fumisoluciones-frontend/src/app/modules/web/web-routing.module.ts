@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WebLayoutComponent } from './layout/web-layout/web-layout.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
+import { PaginaComponent } from './pages/pagina/pagina.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { ProductoComponent } from './pages/producto/producto.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
@@ -20,9 +21,10 @@ const routes: Routes = [
       { path: 'experiencia', component: ExperienciaComponent },
       { path: 'servicios', component: ServiciosComponent },
       { path: 'productos', component: ProductosComponent },
-      { path: 'producto/:id', component: ProductoComponent }, // 👈 detalle
+      { path: 'producto/:id', component: ProductoComponent },
       { path: 'contacto', component: ContactoComponent },
       { path: 'seguridad', component: PaginaSeguridadComponent },
+      { path: ':slug', component: PaginaComponent },
     ]
   }
 ];

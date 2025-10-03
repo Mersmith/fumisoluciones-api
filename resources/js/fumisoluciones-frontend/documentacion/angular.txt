@@ -17,6 +17,7 @@ ng g component modules/web/pages/nosotros
 ng g component modules/web/pages/servicios
 ng g component modules/web/pages/experiencia
 ng g component modules/web/pages/producto
+ng g component modules/web/pages/pagina
 ng g component modules/web/pages/pagina-seguridad
 
 ng g component admin/layout/admin-layout

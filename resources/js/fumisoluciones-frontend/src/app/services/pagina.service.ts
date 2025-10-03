@@ -33,6 +33,10 @@ export class PaginaService {
       .pipe(catchError(handleHttpError));
   }
 
+  getPaginaBySlug(slug: string): Observable<Pagina> {
+    return this.http.get<Pagina>(`${this.apiUrl}/slug/${slug}`);
+  }
+
   create(formData: FormData): Observable<Pagina> {
     return this.http.post<Pagina>(this.apiUrl, formData)
       .pipe(catchError(handleHttpError));

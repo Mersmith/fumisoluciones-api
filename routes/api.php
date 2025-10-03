@@ -24,6 +24,7 @@ Route::get('paginas/web', [PaginaController::class, 'indexWeb'])->name('paginas-
 Route::get('paginas', [PaginaController::class, 'index'])->name('paginas.index');
 Route::post('paginas', [PaginaController::class, 'store'])->name('paginas.store');
 Route::get('paginas/{pagina}', [PaginaController::class, 'show'])->name('paginas.show');
+Route::get('paginas/slug/{slug}', [PaginaController::class, 'showBySlug'])->name('paginas.showBySlug');
 Route::put('paginas/{pagina}', [PaginaController::class, 'update'])->name('paginas.update');
 Route::patch('paginas/{pagina}', [PaginaController::class, 'update']);
 Route::delete('paginas/{pagina}', [PaginaController::class, 'destroy'])->name('paginas.destroy');
