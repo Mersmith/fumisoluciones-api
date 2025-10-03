@@ -4,35 +4,48 @@
     </div>
 
     <div class="g_pagina_body g_grid">
-        <div class="g_grid_col_1" class="g_form g_card">
-            <form (ngSubmit)="addMenuPagina()">
+        <!-- Formulario -->
+        <div class="g_grid_col_1 g_card">
+            <form [formGroup]="form" (ngSubmit)="submit()" class="g_form">
                 <div class="g_form_item">
-                    <label for="menu_id">Menu <span class="obligatorio"><i
-                                class="fa-solid fa-asterisk"></i></span></label>
-                    <select id="menu_id" [(ngModel)]="newMenuPagina.menu_id" name="menu_id">
-                        <option [ngValue]="null">-- Selecciona un menú --</option>
+                    <label for="menu_id">
+                        Menú <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span>
+                    </label>
+                    <select id="menu_id" formControlName="menu_id">
+                        <option value="">-- Selecciona un menú --</option>
                         <option *ngFor="let menu of menus" [value]="menu.id">{{ menu.label }}</option>
                     </select>
+                    <div *ngIf="form.get('menu_id')?.touched && form.get('menu_id')?.invalid" class="g_error">
+                        <p>El menú es obligatorio.</p>
+                    </div>
                 </div>
 
                 <div class="g_form_item">
-                    <label for="pagina_id">Página <span class="obligatorio"><i
-                                class="fa-solid fa-asterisk"></i></span></label>
-                    <select id="pagina_id" [(ngModel)]="newMenuPagina.pagina_id" name="pagina_id">
-                        <option [ngValue]="null">-- Selecciona una página --</option>
+                    <label for="pagina_id">
+                        Página <span class="obligatorio"><i class="fa-solid fa-asterisk"></i></span>
+                    </label>
+                    <select id="pagina_id" formControlName="pagina_id">
+                        <option value="">-- Selecciona una página --</option>
                         <option *ngFor="let pagina of paginas" [value]="pagina.id">{{ pagina.titulo }}</option>
                     </select>
+                    <div *ngIf="form.get('pagina_id')?.touched && form.get('pagina_id')?.invalid" class="g_error">
+                        <p>La página es obligatoria.</p>
+                    </div>
                 </div>
 
-                <button type="submit">Relacionar</button>
+                <div class="g_form_item">
+                    <button type="submit">Relacionar</button>
+                    <button type="button" (click)="reset()">Limpiar</button>
+                </div>
             </form>
         </div>
 
-        <div class="g_grid_col_2" class="g_form g_card">
+        <!-- Tabla -->
+        <div class="g_grid_col_2 g_card">
             <table class="g_tabla">
                 <thead>
                     <tr>
-                        <th>Menu</th>
+                        <th>Menú</th>
                         <th>Página</th>
                         <th>Acciones</th>
                     </tr>
@@ -42,7 +55,8 @@
                         <td>{{ mp.menu?.label }}</td>
                         <td>{{ mp.pagina?.titulo }}</td>
                         <td>
-                            <button (click)="deleteMenuPagina(mp.menu_id, mp.pagina_id)">Eliminar</button>
+                            <button (click)="edit(mp)">Editar</button>
+                            <button (click)="delete(mp.id)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>

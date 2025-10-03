@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
-use Illuminate\Http\Request;
 use App\Models\MenuPagina;
+use Illuminate\Http\Request;
 
 class MenuPaginaController extends Controller
 {
@@ -26,16 +26,21 @@ class MenuPaginaController extends Controller
         return response()->json(['message' => 'Relación creada correctamente']);
     }
 
-    public function destroy(Request $request)
+    public function update(Request $request, MenuPagina $menuPagina)
     {
-        $data = $request->validate([
+        $validated = $request->validate([
             'menu_id' => 'required|exists:menus,id',
             'pagina_id' => 'required|exists:paginas,id',
         ]);
 
-        $menu = Menu::findOrFail($data['menu_id']);
-        $menu->paginas()->detach($data['pagina_id']);
+        $menuPagina->update($validated);
 
-        return response()->json(['message' => 'Relación eliminada correctamente']);
+        return response()->json($menuPagina);
+    }
+
+    public function destroy(MenuPagina $menuPagina)
+    {
+        $menuPagina->delete();
+        return response()->noContent();
     }
 }
