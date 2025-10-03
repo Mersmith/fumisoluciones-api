@@ -30,9 +30,10 @@ class ServicioSeeder extends Seeder
                 'descripcion' => 'Servicio especializado en desinfección de ambientes y superficies con productos certificados y seguros.',
                 'imagen' => 'http://127.0.0.1:8000/imagenes/servicio/servicio-3.jpg',
                 'contenido' => [
-                    'Control efectivo de plagas.',
-                    'Protección de la salud.',
-                    'Prevención de daños estructurales.',
+                    'Eliminación de virus, bacterias y microorganismos nocivos.',
+                    'Ambientes más seguros y saludables para tu familia o empleados.',
+                    'Uso de productos certificados y seguros para todas las superficies.',
+                    'Prevención de enfermedades y contaminación cruzada.',
                 ],
             ],
             [
@@ -40,9 +41,10 @@ class ServicioSeeder extends Seeder
                 'descripcion' => 'Limpieza profunda de hogares, oficinas e industrias con equipos profesionales de alta calidad.',
                 'imagen' => 'http://127.0.0.1:8000/imagenes/servicio/servicio-4.jpg',
                 'contenido' => [
-                    'Control efectivo de plagas.',
-                    'Protección de la salud.',
-                    'Prevención de daños estructurales.',
+                    'Eliminación completa de suciedad y residuos.',
+                    'Ambientes más higiénicos y saludables.',
+                    'Prevención de enfermedades y malos olores.',
+                    'Cuidado de superficies y mobiliario durante la limpieza.',
                 ],
             ],
             [
@@ -50,9 +52,10 @@ class ServicioSeeder extends Seeder
                 'descripcion' => 'Aplicamos productos de grado hospitalario que eliminan virus, bacterias y hongos para un ambiente más seguro.',
                 'imagen' => 'http://127.0.0.1:8000/imagenes/servicio/servicio-5.jpg',
                 'contenido' => [
-                    'Control efectivo de plagas.',
-                    'Protección de la salud.',
-                    'Prevención de daños estructurales.',
+                    'Eliminación de virus, bacterias y hongos con productos de grado hospitalario.',
+                    'Ambientes más seguros y saludables para hogares y lugares de trabajo.',
+                    'Prevención de enfermedades y contaminación cruzada.',
+                    'Protección integral de superficies y áreas comunes.',
                 ],
             ],
             [
@@ -60,9 +63,10 @@ class ServicioSeeder extends Seeder
                 'descripcion' => 'Control efectivo de roedores con métodos modernos y seguros, evitando daños materiales y riesgos sanitarios.',
                 'imagen' => 'http://127.0.0.1:8000/imagenes/servicio/servicio-6.jpg',
                 'contenido' => [
-                    'Control efectivo de plagas.',
-                    'Protección de la salud.',
-                    'Prevención de daños estructurales.',
+                    'Eliminación segura de roedores utilizando métodos modernos y efectivos.',
+                    'Prevención de daños a estructuras, instalaciones y alimentos.',
+                    'Reducción de riesgos sanitarios asociados a roedores.',
+                    'Protección del ambiente y de los ocupantes de tu hogar o negocio.',
                 ],
             ],
             [
@@ -70,9 +74,10 @@ class ServicioSeeder extends Seeder
                 'descripcion' => 'Eliminación de insectos rastreros y voladores con técnicas de control ambiental y productos confiables.',
                 'imagen' => 'http://127.0.0.1:8000/imagenes/servicio/servicio-7.jpg',
                 'contenido' => [
-                    'Control efectivo de plagas.',
-                    'Protección de la salud.',
-                    'Prevención de daños estructurales.',
+                    'Eliminación de insectos rastreros y voladores de manera segura y efectiva.',
+                    'Prevención de infestaciones futuras mediante técnicas de control ambiental.',
+                    'Protección de la salud de las personas y mascotas.',
+                    'Uso de productos confiables y aprobados para cada tipo de insecto.',
                 ],
             ],
         ];
@@ -89,7 +94,7 @@ class ServicioSeeder extends Seeder
                     'slug' => Str::slug($servicio['nombre']),
                     'imagen' => $servicio['imagen'],
                     'descripcion' => $servicio['descripcion'],
-                    'contenido' => $servicio['contenido'], 
+                    'contenido' => $servicio['contenido'],
                     'categoria_id' => $categoria->id, // <-- asignar la categoría
                 ]);
             }

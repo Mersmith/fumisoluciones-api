@@ -24,11 +24,11 @@ class MenuSeeder extends Seeder
         ]);
 
         $saneamientoChildren = [
-            ['label' => 'Fumigación', 'icon' => 'fa-solid fa-bug'],
-            ['label' => 'Limpieza', 'icon' => 'fa-solid fa-broom'],
-            ['label' => 'Desinsectación', 'icon' => 'fa-solid fa-spider'],
-            ['label' => 'Desratización', 'icon' => 'fa-solid fa-mouse'],
-            ['label' => 'Desinfección', 'icon' => 'fa-solid fa-spray-can'],
+            ['label' => 'Fumigación', 'icon' => 'fa-solid fa-bug'],//
+            ['label' => 'Limpieza', 'icon' => 'fa-solid fa-broom'],//
+            ['label' => 'Desinsectación', 'icon' => 'fa-solid fa-spider'],//
+            ['label' => 'Desratización', 'icon' => 'fa-solid fa-mouse'],//
+            ['label' => 'Desinfección', 'icon' => 'fa-solid fa-spray-can'],//
             ['label' => 'Limpieza y Desinfección de Reservorios', 'icon' => 'fa-solid fa-water'],
             ['label' => 'Planes Operativos de Saneamiento', 'icon' => 'fa-solid fa-file-alt'],
             ['label' => 'Limpieza de ambientes', 'icon' => 'fa-solid fa-broom'],
